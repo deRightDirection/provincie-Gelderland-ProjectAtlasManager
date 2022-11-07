@@ -1,0 +1,13 @@
+.loginButton {
+  font-size: large;
+  text-decoration: none;
+  background-color: #000000;
+  padding: 4em;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+  .loginButton:hover {
+    background-color: #444;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }

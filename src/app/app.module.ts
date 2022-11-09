@@ -6,14 +6,22 @@ import { AppComponent } from './app.component';
 import { Router } from '@angular/router';
 import { ArcgisloginComponent } from './arcgislogin/arcgislogin.component';
 import { OverviewComponent } from './overview/overview.component';
+import { AppBarModule } from "@syncfusion/ej2-angular-navigations";
+import { MenuModule } from '@syncfusion/ej2-angular-navigations'
+import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
+import { DropDownButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     ArcgisloginComponent,
       OverviewComponent
    ],
   imports: [
+    DropDownButtonModule,
+    ButtonModule,
+    MenuModule,
+    AppBarModule,
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule

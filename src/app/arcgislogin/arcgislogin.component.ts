@@ -10,6 +10,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./arcgislogin.component.css']
 })
 export class ArcgisloginComponent implements OnInit {
+  public showLogin : boolean = true;
+  public username : string = "";
 
   constructor(private _router: Router) { }
 
@@ -25,30 +27,28 @@ export class ArcgisloginComponent implements OnInit {
     popupCallbackUrl: "assets/oauth-callback.html"
   });
 
-  onLogin2(){
-    this.goToOverview();
-  }
-
   onLogin() {
     esriId.destroyCredentials();
       esriId.checkSignInStatus(this.info.portalUrl + "/sharing")
-        .then(() => {
-          this.goToOverview();
+        .then(x => {
+          this.goToOverview(x);
         })
         .catch(() => { });
 
       esriId.getCredential((this.info.portalUrl + "/sharing"), {
           oAuthPopupConfirmation: false
         })
-        .then(() =>{
-          this.goToOverview();
+        .then(x =>{
+          this.goToOverview(x);
         })
         .catch(()=>{
           console.log("login afgebroken");
         });
   }
 
-  goToOverview(): void  {
+  goToOverview(credential : __esri.Credential): void  {
+    this.username = credential.userId
+    this.showLogin = false;
     this._router.navigate(['overview']);
   };
 }

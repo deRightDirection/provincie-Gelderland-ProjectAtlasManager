@@ -1,3 +1,8 @@
-<div type="submit" (click)="onLogin()" class="loginButton">
-  <b>Inloggen</b>
-</div>
+<ng-container *ngIf="showLogin">
+  <div type="submit" (click)="onLogin()" class="loginButton">
+    <b>Inloggen</b>
+  </div>
+</ng-container>
+<ng-container *ngIf="!showLogin">
+  <div>welkom {{username}}</div>
+</ng-container>

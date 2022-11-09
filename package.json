@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "buildPortal": "npm install && npx syncfusion-license activate && ng build"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +21,10 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@arcgis/core": "^4.24.7",
+    "@syncfusion/ej2-angular-buttons": "^20.3.56",
+    "@syncfusion/ej2-angular-grids": "^20.3.56",
+    "@syncfusion/ej2-angular-navigations": "^20.3.56",
+    "@syncfusion/ej2-angular-splitbuttons": "^20.3.56",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

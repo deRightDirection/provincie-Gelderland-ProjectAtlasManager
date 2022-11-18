@@ -10,12 +10,14 @@ import { AppBarModule } from "@syncfusion/ej2-angular-navigations";
 import { MenuModule } from '@syncfusion/ej2-angular-navigations'
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { DropDownButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
+import { ItemsviewComponent } from './itemsview/itemsview.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     ArcgisloginComponent,
-      OverviewComponent
+      OverviewComponent,
+      ItemsviewComponent
    ],
   imports: [
     DropDownButtonModule,

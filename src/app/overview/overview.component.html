@@ -1,13 +1,11 @@
 <div>
   <ejs-appbar [colorMode]="colorMode">
-    <button ejs-button cssClass="e-inherit menu" iconCss="e-icons e-menu" (created)='onCreate()'></button>
-    <button ejs-button cssClass="e-inherit home e-appbar-menu">Home</button>
     <button ejs-dropdownbutton cssClass="e-inherit e-appbar-menu e-primary" [items]='productDropDownButtonItems'
-      content="Products"></button>
+      content="template apps"></button>
     <button ejs-dropdownbutton cssClass="e-inherit e-appbar-menu e-primary" [items]='companyDropDownButtonItems'
-      content="Company"></button>
-    <div class="e-appbar-spacer"></div>
-    <div class="e-appbar-separator"></div>
-    <button ejs-button [isPrimary]="true" [cssClass]="loginClass">Login</button>
+      content="template maps"></button>
   </ejs-appbar>
+</div>
+<div>
+  <app-itemsview></app-itemsview>
 </div>

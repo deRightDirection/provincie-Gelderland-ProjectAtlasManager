@@ -1,47 +1,10 @@
-<div class="col-lg-12 control-section card-control-section tile_layout">
-  <div class="row filter">
-      <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-          <div class="e-float-input">
-              <input type="text" required="" id="search_Card">
-              <span class="e-float-line"></span>
-              <label class="e-float-text" style="font-size:14px">Enter text to search</label>
-          </div>
-      </div>
-      <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6 tile_search">
-          <input type="text" id="local">
-      </div>
-  </div>
-  <div class='row e-card-layout' style="text-align:center;">
-      <div class="row">
-          <div class="row error" style="display:none;min-height:150px">
-              <div class="e-error-content" style="margin:auto;height:inherit;font-size:18px;font-weight:500;color:inherit">No results found. Please try a different search.</div>
-          </div>
-          <div *ngFor="let task of DataList;">
-          <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
-              <div id='card_sample_{{task.id}}' class='card_sample'>
-                <div class='{{task.isHorizontal == true? "e-card e-card-horizontal" : "e-card"}}'>
-                  <div class='e-card-image'>
-                    <img src="{{task.cardImage.url}}">
-                  </div>
-                  <div class='e-card-header'>
-                    <div class='e-card-header-caption'>
-                      <div class='e-card-header-title'>
-                        {{task.header_title}}</div>
-                      <div class='e-card-sub-title'>{{task.header_subtitle}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class='e-card-content'>{{task.cardContent}}</div>
-                  <div class='e-card-actions {{task.isHorizontal == true ? "e-card e-card-horizontal" : ""}}'>
-                    <a href='{{task.card_action_btn.action_btns[0].href}}' target='{{task.card_action_btn.action_btns[0].target}}'>{{task.card_action_btn.action_btns[0].text}}</a>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-      </div>
-  </div>
-  <div id='source_link'>Source: &nbsp;
-      <a href="https://www.syncfusion.com/ebooks/" target='_blank'>https://www.syncfusion.com/ebooks</a>
+<div fxLayout="row wrap" fxLayoutGap="25px">
+  <div *ngFor="let card of DataList;">
+    <div>
+      {{card.Title}}
+    </div>
+    <div>
+      <img src="{{card.Thumbnail}}">
+    </div>
   </div>
 </div>

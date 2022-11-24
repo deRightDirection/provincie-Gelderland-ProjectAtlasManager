@@ -23,6 +23,7 @@
     "@arcgis/core": "^4.24.7",
     "@syncfusion/ej2-angular-buttons": "^20.3.56",
     "@syncfusion/ej2-angular-grids": "^20.3.56",
+    "@syncfusion/ej2-angular-layouts": "^20.3.58",
     "@syncfusion/ej2-angular-navigations": "^20.3.56",
     "@syncfusion/ej2-angular-splitbuttons": "^20.3.56",
     "rxjs": "~7.5.0",

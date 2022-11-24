@@ -1,0 +1,6 @@
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\bin\Debug\ProjectAtlasManager.dll
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\bin\Debug\ProjectAtlasManager.pdb
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.csproj.AssemblyReference.cache
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.csproj.CoreCompileInputs.cache
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.dll
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.pdb

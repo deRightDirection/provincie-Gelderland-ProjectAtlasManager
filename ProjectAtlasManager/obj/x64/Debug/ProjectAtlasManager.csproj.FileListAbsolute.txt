@@ -4,3 +4,10 @@ C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\D
 C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.csproj.CoreCompileInputs.cache
 C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.dll
 C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.pdb
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\Views\ShowTemplatesView.g.cs
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager_MarkupCompile.cache
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager_MarkupCompile.lref
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\Views\ShowTemplatesView.baml
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.g.resources
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\BackstageView.g.cs
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\BackstageView.baml

@@ -17,7 +17,6 @@
 
   <modules>
     <insertModule id="ProjectAtlasManager_Module" className="Module1" autoLoad="false" caption="Module1">
-      <!-- uncomment to have the control hosted on a separate tab-->
       <tabs>
         <tab id="ProjectAtlasManager_Tab1" caption="Project Atlas-manager">
           <group refID="ProjectAtlasManager_Group1"/>
@@ -25,17 +24,24 @@
       </tabs>
               
       <groups>
-        <!-- comment this out if you have no controls on the Addin tab to avoid
-              an empty group-->
         <group id="ProjectAtlasManager_Group1" caption="templates" appearsOnAddInTab="false">
-          <!-- host controls within groups -->
+          <button refID="showTemplatesButton" size="large" />
         </group>
       </groups>
-      
+
       <controls>
-        <!-- add your controls here -->
+        <!-- bekijk alle templates -->
+        <button id="showTemplatesButton" className="ShowTemplates" caption="bekijk templates" largeImage="Images\button.png">
+          <tooltip heading="bekijk alle webmaps die als template zijn gemarkeerd">
+            <disabledText/>
+          </tooltip>
+        </button>
       </controls> 
-      
     </insertModule>
   </modules>
+  <backstage>
+    <insertTab id="ProjectAtlasManager_BackStage" caption="Project Atlas Manager-configuratie" className="BackstageViewModel" insert="after" placeWith="esri_core_showHelpButton">
+      <content className="BackstageView" />
+    </insertTab>
+  </backstage>
 </ArcGIS>

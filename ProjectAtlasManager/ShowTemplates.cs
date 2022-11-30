@@ -25,7 +25,7 @@ namespace ProjectAtlasManager
       var portal = ArcGISPortalManager.Current.GetActivePortal();
       if (portal.IsSignedOn())
       {
-        Enabled = portal.PortalUri.Equals(new Uri("https://www.therightdirectionserver.nl/portal"));
+        Enabled = portal.PortalUri.Equals(Properties.Settings.Default.PortalUri);
       }
     }
 

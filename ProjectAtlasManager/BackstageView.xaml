@@ -1,7 +1,7 @@
 <UserControl x:Class="ProjectAtlasManager.BackstageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
+             xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectAtlasManager"
@@ -25,13 +25,33 @@
     </Grid.RowDefinitions>
     <DockPanel Grid.Row="0">
       <TextBlock DockPanel.Dock="Left" Style="{DynamicResource Esri_TextBlockBackStageTitle}"
-                       Text="Sample Backstage Tab" 
+                       Text="Project Atlas manager configuratie" 
                        Margin="0,0,0,15" ></TextBlock>
     </DockPanel>
-    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,60,0,0">
-      <CheckBox Content="Do something here" FontSize="16"
-            HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" 
-                IsChecked="{Binding IsSomethingChecked}"/>
+    <StackPanel Grid.Row="1" Margin="0,60,0,0" Orientation="Vertical">
+      <TextBlock>selecteer het ArcGIS Enterprise-portaal van de provincie Gelderland</TextBlock>
+      <ListBox ItemsSource="{Binding Portals}" SelectedItem="{Binding SelectedPortal, Mode=TwoWay}" Margin="0 10 0 0">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <TextBlock Text="{Binding PortalName}" FontWeight="Bold" FontSize="20"/>
+                <TextBlock Text="{Binding PortalUri, StringFormat={}({0})}" Margin="10 0 0 0" VerticalAlignment="Center"/>
+              </StackPanel>
+              <TextBlock Text="{Binding Username}" Grid.Row="1" Margin="0 5 0 5" FontSize="15" Foreground="Green"/>
+              <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0 5 0 0">
+                <CheckBox IsChecked="{Binding IsActive}" Content="is actief"/>
+                <CheckBox IsChecked="{Binding IsSignedOn}" Content="is ingelogd" Margin="10 0 0 0"/>
+              </StackPanel>
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
     </StackPanel>
   </Grid>
 </UserControl>

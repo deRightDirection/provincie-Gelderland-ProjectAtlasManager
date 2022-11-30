@@ -1,8 +1,9 @@
-﻿using ArcGIS.Core.CIM;
+using ArcGIS.Core.CIM;
 using ArcGIS.Core.Data;
 using ArcGIS.Core.Geometry;
 using ArcGIS.Desktop.Catalog;
 using ArcGIS.Desktop.Core;
+using ArcGIS.Desktop.Core.Events;
 using ArcGIS.Desktop.Editing;
 using ArcGIS.Desktop.Extensions;
 using ArcGIS.Desktop.Framework;
@@ -20,34 +21,25 @@ using System.Windows.Input;
 
 namespace ProjectAtlasManager
 {
-    internal class Module1 : Module
+  internal class Module1 : Module
+  {
+    private static Module1 _this = null;
+    private static string ModuleID = "ProjectAtlasManager_Module";
+
+    /// <summary>
+    /// Retrieve the singleton instance to this module here
+    /// </summary>
+    public static Module1 Current
     {
-        private static Module1 _this = null;
-
-        /// <summary>
-        /// Retrieve the singleton instance to this module here
-        /// </summary>
-        public static Module1 Current
-        {
-            get
-            {
-                return _this ?? (_this = (Module1)FrameworkApplication.FindModule("ProjectAtlasManager_Module"));
-            }
-        }
-
-        #region Overrides
-        /// <summary>
-        /// Called by Framework when ArcGIS Pro is closing
-        /// </summary>
-        /// <returns>False to prevent Pro from closing, otherwise True</returns>
-        protected override bool CanUnload()
-        {
-            //TODO - add your business logic
-            //return false to ~cancel~ Application close
-            return true;
-        }
-
-        #endregion Overrides
-
+      get
+      {
+        return _this ?? (_this = (Module1)FrameworkApplication.FindModule(ModuleID));
+      }
     }
+
+    protected override bool CanUnload()
+    {
+      return true;
+    }
+  }
 }

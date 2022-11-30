@@ -8,8 +8,8 @@
   <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.0" desktopVersion="2.8.29751">
     <Name>Project Atlas-manager</Name>   
     <Description>De project atlas-manager voor de provincie Gelderland</Description>
-    <Image>Images\AddinDesktop32.png</Image>
-    <Author>M.M. Etten</Author>
+    <Image>Images\button.png</Image>
+    <Author>the Right Direction BV</Author>
     <Company>the Right Direction BV</Company>
     <Date>11/24/2022 3:57:41 PM</Date>
     <Subject>Framework</Subject>

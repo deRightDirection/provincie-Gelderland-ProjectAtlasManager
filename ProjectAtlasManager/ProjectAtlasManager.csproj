@@ -150,28 +150,33 @@
       <DependentUpon>BackstageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BackstageViewModel.cs" />
+    <Compile Include="CreateNewTemplateButton.cs" />
+    <Compile Include="DeleteTemplateButton.cs" />
     <Compile Include="Domain\PortalInformation.cs" />
     <Compile Include="Module1.cs" />
+    <Compile Include="NewTemplateGallery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ShowTemplates.cs" />
-    <Compile Include="Views\ShowTemplatesView.xaml.cs">
-      <DependentUpon>ShowTemplatesView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="SynchronizeTemplateButton.cs" />
+    <Compile Include="TemplatesGallery.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="BackstageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ShowTemplatesView.xaml">
+    <Resource Include="Views\NewTemplateGalleryTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </Resource>
+    <Resource Include="Views\TemplatesGalleryTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <AddInContent Include="Images\button.png" />
@@ -182,6 +187,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="Images\upgradewebmaptotemplate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="Images\deletetemplate.png" />
+    <AddInContent Include="Images\synchronizetemplate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--

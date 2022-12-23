@@ -24,3 +24,5 @@ C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\bin\Debug
 C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.csproj.CopyComplete
 C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\obj\x64\Debug\ProjectAtlasManager.csproj.AssemblyReference.cache
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\bin\Debug\Newtonsoft.Json.dll
+C:\GitHub\provincie-Gelderland-ProjectAtlasManager\ProjectAtlasManager\bin\Debug\Newtonsoft.Json.xml

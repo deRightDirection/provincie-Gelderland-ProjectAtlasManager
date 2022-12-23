@@ -37,7 +37,7 @@ namespace ProjectAtlasManager
       }
     }
 
-    internal static GalleryItem SelectedWebMapToUpgradeToTemplate { get; set; }
+    internal static string SelectedWebMapToUpgradeToTemplate { get; set; }
 
     protected override bool CanUnload()
     {

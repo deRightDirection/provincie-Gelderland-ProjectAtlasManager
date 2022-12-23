@@ -39,12 +39,18 @@
         </button>
       </controls>
       <galleries>
-        <gallery id="newTemplateGallery" caption="selecteer een webmap" className="NewTemplateGallery" itemsInRow="20" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/NewTemplateGalleryTemplate.xaml" templateID="NewTemplateGalleryItemTemplate" resizable="true" largeImage="Images/upgradewebmaptotemplate.png">
+        <gallery id="newTemplateGallery" caption="selecteer een webmap" className="NewTemplateGallery" itemsInRow="20"
+                 dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml"
+                  templateID="WebMapsGalleryItemTemplate"
+                 resizable="true" largeImage="Images/upgradewebmaptotemplate.png">
           <tooltip heading="nieuwe templates">
             selecteer een webmap en gebruik de knop 'omzetten naar template' om van deze webmap een template te maken<disabledText /></tooltip>
           <button refID="ProjectAtlasManager_CreateNewTemplateButton" />
         </gallery>
-        <gallery id="showTemplatesGallery" caption="selecteer een bestaand template" className="TemplatesGallery" itemsInRow="20" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/TemplatesGalleryTemplate.xaml" templateID="TemplatesGalleryItemTemplate" resizable="true" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonYellow32.png">
+        <gallery id="showTemplatesGallery" caption="selecteer een bestaand template" className="TemplatesGallery" itemsInRow="20"
+                 dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml"
+                  templateID="WebMapsGalleryItemTemplate"
+                 resizable="true" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonYellow32.png">
           <tooltip heading="selecteer template">Selecteer een template en voer hier een actie mee uit<disabledText>geen templates beschikbaar</disabledText></tooltip>
         </gallery>
       </galleries>

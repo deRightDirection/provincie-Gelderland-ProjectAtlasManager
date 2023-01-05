@@ -36,7 +36,7 @@ namespace ProjectAtlasManager
         return _this ?? (_this = (Module1)FrameworkApplication.FindModule(ModuleID));
       }
     }
-
+    internal static string SelectedProjectTemplate { get; set; }
     internal static string SelectedWebMapToUpgradeToTemplate { get; set; }
 
     protected override bool CanUnload()

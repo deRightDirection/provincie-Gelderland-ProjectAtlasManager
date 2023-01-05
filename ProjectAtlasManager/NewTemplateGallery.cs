@@ -32,14 +32,28 @@ namespace ProjectAtlasManager
   {
     private bool _isInitialized;
 
-    protected override void OnDropDownOpened()
+    protected async override void OnDropDownOpened()
     {
-      LoadItems();
+      await QueuedTask.Run(async () =>
+      {
+        await LoadItems();
+      });
     }
 
-    private async Task LoadItems()
+    protected async override void OnUpdate()
     {
-      if(_isInitialized)
+      if(FrameworkApplication.State.Contains("ProjectAtlasManager_Module_UpdateWebMapGalleryState"))
+      {
+        await QueuedTask.Run(async () =>
+          {
+            await LoadItems(true);
+          });
+      }
+    }
+
+    private async Task LoadItems(bool renew = false)
+    {
+      if(_isInitialized && !renew)
       {
         return;
       }
@@ -51,6 +65,11 @@ namespace ProjectAtlasManager
       var items = await GetWebMapsAsync();
       SetItemCollection(new ObservableCollection<object>(items));
       _isInitialized = true;
+      if(renew)
+      {
+        FrameworkApplication.State.Activate("ProjectAtlasManager_Module_ProjectTemplateGalleryState");
+        FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_UpdateWebMapGalleryState");
+      }
     }
 
     protected override void OnClick(object item)
@@ -60,7 +79,7 @@ namespace ProjectAtlasManager
         var clickedWebMapItem = (WebMapItemGalleryItem)item;
         Module1.SelectedWebMapToUpgradeToTemplate = clickedWebMapItem.ID;
       }
-      // TODO set state
+      FrameworkApplication.State.Activate("ProjectAtlasManager_Module_WebMapSelectedState");
     }
 
     /// <summary>
@@ -79,16 +98,17 @@ namespace ProjectAtlasManager
           var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
           if (results == null)
             return;
-
-          foreach (var item in results.Results.OfType<PortalItem>())
+          if(results.TotalResultsCount > 0)
           {
-            if (!item.Owner.ToLowerInvariant().StartsWith("esri"))
+            foreach (var item in results.Results.OfType<PortalItem>())
             {
-              lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
+              if (!item.Owner.ToLowerInvariant().StartsWith("esri"))
+              {
+                lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
+              }
             }
           }
         });
-
       }
       catch (Exception ex)
       {

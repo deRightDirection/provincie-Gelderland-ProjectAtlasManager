@@ -30,12 +30,24 @@ namespace ProjectAtlasManager
 
     public TemplatesGallery()
     {
-      LoadItems();
+      Task.Run(async () =>
+      {
+        await LoadItems();
+      });
     }
 
-    private async Task LoadItems()
+    protected async override void OnUpdate()
     {
-      if (_isInitialized)
+      if (FrameworkApplication.State.Contains("ProjectAtlasManager_Module_ProjectTemplateGalleryState"))
+      {
+        await LoadItems(true);
+        FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateGalleryState");
+      }
+    }
+
+    private async Task LoadItems(bool renew = false)
+    {
+      if (_isInitialized && !renew)
       {
         return;
       }
@@ -52,34 +64,27 @@ namespace ProjectAtlasManager
     private async Task<List<WebMapItemGalleryItem>> GetWebMapsAsync()
     {
       var lstWebmapItems = new List<WebMapItemGalleryItem>();
-      try
-      {
-        await QueuedTask.Run(async () =>
-        {
           ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
           var query = new PortalQueryParameters($"type:\"Web map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:0123456789ABCDEF");
           var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
           if (results == null)
-            return;
+            return lstWebmapItems;
 
           foreach (var item in results.Results.OfType<PortalItem>())
           {
             lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
           }
-        });
-      }
-      catch (Exception ex)
-      {
-        System.Diagnostics.Debug.WriteLine(ex.Message);
-      }
       return lstWebmapItems;
     }
 
-    protected override void OnClick(GalleryItem item)
+    protected override void OnClick(object item)
     {
-      //TODO - insert your code to manipulate the clicked gallery item here
-      System.Diagnostics.Debug.WriteLine("Remove this line after adding your custom behavior.");
-      base.OnClick(item);
+      if (item is WebMapItemGalleryItem)
+      {
+        var clickedWebMapItem = (WebMapItemGalleryItem)item;
+        Module1.SelectedProjectTemplate = clickedWebMapItem.ID;
+        FrameworkApplication.State.Activate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
+      }
     }
   }
 }

@@ -8,6 +8,14 @@
     <Date>11/24/2022 3:57:41 PM</Date>
     <Subject>Framework</Subject>
   </AddInInfo>
+  <conditions>
+    <insertCondition id="ProjectAtlasManager_Module_WebMap_Selected">
+      <state id="ProjectAtlasManager_Module_WebMapSelectedState"/>
+    </insertCondition>
+    <insertCondition id="ProjectAtlasManager_Module_ProjectTemplate_Selected">
+      <state id="ProjectAtlasManager_Module_ProjectTemplateSelectedState"/>
+    </insertCondition>
+  </conditions>
   <modules>
     <insertModule id="ProjectAtlasManager_Module" className="Module1" autoLoad="false" caption="Module1">
       <tabs>
@@ -26,14 +34,14 @@
         </group>
       </groups>
       <controls>
-        <button id="ProjectAtlasManager_CreateNewTemplateButton" caption="maak van de webmap een template" className="CreateNewTemplateButton" loadOnClick="true" smallImage="Images/upgradewebmaptotemplate.png" largeImage="Images/upgradewebmaptotemplate.png">
+        <button id="ProjectAtlasManager_CreateNewTemplateButton" caption="maak van de webmap een template" condition="ProjectAtlasManager_Module_WebMap_Selected" className="CreateNewTemplateButton" loadOnClick="true" smallImage="Images/upgradewebmaptotemplate.png" largeImage="Images/upgradewebmaptotemplate.png">
           <tooltip heading="Upgrade webmap">Selecteer een webmap en maak van deze webmap een template<disabledText>Geen webmap geselecteerd</disabledText></tooltip>
         </button>
-        <button id="ProjectAtlasManager_SynchronizeTemplateButton" caption="synchroniseer template" className="SynchronizeTemplateButton" loadOnClick="true" smallImage="Images/synchronizetemplate.png" largeImage="Images/synchronizetemplate.png">
+        <button id="ProjectAtlasManager_SynchronizeTemplateButton" caption="synchroniseer template" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="SynchronizeTemplateButton" loadOnClick="true" smallImage="Images/synchronizetemplate.png" largeImage="Images/synchronizetemplate.png">
           <tooltip heading="Synchroniseer template">Alle afgeleiden van het template worden bijgewerkt<disabledText>Geen template geselecteerd</disabledText>
         </tooltip>
         </button>
-        <button id="ProjectAtlasManager_DeleteTemplateButton" caption="verwijder een template" className="DeleteTemplateButton" loadOnClick="true" smallImage="Images/deletetemplate.png" largeImage="Images/deletetemplate.png">
+        <button id="ProjectAtlasManager_DeleteTemplateButton" caption="verwijder een template" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="DeleteTemplateButton" loadOnClick="true" smallImage="Images/deletetemplate.png" largeImage="Images/deletetemplate.png">
           <tooltip heading="Verwijder template">Verwijder een template<disabledText>Geen template geselecteerd</disabledText>
         </tooltip>
         </button>

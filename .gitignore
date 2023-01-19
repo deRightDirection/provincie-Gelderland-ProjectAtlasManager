@@ -46,3 +46,7 @@ Thumbs.db
 \packages
 \obj
 /obj
+*.pdb
+*.dll
+bin/
+obj/

@@ -19,10 +19,10 @@
     <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
   </ResourceDictionary.MergedDictionaries>
   <DataTemplate x:Key="WebMapsGalleryItemTemplate">
-    <Grid Margin="5">
+    <Grid Margin="5" MinWidth="50">
       <Grid.RowDefinitions>
           <RowDefinition Height="auto"/>
-          <RowDefinition Height="*"/>
+          <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Image Grid.Row="0" Stretch="None" Margin="5">
           <Image.Effect>

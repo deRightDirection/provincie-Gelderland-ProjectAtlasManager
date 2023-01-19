@@ -30,22 +30,23 @@ namespace ProjectAtlasManager
 
     public TemplatesGallery()
     {
-      Task.Run(async () =>
-      {
-        await LoadItems();
-      });
+      Initialize();
     }
 
-    protected async override void OnUpdate()
+    private async void Initialize()
+    {
+      await LoadItemsAsync();
+    }
+    protected override void OnUpdate()
     {
       if (FrameworkApplication.State.Contains("ProjectAtlasManager_Module_ProjectTemplateGalleryState"))
       {
-        await LoadItems(true);
+        LoadItemsAsync(true);
         FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateGalleryState");
       }
     }
 
-    private async Task LoadItems(bool renew = false)
+    private async Task LoadItemsAsync(bool renew = false)
     {
       if (_isInitialized && !renew)
       {
@@ -64,16 +65,20 @@ namespace ProjectAtlasManager
     private async Task<List<WebMapItemGalleryItem>> GetWebMapsAsync()
     {
       var lstWebmapItems = new List<WebMapItemGalleryItem>();
-          ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-          var query = new PortalQueryParameters($"type:\"Web map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:0123456789ABCDEF");
-          var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
-          if (results == null)
-            return lstWebmapItems;
-
-          foreach (var item in results.Results.OfType<PortalItem>())
-          {
-            lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
-          }
+      await QueuedTask.Run(async () =>
+      {
+        ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+        var query = new PortalQueryParameters($"type:\"Web map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:0123456789ABCDEF");
+        var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
+        if (results == null)
+        {
+          return;
+        }
+        foreach (var item in results.Results.OfType<PortalItem>())
+        {
+          lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
+        }
+      });
       return lstWebmapItems;
     }
 
@@ -85,6 +90,7 @@ namespace ProjectAtlasManager
         Module1.SelectedProjectTemplate = clickedWebMapItem.ID;
         FrameworkApplication.State.Activate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
       }
+      base.OnClick(item);
     }
   }
 }

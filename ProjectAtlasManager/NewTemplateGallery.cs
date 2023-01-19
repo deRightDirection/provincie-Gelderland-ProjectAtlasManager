@@ -32,26 +32,20 @@ namespace ProjectAtlasManager
   {
     private bool _isInitialized;
 
-    protected async override void OnDropDownOpened()
+    protected override void OnDropDownOpened()
     {
-      await QueuedTask.Run(async () =>
-      {
-        await LoadItems();
-      });
+      LoadItemsAsync();
     }
 
-    protected async override void OnUpdate()
+    protected override void OnUpdate()
     {
       if(FrameworkApplication.State.Contains("ProjectAtlasManager_Module_UpdateWebMapGalleryState"))
       {
-        await QueuedTask.Run(async () =>
-          {
-            await LoadItems(true);
-          });
+          LoadItemsAsync(true);
       }
     }
 
-    private async Task LoadItems(bool renew = false)
+    private async Task LoadItemsAsync(bool renew = false)
     {
       if(_isInitialized && !renew)
       {
@@ -80,6 +74,7 @@ namespace ProjectAtlasManager
         Module1.SelectedWebMapToUpgradeToTemplate = clickedWebMapItem.ID;
       }
       FrameworkApplication.State.Activate("ProjectAtlasManager_Module_WebMapSelectedState");
+      base.OnClick(item);
     }
 
     /// <summary>

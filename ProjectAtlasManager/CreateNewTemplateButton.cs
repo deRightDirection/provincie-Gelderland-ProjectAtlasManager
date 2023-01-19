@@ -31,19 +31,15 @@ namespace ProjectAtlasManager
     }
     protected override void OnClick()
     {
-      var t = Task.Run(async () =>
-      {
-        await SetTagsForNewTemplate();
-      });
-      t.Wait();
-      FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_WebMapSelectedState");
-      FrameworkApplication.State.Activate("ProjectAtlasManager_Module_UpdateWebMapGalleryState");
+        SetTagsForNewTemplateAsync();
     }
 
-    private async Task SetTagsForNewTemplate()
+    private async Task SetTagsForNewTemplateAsync()
     {
         ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
         var query = new PortalQueryParameters("id:" + Module1.SelectedWebMapToUpgradeToTemplate);
+      await QueuedTask.Run(async () =>
+      {
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
         var item = results.Results.FirstOrDefault();
         if (item == null)
@@ -52,16 +48,22 @@ namespace ProjectAtlasManager
         }
         var tags = string.Join(",", item.ItemTags);
         tags += ",Template,ProjectAtlas";
-        if(tags.StartsWith(","))
+        if (tags.StartsWith(","))
         {
           tags = tags.Substring(1);
         }
         var uri = $"{item.PortalUri}sharing/rest/content/users/{item.Owner}/{item.FolderID}/items/{item.ItemID}/update?f=json&token=" + portal.GetToken();
         // TODO thumbnail toevoegen indien die nog niet aanwezig is
+        // TODO opzoeken van item die de template informatie bevat
+        // TODO operational layers uitlezen, die opslaan in een feature service
         var httpClient = new EsriHttpClient();
         var formContent = new MultipartFormDataContent();
         formContent.Add(new StringContent(tags), "tags");
         var response = await httpClient.PostAsync(uri, formContent);
+      });
+      FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_WebMapSelectedState");
+      FrameworkApplication.State.Activate("ProjectAtlasManager_Module_UpdateWebMapGalleryState");
+
     }
   }
 }

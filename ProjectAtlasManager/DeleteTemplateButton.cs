@@ -23,36 +23,40 @@ namespace ProjectAtlasManager
 {
   internal class DeleteTemplateButton : Button
   {
-    protected async override void OnClick()
+    protected override void OnClick()
     {
-      await RemoveTagsFromTemplate();
-      FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
-      FrameworkApplication.State.Activate("ProjectAtlasManager_Module_UpdateWebMapGalleryState");
+      RemoveTagsFromTemplateAsync();
     }
 
-    private async Task RemoveTagsFromTemplate()
+    private async Task RemoveTagsFromTemplateAsync()
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
       var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
-      var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
-      var item = results.Results.FirstOrDefault();
-      if (item == null)
+      await QueuedTask.Run(async () =>
       {
-        return;
-      }
-      var tags = string.Join(",", item.ItemTags);
-      tags = tags.Replace("Template", string.Empty);
-      tags = tags.Replace("ProjectAtlas", string.Empty);
-      tags = tags.Replace(",,", ",");
-      if (tags.StartsWith(","))
-      {
-        tags = tags.Substring(1);
-      }
-      var uri = $"{item.PortalUri}sharing/rest/content/users/{item.Owner}/{item.FolderID}/items/{item.ItemID}/update?f=json&token=" + portal.GetToken();
-      var httpClient = new EsriHttpClient();
-      var formContent = new MultipartFormDataContent();
-      formContent.Add(new StringContent(tags), "tags");
-      var response = await httpClient.PostAsync(uri, formContent);
+        var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
+        var item = results.Results.FirstOrDefault();
+        if (item == null)
+        {
+          return;
+        }
+        var tags = string.Join(",", item.ItemTags);
+        tags = tags.Replace("Template", string.Empty);
+        tags = tags.Replace("ProjectAtlas", string.Empty);
+        tags = tags.Replace(",,", ",");
+        if (tags.StartsWith(","))
+        {
+          tags = tags.Substring(1);
+        }
+        var uri = $"{item.PortalUri}sharing/rest/content/users/{item.Owner}/{item.FolderID}/items/{item.ItemID}/update?f=json&token=" + portal.GetToken();
+        var httpClient = new EsriHttpClient();
+        var formContent = new MultipartFormDataContent();
+        formContent.Add(new StringContent(tags), "tags");
+        formContent.Add(new StringContent("" + true), "clearEmptyFields");
+        var response = await httpClient.PostAsync(uri, formContent);
+      });
+      FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
+      FrameworkApplication.State.Activate("ProjectAtlasManager_Module_UpdateWebMapGalleryState");
     }
   }
 }

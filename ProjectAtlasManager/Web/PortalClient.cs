@@ -58,9 +58,9 @@ namespace ProjectAtlasManager.Web
       return result;
     }
 
-    internal Task UpdateData(PortalItem webmap, string webmapData)
+    internal Task<EsriHttpResponseMessage> UpdateData(PortalItem webmap, string webmapData)
     {
-      var uri = $"{_portalUri}sharing/rest/content/{webmap.Owner}/items/{webmap.ID}/update?f=json&token={_token}";
+      var uri = $"{_portalUri}sharing/rest/content/users/{webmap.Owner}/{webmap.FolderID}/items/{webmap.ID}/update?token={_token}";
       var formContent = new MultipartFormDataContent();
       formContent.Add(new StringContent(webmapData), "text");
       return _http.PostAsync(uri, formContent);

@@ -47,7 +47,7 @@ namespace ProjectAtlasManager
           return;
         }
         var layersFromTemplate = await portalClient.RetrieveLayers(item);
-        var mapsBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND tags:\"PAT{item.ID}\" AND orgid:0123456789ABCDEF");
+        var mapsBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:0123456789ABCDEF");
         var mapsBasedOnTemplate = await ArcGISPortalExtensions.SearchForContentAsync(portal, mapsBasedOnTemplateQuery);
         var webmapSynchronizer = new WebMapSynchronizer();
         Parallel.ForEach(mapsBasedOnTemplate.Results, async x =>
@@ -62,7 +62,7 @@ namespace ProjectAtlasManager
     {
       var webmapData = await portalClient.GetDataFromItem(webmap);
       webmapData = webmapSynchronizer.Synchronize(webmapData, layersFromTemplate);
-      await portalClient.UpdateData(webmap, webmapData);
+      var result = await portalClient.UpdateData(webmap, webmapData);
     }
   }
 }

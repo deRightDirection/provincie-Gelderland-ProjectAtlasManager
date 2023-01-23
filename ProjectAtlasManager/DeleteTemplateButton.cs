@@ -43,6 +43,7 @@ namespace ProjectAtlasManager
         var tags = string.Join(",", item.ItemTags);
         tags = tags.Replace("Template", string.Empty);
         tags = tags.Replace("ProjectAtlas", string.Empty);
+        tags = tags.Replace($"PAT{item.ID}", string.Empty);
         tags = tags.Replace(",,", ",");
         if (tags.StartsWith(","))
         {

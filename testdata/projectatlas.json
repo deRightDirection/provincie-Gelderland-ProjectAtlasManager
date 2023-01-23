@@ -1,0 +1,1487 @@
+{
+    "operationalLayers": [
+        {
+            "id": "DKKv4_5160",
+            "layerType": "ArcGISMapServiceLayer",
+            "url": "https://basisregistraties.arcgisonline.nl/arcgis/rest/services/DKK/DKKv4/MapServer",
+            "visibility": false,
+            "visibleLayers": [
+                0,
+                1,
+                2
+            ],
+            "opacity": 1,
+            "title": "GRENZEN - Kadastrale grenzen (extern)",
+            "minScale": 81390,
+            "maxScale": 0,
+            "layers": [
+                {
+                    "id": 0,
+                    "popupInfo": {
+                        "title": "Perceelnummer: {akrkadastralegemeentecode}",
+                        "fieldInfos": [
+                            {
+                                "fieldName": "objectid",
+                                "label": "OBJECTID",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "globalid",
+                                "label": "GlobalID",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "begingeldigheid",
+                                "label": "beginGeldigheid",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "eindgeldigheid",
+                                "label": "eindGeldigheid",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "tijdstipregistratie",
+                                "label": "tijdstipRegistratie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "eindregistratie",
+                                "label": "eindRegistratie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "volgnummer",
+                                "label": "volgnummer",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "statushistorie",
+                                "label": "statusHistorie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "akrkadastralegemeentecode",
+                                "label": "aKRKadastraleGemeenteCode",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "sectie",
+                                "label": "sectie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "perceelnummer",
+                                "label": "perceelnummer",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "perceelnummerrotatie",
+                                "label": "perceelnummerRotatie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "perceelnummerverschuivingx",
+                                "label": "perceelnummerVerschuivingX",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "perceelnummerverschuivingy",
+                                "label": "perceelnummerVerschuivingY",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "shape",
+                                "label": "Shape",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox"
+                            }
+                        ],
+                        "description": null,
+                        "showAttachments": true,
+                        "mediaInfos": []
+                    },
+                    "layerDefinition": {
+                        "source": {
+                            "type": "mapLayer",
+                            "mapLayerId": 0
+                        }
+                    },
+                    "name": "Perceelnummer",
+                    "minScale": 5000,
+                    "maxScale": 0,
+                    "parentLayerId": -1,
+                    "defaultVisibility": true
+                },
+                {
+                    "id": 1,
+                    "popupInfo": {
+                        "title": "KadastraleGrens",
+                        "fieldInfos": [
+                            {
+                                "fieldName": "objectid",
+                                "label": "OBJECTID",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "globalid",
+                                "label": "GlobalID",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "identificatie",
+                                "label": "identificatie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "namespace",
+                                "label": "namespace",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "lokaalid",
+                                "label": "lokaalID",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "begingeldigheid",
+                                "label": "beginGeldigheid",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "eindgeldigheid",
+                                "label": "eindGeldigheid",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "tijdstipregistratie",
+                                "label": "tijdstipRegistratie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "eindregistratie",
+                                "label": "eindRegistratie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "volgnummer",
+                                "label": "volgnummer",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "statushistorie",
+                                "label": "statusHistorie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "typegrens",
+                                "label": "typeGrens",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "perceellinksidentificatie",
+                                "label": "perceelLinksIdentificatie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "perceellinksnamespace",
+                                "label": "perceelLinksNamespace",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "perceellinkslokaalid",
+                                "label": "perceelLinksLokaalID",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "perceelrechtsidentificatie",
+                                "label": "perceelRechtsIdentificatie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "perceelrechtsnamespace",
+                                "label": "perceelRechtsNamespace",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "perceelrechtslokaalid",
+                                "label": "perceelRechtsLokaalID",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "shape",
+                                "label": "Shape",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "st_length(shape)",
+                                "label": "st_length(shape)",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            }
+                        ],
+                        "description": null,
+                        "showAttachments": true,
+                        "mediaInfos": []
+                    },
+                    "layerDefinition": {
+                        "source": {
+                            "type": "mapLayer",
+                            "mapLayerId": 1
+                        }
+                    },
+                    "name": "KadastraleGrens",
+                    "minScale": 5000,
+                    "maxScale": 0,
+                    "parentLayerId": -1,
+                    "defaultVisibility": false
+                },
+                {
+                    "id": 2,
+                    "layerDefinition": {
+                        "source": {
+                            "type": "mapLayer",
+                            "mapLayerId": 2
+                        }
+                    },
+                    "name": "Perceel",
+                    "minScale": 28956,
+                    "maxScale": 0,
+                    "parentLayerId": -1,
+                    "defaultVisibility": true,
+                    "popupInfo": {
+                        "title": "Kadastrale gemeentewaarde:{kadastralegemeentewaarde}",
+                        "fieldInfos": [
+                            {
+                                "fieldName": "objectid",
+                                "label": "OBJECTID",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "globalid",
+                                "label": "GlobalID",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "identificatie",
+                                "label": "identificatie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "namespace",
+                                "label": "namespace",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "lokaalid",
+                                "label": "lokaalID",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "begingeldigheid",
+                                "label": "beginGeldigheid",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "eindgeldigheid",
+                                "label": "eindGeldigheid",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "tijdstipregistratie",
+                                "label": "tijdstipRegistratie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "eindregistratie",
+                                "label": "eindRegistratie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "dateFormat": "shortDateShortTime"
+                                }
+                            },
+                            {
+                                "fieldName": "volgnummer",
+                                "label": "volgnummer",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "statushistorie",
+                                "label": "statusHistorie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "kadastralegemeentecode",
+                                "label": "kadastraleGemeenteCode",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "kadastralegemeentewaarde",
+                                "label": "kadastraleGemeenteWaarde",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "sectie",
+                                "label": "sectie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "perceelnummer",
+                                "label": "perceelnummer",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "akrkadastralegemeentecode",
+                                "label": "aKRKadastraleGemeenteCode",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "kadastralegrootte",
+                                "label": "kadastraleGrootte",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "soortgrootte",
+                                "label": "soortGrootte",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "perceelnummerrotatie",
+                                "label": "perceelnummerRotatie",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "perceelnummerverschuivingx",
+                                "label": "perceelnummerVerschuivingX",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "perceelnummerverschuivingy",
+                                "label": "perceelnummerVerschuivingY",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "plaatscoordinatenx",
+                                "label": "plaatscoordinatenX",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "plaatscoordinateny",
+                                "label": "plaatscoordinatenY",
+                                "tooltip": "",
+                                "visible": true,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "shape",
+                                "label": "SHAPE",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox"
+                            },
+                            {
+                                "fieldName": "st_area(shape)",
+                                "label": "st_area(shape)",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            },
+                            {
+                                "fieldName": "st_length(shape)",
+                                "label": "st_length(shape)",
+                                "tooltip": "",
+                                "visible": false,
+                                "stringFieldOption": "textbox",
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                }
+                            }
+                        ],
+                        "description": "<table>\n  <tbody><tr>\n    <td>Perceelnummer<\/td>\n    <td>{perceelnummer}<\/td>\n  <\/tr>\n  <tr>\n    <td>Sectie<\/td>\n    <td>{sectie}<\/td>\n  <\/tr>\n  <tr>\n    <td>Kadastrale Gemeente  <br /><\/td>\n    <td>{kadastralegemeentewaarde}<\/td>\n  <\/tr>\n  <tr>\n    <td>Oppervlakte<\/td>\n    <td>{kadastralegrootte} m2<\/td>\n  <\/tr>\n<\/tbody><\/table>",
+                        "showAttachments": true,
+                        "mediaInfos": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": "wms_2158",
+            "url": "https://geodata.nationaalgeoregister.nl/natura2000/wms",
+            "visibility": false,
+            "visibleLayers": [
+                "natura2000"
+            ],
+            "opacity": 1,
+            "title": "RUIMTELIJKE ORDENING - Natura2000 (extern)",
+            "version": "1.3.0",
+            "mapUrl": "https://geodata.nationaalgeoregister.nl/natura2000/wms?language=dut",
+            "featureInfoUrl": "https://geodata.nationaalgeoregister.nl/natura2000/wms?language=dut",
+            "featureInfoFormat": "text/html",
+            "layers": [
+                {
+                    "name": "natura2000",
+                    "title": "natura2000",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/natura2000/wms?SERVICE=WMS&language=dut&version=1.3.0&service=WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=natura2000&format=image/png&STYLE=natura2000:lnv_natura2000",
+                    "queryable": true,
+                    "showPopup": true
+                }
+            ],
+            "spatialReferences": [
+                28992,
+                25831,
+                25832,
+                3034,
+                3035,
+                3857,
+                4258,
+                4326
+            ],
+            "extent": [
+                [
+                    198260,
+                    6480510
+                ],
+                [
+                    831799,
+                    7574370
+                ]
+            ],
+            "copyright": "otherRestrictions;http://creativecommons.org/publicdomain/mark/1.0/deed.nl;Geen beperkingen",
+            "maxWidth": 4000,
+            "maxHeight": 4000,
+            "type": "WMS",
+            "layerType": "WMS"
+        },
+        {
+            "id": "wms_7548",
+            "url": "https://geodata.nationaalgeoregister.nl/plu/wms",
+            "visibility": false,
+            "visibleLayers": [
+                "Dubbelbestemming",
+                "Enkelbestemming"
+            ],
+            "opacity": 1,
+            "title": "RUIMTELIJKE ORDENING - Ruimtelijke plannen (extern)",
+            "version": "1.3.0",
+            "mapUrl": "https://geodata.nationaalgeoregister.nl/plu/ows",
+            "featureInfoUrl": "https://geodata.nationaalgeoregister.nl/plu/ows",
+            "featureInfoFormat": "text/html",
+            "layers": [
+                {
+                    "name": "Besluitgebied_A",
+                    "title": "Besluitgebied_A",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitgebied_A",
+                    "queryable": true
+                },
+                {
+                    "name": "Besluitgebied_P",
+                    "title": "Besluitgebied_P",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitgebied_P",
+                    "queryable": true
+                },
+                {
+                    "name": "Besluitgebied_X",
+                    "title": "Besluitgebied_X",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitgebied_X",
+                    "queryable": true
+                },
+                {
+                    "name": "Besluitsubvlak_A",
+                    "title": "Besluitsubvlak_A",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitsubvlak_A",
+                    "queryable": true
+                },
+                {
+                    "name": "Besluitsubvlak_P",
+                    "title": "Besluitsubvlak_P",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitsubvlak_P",
+                    "queryable": true
+                },
+                {
+                    "name": "Besluitsubvlak_X",
+                    "title": "Besluitsubvlak_X",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitsubvlak_X",
+                    "queryable": true
+                },
+                {
+                    "name": "Besluitvlak_A",
+                    "title": "Besluitvlak_A",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitvlak_A",
+                    "queryable": true
+                },
+                {
+                    "name": "Besluitvlak_P",
+                    "title": "Besluitvlak_P",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitvlak_P",
+                    "queryable": true
+                },
+                {
+                    "name": "Besluitvlak_X",
+                    "title": "Besluitvlak_X",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitvlak_X",
+                    "queryable": true
+                },
+                {
+                    "name": "Bestemmingsplangebied",
+                    "title": "Bestemmingsplangebied",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Bestemmingsplangebied",
+                    "queryable": true
+                },
+                {
+                    "name": "Bouwaanduiding",
+                    "title": "Bouwaanduiding",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Bouwaanduiding",
+                    "queryable": true
+                },
+                {
+                    "name": "Bouwvlak",
+                    "title": "Bouwvlak",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Bouwvlak",
+                    "queryable": true
+                },
+                {
+                    "name": "Dubbelbestemming",
+                    "title": "Dubbelbestemming",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Dubbelbestemming",
+                    "queryable": true,
+                    "showPopup": true
+                },
+                {
+                    "name": "Enkelbestemming",
+                    "title": "Enkelbestemming",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Enkelbestemming",
+                    "queryable": true,
+                    "showPopup": true
+                },
+                {
+                    "name": "Figuur",
+                    "title": "Figuur",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Figuur",
+                    "queryable": true
+                },
+                {
+                    "name": "Functieaanduiding",
+                    "title": "Functieaanduiding",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Functieaanduiding",
+                    "queryable": true
+                },
+                {
+                    "name": "Gebiedsaanduiding",
+                    "title": "Gebiedsaanduiding",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Gebiedsaanduiding",
+                    "queryable": true
+                },
+                {
+                    "name": "Lettertekenaanduiding",
+                    "title": "Lettertekenaanduiding",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Lettertekenaanduiding",
+                    "queryable": true
+                },
+                {
+                    "name": "Maatvoering",
+                    "title": "Maatvoering",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Maatvoering",
+                    "queryable": true
+                },
+                {
+                    "name": "Plangebied",
+                    "title": "Plangebied",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Plangebied",
+                    "queryable": true
+                },
+                {
+                    "name": "Plangebied_PCP",
+                    "title": "Plangebied_PCP",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Plangebied_PCP",
+                    "queryable": true
+                },
+                {
+                    "name": "ProvinciaalComplex",
+                    "title": "ProvinciaalComplex",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=ProvinciaalComplex",
+                    "queryable": true
+                },
+                {
+                    "name": "ProvinciaalGebied",
+                    "title": "ProvinciaalGebied",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=ProvinciaalGebied",
+                    "queryable": true
+                },
+                {
+                    "name": "ProvinciaalPlangebied",
+                    "title": "ProvinciaalPlangebied",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=ProvinciaalPlangebied",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisiecomplex_G",
+                    "title": "Structuurvisiecomplex_G",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiecomplex_G",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisiecomplex_P",
+                    "title": "Structuurvisiecomplex_P",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiecomplex_P",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisiecomplex_R",
+                    "title": "Structuurvisiecomplex_R",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiecomplex_R",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisiegebied_G",
+                    "title": "Structuurvisiegebied_G",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiegebied_G",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisiegebied_P",
+                    "title": "Structuurvisiegebied_P",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiegebied_P",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisiegebied_R",
+                    "title": "Structuurvisiegebied_R",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiegebied_R",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisieplangebied_G",
+                    "title": "Structuurvisieplangebied_G",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisieplangebied_G",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisieplangebied_P",
+                    "title": "Structuurvisieplangebied_P",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisieplangebied_P",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisieplangebied_R",
+                    "title": "Structuurvisieplangebied_R",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisieplangebied_R",
+                    "queryable": true
+                },
+                {
+                    "name": "Structuurvisieverklaring_P",
+                    "title": "Structuurvisieverklaring_P",
+                    "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisieverklaring_P",
+                    "queryable": true
+                }
+            ],
+            "spatialReferences": [
+                28992,
+                25831,
+                25832,
+                3034,
+                3035,
+                3857,
+                4258,
+                4326
+            ],
+            "extent": [
+                [
+                    26501.06751444797,
+                    5959807.3321047155
+                ],
+                [
+                    1023142.9657138824,
+                    7590960.109979356
+                ]
+            ],
+            "type": "WMS",
+            "layerType": "WMS"
+        },
+        {
+            "id": "AHN3_i_6801",
+            "layerType": "ArcGISImageServiceLayer",
+            "url": "https://ahn.arcgisonline.nl/arcgis/rest/services/Hoogtebestand/AHN3_i/ImageServer",
+            "visibility": false,
+            "opacity": 1,
+            "title": "ONDERGROND - AHN3 50cm maaiveld (extern)",
+            "minScale": 0,
+            "maxScale": 0,
+            "popupInfo": {
+                "title": "",
+                "fieldInfos": [
+                    {
+                        "fieldName": "OBJECTID",
+                        "label": "OBJECTID",
+                        "isEditable": false,
+                        "visible": false
+                    },
+                    {
+                        "fieldName": "Shape",
+                        "label": "Shape",
+                        "isEditable": false,
+                        "visible": false
+                    },
+                    {
+                        "fieldName": "Name",
+                        "label": "Name",
+                        "isEditable": false,
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "MinPS",
+                        "label": "MinPS",
+                        "isEditable": false,
+                        "visible": true,
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "MaxPS",
+                        "label": "MaxPS",
+                        "isEditable": false,
+                        "visible": true,
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "LowPS",
+                        "label": "LowPS",
+                        "isEditable": false,
+                        "visible": true,
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "HighPS",
+                        "label": "HighPS",
+                        "isEditable": false,
+                        "visible": true,
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "Category",
+                        "label": "Category",
+                        "isEditable": false,
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "Tag",
+                        "label": "Tag",
+                        "isEditable": false,
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "GroupName",
+                        "label": "GroupName",
+                        "isEditable": false,
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "ProductName",
+                        "label": "ProductName",
+                        "isEditable": false,
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "CenterX",
+                        "label": "CenterX",
+                        "isEditable": false,
+                        "visible": true,
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "CenterY",
+                        "label": "CenterY",
+                        "isEditable": false,
+                        "visible": true,
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "ZOrder",
+                        "label": "ZOrder",
+                        "isEditable": false,
+                        "visible": true,
+                        "format": {
+                            "places": 0,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "Shape_Length",
+                        "label": "Shape_Length",
+                        "isEditable": false,
+                        "visible": false,
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "Shape_Area",
+                        "label": "Shape_Area",
+                        "isEditable": false,
+                        "visible": false,
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "Raster.ServicePixelValue",
+                        "label": "Service Pixel Value",
+                        "isEditable": false,
+                        "visible": false,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "Raster.ItemPixelValue",
+                        "label": "Item Pixel Value",
+                        "isEditable": false,
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    }
+                ],
+                "description": "Hoogte (m): {Raster.ItemPixelValue}\n        ",
+                "showAttachments": false,
+                "mediaInfos": []
+            }
+        },
+        {
+            "id": "Infra_8286",
+            "layerType": "ArcGISFeatureLayer",
+            "url": "https://geoservices.gelderland.nl/gisserver/rest/services/Infra/Infra/MapServer/102",
+            "visibility": false,
+            "opacity": 1,
+            "mode": 1,
+            "title": "MOBILITEIT - Trajectvisies",
+            "popupInfo": {
+                "title": "Trajectvisies: {weg_nr}",
+                "fieldInfos": [
+                    {
+                        "fieldName": "objectid",
+                        "label": "OBJECTID",
+                        "tooltip": "",
+                        "visible": false,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "weg_nr",
+                        "label": "Wegnummer",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "hm_van",
+                        "label": "KM van",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox",
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "hm_tot",
+                        "label": "KM tot",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox",
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "traject_nr",
+                        "label": "Traject",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox",
+                        "format": {
+                            "places": 0,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "trajectvisie",
+                        "label": "Trajectvisie",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "functie",
+                        "label": "Functie verkeersmanagement",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "cat_pvvp2",
+                        "label": "Verkeerskundige categorisering",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "omgevingsvisie",
+                        "label": "Belang omgevingsvisie",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "url_kaart",
+                        "label": "Url kaart",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "shape",
+                        "label": "Shape",
+                        "tooltip": "",
+                        "visible": false,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "field",
+                        "label": "Field",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox",
+                        "format": {
+                            "places": 0,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "st_length(shape)",
+                        "label": "st_length(shape)",
+                        "tooltip": "",
+                        "visible": false,
+                        "stringFieldOption": "textbox",
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    }
+                ],
+                "description": null,
+                "showAttachments": true,
+                "mediaInfos": []
+            }
+        },
+        {
+            "id": "Infra_7965",
+            "layerType": "ArcGISFeatureLayer",
+            "url": "https://geoservices.gelderland.nl/gisserver/rest/services/Infra/Infra/MapServer/41",
+            "visibility": false,
+            "opacity": 1,
+            "mode": 1,
+            "title": "B&O - Bomen",
+            "layerDefinition": {
+                "drawingInfo": {
+                    "renderer": {
+                        "type": "simple",
+                        "symbol": {
+                            "angle": 0,
+                            "xoffset": 0,
+                            "yoffset": 0,
+                            "type": "esriPMS",
+                            "url": "b8a4109792d0c0630184bb186808e77c",
+                            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABMUlEQVQoka3ST0uUURQH4OfOO7kKWrl1YTIGtWovaK1btLKVroya8c++lehArYTQsegbuIjoE4gwX2EsXsRF0NRkgrsEm/e4sMWM9CZIv+W5POdezrlV10z1v8OJJberhZPPLcdXwulV1V7X6Kd3vlUKe33eojm+YuzwtS+lsHuk6YYnd56ZLv7UanV1v21MLLl/sGn/r7Dft5FlHkVmDzcls7gneTWIhuBk3UxwN5L3wgtkKdxCrvC1VrdYZHYONh0NwUgeYy4FqAw0H5M0IfW1uQTzlmUsTzY8D1oISPyIwkz+xmHpcGqLnkZo4SXmJR8iPEwVu+MrpgYnO7zHwr6KtXzLaq1hPkJvJDw4S9ZPf/lZemO+rY22izd+TKHT2fYdCy6l9OfkWxplZ/+EV+UctEZlb+QRREwAAAAASUVORK5CYII=",
+                            "contentType": "image/png",
+                            "width": 10,
+                            "height": 10
+                        }
+                    },
+                    "labelingInfo": [
+                        {
+                            "labelExpression": null,
+                            "labelExpressionInfo": {
+                                "expression": "$feature[\"boom_id\"]",
+                                "value": "{boom_id}"
+                            },
+                            "useCodedValues": true,
+                            "maxScale": 0,
+                            "minScale": 48965,
+                            "where": null,
+                            "labelPlacement": "esriServerPointLabelPlacementAboveRight",
+                            "symbol": {
+                                "color": [
+                                    0,
+                                    0,
+                                    0,
+                                    255
+                                ],
+                                "type": "esriTS",
+                                "backgroundColor": null,
+                                "borderLineColor": null,
+                                "borderLineSize": null,
+                                "haloSize": 0,
+                                "haloColor": null,
+                                "verticalAlignment": "bottom",
+                                "horizontalAlignment": "center",
+                                "rightToLeft": false,
+                                "angle": 0,
+                                "xoffset": 0,
+                                "yoffset": 0,
+                                "text": "",
+                                "rotated": false,
+                                "kerning": true,
+                                "font": {
+                                    "size": 10.5,
+                                    "style": "normal",
+                                    "decoration": "none",
+                                    "weight": "normal",
+                                    "family": "Arial"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "showLabels": true,
+            "popupInfo": {
+                "title": "Bomen (individueel)",
+                "fieldInfos": [
+                    {
+                        "fieldName": "objectid",
+                        "label": "OBJECTID",
+                        "tooltip": "",
+                        "visible": false,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "boom_id",
+                        "label": "Boom ID",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "plantverband",
+                        "label": "Plantverband",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "boomsoort",
+                        "label": "Boomsoort",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "naam_nl",
+                        "label": "Boomnaam (NL)",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "naam_latijn",
+                        "label": "Boomnaam (Latijn)",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "plantjaar",
+                        "label": "Plantjaar",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox",
+                        "format": {
+                            "places": 0,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "cat_hoogte",
+                        "label": "Boomhoogte",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "eindbeeld",
+                        "label": "Eindbeeld",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "type_monument",
+                        "label": "Type monument",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "kanton_code",
+                        "label": "Kantoncode",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "kanton_naam",
+                        "label": "Naam van het kanton",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "weg_nr",
+                        "label": "Wegnummer",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "hm_boom",
+                        "label": "Kilometrering boom",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox",
+                        "format": {
+                            "places": 2,
+                            "digitSeparator": true
+                        }
+                    },
+                    {
+                        "fieldName": "code_dwarsprofiel",
+                        "label": "Code dwarsprofiel",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "dwarsprofiel",
+                        "label": "Dwarsprofiel",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "eigenaar_boom",
+                        "label": "Eigenaar",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "onderhoud_boom",
+                        "label": "Onderhoudsplichtige",
+                        "tooltip": "",
+                        "visible": true,
+                        "stringFieldOption": "textbox"
+                    },
+                    {
+                        "fieldName": "shape",
+                        "label": "Shape",
+                        "tooltip": "",
+                        "visible": false,
+                        "stringFieldOption": "textbox"
+                    }
+                ],
+                "description": null,
+                "showAttachments": true,
+                "mediaInfos": []
+            }
+        },
+        {
+            "id": "Grenzen_9382",
+            "layerType": "ArcGISFeatureLayer",
+            "url": "https://geoservices.gelderland.nl/gisserver/rest/services/Grenzen/Grenzen/MapServer/4",
+            "visibility": true,
+            "opacity": 1,
+            "mode": 1,
+            "title": "GRENZEN - Provincie Gelderland",
+            "layerDefinition": {
+                "drawingInfo": {
+                    "renderer": {
+                        "type": "simple",
+                        "symbol": {
+                            "color": null,
+                            "outline": {
+                                "color": [
+                                    255,
+                                    0,
+                                    0,
+                                    255
+                                ],
+                                "width": 1.5,
+                                "type": "esriSLS",
+                                "style": "esriSLSSolid"
+                            },
+                            "type": "esriSFS",
+                            "style": "esriSFSSolid"
+                        }
+                    }
+                }
+            },
+            "disablePopup": true
+        }
+    ],
+    "baseMap": {
+        "baseMapLayers": [
+            {
+                "id": "Topo_3076",
+                "layerType": "ArcGISTiledMapServiceLayer",
+                "url": "https://services.arcgisonline.nl/ArcGIS/rest/services/Basiskaarten/Topo/MapServer",
+                "visibility": true,
+                "opacity": 1,
+                "title": "Topo"
+            }
+        ],
+        "title": "Topo RD"
+    },
+    "spatialReference": {
+        "wkid": 28992,
+        "latestWkid": 28992
+    },
+    "authoringApp": "WebMapViewer",
+    "authoringAppVersion": "10.9.1",
+    "version": "2.21",
+    "_ssl": true
+}

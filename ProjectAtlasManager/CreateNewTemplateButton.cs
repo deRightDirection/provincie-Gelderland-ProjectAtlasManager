@@ -13,6 +13,7 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
 using Newtonsoft.Json;
+using ProjectAtlasManager.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,19 +48,13 @@ namespace ProjectAtlasManager
           return;
         }
         var tags = string.Join(",", item.ItemTags);
-        tags += ",Template,ProjectAtlas";
+        tags += $",Template,ProjectAtlas,PAT{item.ID}";
         if (tags.StartsWith(","))
         {
           tags = tags.Substring(1);
         }
-        var uri = $"{item.PortalUri}sharing/rest/content/users/{item.Owner}/{item.FolderID}/items/{item.ItemID}/update?f=json&token=" + portal.GetToken();
-        // TODO thumbnail toevoegen indien die nog niet aanwezig is
-        // TODO opzoeken van item die de template informatie bevat
-        // TODO operational layers uitlezen, die opslaan in een feature service
-        var httpClient = new EsriHttpClient();
-        var formContent = new MultipartFormDataContent();
-        formContent.Add(new StringContent(tags), "tags");
-        var response = await httpClient.PostAsync(uri, formContent);
+        var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
+        await portalClient.AddTags(item, tags);
       });
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_WebMapSelectedState");
       FrameworkApplication.State.Activate("ProjectAtlasManager_Module_UpdateWebMapGalleryState");

@@ -68,7 +68,7 @@ namespace ProjectAtlasManager
       await QueuedTask.Run(async () =>
       {
         ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-        var query = new PortalQueryParameters($"type:\"Web map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:0123456789ABCDEF");
+        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:0123456789ABCDEF");
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
         if (results == null)
         {
@@ -76,7 +76,7 @@ namespace ProjectAtlasManager
         }
         foreach (var item in results.Results.OfType<PortalItem>())
         {
-          lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
+            lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
         }
       });
       return lstWebmapItems;

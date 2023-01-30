@@ -18,13 +18,13 @@
   <ResourceDictionary.MergedDictionaries>
     <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
   </ResourceDictionary.MergedDictionaries>
-  <DataTemplate x:Key="WebMapsGalleryItemTemplate">
-    <Grid Margin="5">
+  <DataTemplate x:Key="WebMapsGalleryItemTemplate2">
+    <Grid Margin="2">
       <Grid.RowDefinitions>
           <RowDefinition Height="auto"/>
           <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Stretch="Fill" Width="80" Height="80">
+        <Image Grid.Row="0" Stretch="Fill" Margin="0 0 0 2" Width="60" Height="60">
           <Image.Effect>
             <DropShadowEffect Color="{DynamicResource Esri_Color_Gray145}" Opacity="0.4" />
           </Image.Effect>

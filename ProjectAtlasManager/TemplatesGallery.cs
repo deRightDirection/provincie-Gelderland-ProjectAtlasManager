@@ -68,7 +68,9 @@ namespace ProjectAtlasManager
       await QueuedTask.Run(async () =>
       {
         ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:0123456789ABCDEF");
+        var username = portal.GetSignOnUsername();
+        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:0123456789ABCDEF AND owner:\"{username}\"");
+        query.SortField = "title";
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
         if (results == null)
         {

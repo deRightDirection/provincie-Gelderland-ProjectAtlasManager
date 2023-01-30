@@ -89,13 +89,16 @@ namespace ProjectAtlasManager
         await QueuedTask.Run(async () =>
         {
           ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-          var query = new PortalQueryParameters($"-tags:\"Template\" -tags:\"ProjectAtlas\" type:\"Web Map\" orgid:0123456789ABCDEF", 100);
+          var username = portal.GetSignOnUsername();
+          var query = new PortalQueryParameters($"-tags:\"Template\" -tags:\"ProjectAtlas\" type:\"Web Map\" orgid:0123456789ABCDEF owner:\"{username}\"");
+          query.SortField = "title, modified";
+          query.SortOrder = PortalQuerySortOrder.Ascending;
           var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
           if (results == null)
             return;
           if(results.TotalResultsCount > 0)
           {
-            foreach (var item in results.Results.OfType<PortalItem>())
+            foreach (var item in results.Results.OfType<PortalItem>().OrderBy(x => x.Title))
             {
               if (!item.Owner.ToLowerInvariant().StartsWith("esri"))
               {

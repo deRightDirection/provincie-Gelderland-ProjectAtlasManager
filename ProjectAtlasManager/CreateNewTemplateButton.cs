@@ -13,12 +13,14 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
 using Newtonsoft.Json;
+using ProjectAtlasManager.Events;
 using ProjectAtlasManager.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjectAtlasManager
@@ -57,8 +59,8 @@ namespace ProjectAtlasManager
         await portalClient.AddTags(item, tags);
       });
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_WebMapSelectedState");
-      FrameworkApplication.State.Activate("ProjectAtlasManager_Module_UpdateWebMapGalleryState");
-
+      Thread.Sleep(750);
+      EventSender.Publish(new UpdateGalleryEvent());
     }
   }
 }

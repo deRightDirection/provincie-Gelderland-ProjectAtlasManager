@@ -12,11 +12,13 @@ using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
+using ProjectAtlasManager.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjectAtlasManager
@@ -54,10 +56,11 @@ namespace ProjectAtlasManager
         var formContent = new MultipartFormDataContent();
         formContent.Add(new StringContent(tags), "tags");
         formContent.Add(new StringContent("" + true), "clearEmptyFields");
-        var response = await httpClient.PostAsync(uri, formContent);
+        await httpClient.PostAsync(uri, formContent);
       });
+      Thread.Sleep(750);
+      EventSender.Publish(new UpdateGalleryEvent());
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
-      FrameworkApplication.State.Activate("ProjectAtlasManager_Module_UpdateWebMapGalleryState");
     }
   }
 }

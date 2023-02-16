@@ -1,8 +1,10 @@
 using ArcGIS.Core.CIM;
 using ArcGIS.Core.Data;
+using ArcGIS.Core.Events;
 using ArcGIS.Core.Geometry;
 using ArcGIS.Desktop.Catalog;
 using ArcGIS.Desktop.Core;
+using ArcGIS.Desktop.Core.Events;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Editing;
 using ArcGIS.Desktop.Extensions;
@@ -13,6 +15,7 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
 using ProjectAtlasManager.Domain;
+using ProjectAtlasManager.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,22 +33,43 @@ namespace ProjectAtlasManager
 
     public TemplatesGallery()
     {
+      EventSender.Subscribe(RenewData, true);
+      ActivePortalChangedEvent.Subscribe((args) =>
+      {
+        CheckStatus();
+      });
+      PortalSignOnChangedEvent.Subscribe((args) =>
+      {
+        CheckStatus();
+      });
       Initialize();
     }
 
+    private void CheckStatus()
+    {
+      ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+      if (portal != null && portal.IsSignedOn())
+      {
+        EventSender.Subscribe(RenewData, true);
+      }
+      else
+      {
+        SetItemCollection(new ObservableCollection<object>());
+      }
+    }
+    private void RenewData(EventBase eventData)
+    {
+      LoadItemsAsync(true);
+    }
+
+    protected override void OnDropDownOpened()
+    {
+      LoadItemsAsync(true);
+    }
     private async void Initialize()
     {
       await LoadItemsAsync();
     }
-    protected override void OnUpdate()
-    {
-      if (FrameworkApplication.State.Contains("ProjectAtlasManager_Module_ProjectTemplateGalleryState"))
-      {
-        LoadItemsAsync(true);
-        FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateGalleryState");
-      }
-    }
-
     private async Task LoadItemsAsync(bool renew = false)
     {
       if (_isInitialized && !renew)
@@ -53,8 +77,9 @@ namespace ProjectAtlasManager
         return;
       }
       var activePortal = ArcGISPortalManager.Current.GetActivePortal();
-      if (activePortal == null)
+      if (activePortal == null || activePortal.IsSignedOn() == false)
       {
+        SetItemCollection(new ObservableCollection<object>());
         return;
       }
       var items = await GetWebMapsAsync();
@@ -78,7 +103,7 @@ namespace ProjectAtlasManager
         }
         foreach (var item in results.Results.OfType<PortalItem>())
         {
-            lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
+          lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
         }
       });
       return lstWebmapItems;

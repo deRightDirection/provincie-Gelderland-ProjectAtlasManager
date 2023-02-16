@@ -1,8 +1,10 @@
 using ArcGIS.Core.CIM;
 using ArcGIS.Core.Data;
+using ArcGIS.Core.Events;
 using ArcGIS.Core.Geometry;
 using ArcGIS.Desktop.Catalog;
 using ArcGIS.Desktop.Core;
+using ArcGIS.Desktop.Core.Events;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Editing;
 using ArcGIS.Desktop.Extensions;
@@ -13,6 +15,7 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
 using ProjectAtlasManager.Domain;
+using ProjectAtlasManager.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,39 +34,58 @@ namespace ProjectAtlasManager
   internal class NewTemplateGallery : Gallery
   {
     private bool _isInitialized;
+    private bool _renew;
+    public NewTemplateGallery()
+    {
+      EventSender.Subscribe(RenewData, true);
+      ActivePortalChangedEvent.Subscribe((args) =>
+      {
+        CheckStatus();
+      });
+      PortalSignOnChangedEvent.Subscribe((args) =>
+      {
+        CheckStatus();
+      });
+    }
 
+    private void CheckStatus()
+    {
+      ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+      if (portal != null && portal.IsSignedOn())
+      {
+        _renew = true;
+      }
+      else
+      {
+        SetItemCollection(new ObservableCollection<object>());
+      }
+    }
+
+    private void RenewData(EventBase eventData)
+    {
+      _renew = true;
+    }
     protected override void OnDropDownOpened()
     {
       LoadItemsAsync();
     }
 
-    protected override void OnUpdate()
+    private async Task LoadItemsAsync()
     {
-      if(FrameworkApplication.State.Contains("ProjectAtlasManager_Module_UpdateWebMapGalleryState"))
-      {
-          LoadItemsAsync(true);
-      }
-    }
-
-    private async Task LoadItemsAsync(bool renew = false)
-    {
-      if(_isInitialized && !renew)
+      if (_isInitialized && _renew == false)
       {
         return;
       }
       var activePortal = ArcGISPortalManager.Current.GetActivePortal();
-      if (activePortal == null)
+      if (activePortal == null || activePortal.IsSignedOn() == false)
       {
+        SetItemCollection(new ObservableCollection<object>());
         return;
       }
       var items = await GetWebMapsAsync();
       SetItemCollection(new ObservableCollection<object>(items));
       _isInitialized = true;
-      if(renew)
-      {
-        FrameworkApplication.State.Activate("ProjectAtlasManager_Module_ProjectTemplateGalleryState");
-        FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_UpdateWebMapGalleryState");
-      }
+      _renew = false;
     }
 
     protected override void OnClick(object item)

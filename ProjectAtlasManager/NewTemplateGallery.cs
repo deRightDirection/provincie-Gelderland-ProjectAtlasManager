@@ -114,6 +114,7 @@ namespace ProjectAtlasManager
           var username = portal.GetSignOnUsername();
           var query = new PortalQueryParameters($"-tags:\"Template\" -tags:\"ProjectAtlas\" type:\"Web Map\" orgid:0123456789ABCDEF owner:\"{username}\"");
           query.SortField = "title, modified";
+          query.Limit = 100;
           query.SortOrder = PortalQuerySortOrder.Ascending;
           var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
           if (results == null)

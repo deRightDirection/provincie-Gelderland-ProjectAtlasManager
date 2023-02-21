@@ -37,6 +37,7 @@ namespace ProjectAtlasManager
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
       var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
+      query.Limit = 100;
       var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
       return QueuedTask.Run(async () =>
       {
@@ -48,6 +49,7 @@ namespace ProjectAtlasManager
         }
         var layersFromTemplate = await portalClient.RetrieveLayers(item);
         var mapsBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:0123456789ABCDEF");
+        mapsBasedOnTemplateQuery.Limit = 100;
         var mapsBasedOnTemplate = await ArcGISPortalExtensions.SearchForContentAsync(portal, mapsBasedOnTemplateQuery);
         var webmapSynchronizer = new WebMapSynchronizer();
         Parallel.ForEach(mapsBasedOnTemplate.Results, async x =>

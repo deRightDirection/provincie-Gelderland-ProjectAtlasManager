@@ -39,8 +39,9 @@ namespace ProjectAtlasManager
 
     private async Task SetTagsForNewTemplateAsync()
     {
-        ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-        var query = new PortalQueryParameters("id:" + Module1.SelectedWebMapToUpgradeToTemplate);
+      ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+      var query = new PortalQueryParameters("id:" + Module1.SelectedWebMapToUpgradeToTemplate);
+      query.Limit = 100;
       await QueuedTask.Run(async () =>
       {
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);

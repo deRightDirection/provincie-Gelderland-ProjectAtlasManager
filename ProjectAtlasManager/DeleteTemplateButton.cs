@@ -34,6 +34,7 @@ namespace ProjectAtlasManager
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
       var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
+      query.Limit = 100;
       await QueuedTask.Run(async () =>
       {
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArcGIS defaultAssembly="ProjectAtlasManager.dll" defaultNamespace="ProjectAtlasManager" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.2" desktopVersion="2.8.29751">
+  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.3" desktopVersion="2.8.29751">
     <Name>Project Atlas-manager</Name>
     <Description>De project atlas-manager voor de provincie Gelderland</Description>
     <Image>Images\button.png</Image>
@@ -37,6 +37,11 @@
           <button refID="ProjectAtlasManager_SynchronizeTemplateButton" size="large" />
           <button refID="ProjectAtlasManager_DeleteTemplateButton" size="large" />
         </group>
+        <group id="ProjectAtlasManager_Group3" caption="viewers" appearsOnAddInTab="false">
+          <!-- bekijk alle viewers -->
+          <gallery refID="showViewersGallery" inline="true" size="large" />
+          <button refID="ProjectAtlasManager_OpenViewerButton" size="large" />
+        </group>
       </groups>
       <controls>
         <button id="ProjectAtlasManager_CreateNewTemplateButton" caption="maak van de webmap een template" condition="ProjectAtlasManager_Module_WebMap_Selected" className="CreateNewTemplateButton" loadOnClick="true" smallImage="Images/upgradewebmaptotemplate.png" largeImage="Images/upgradewebmaptotemplate.png">
@@ -50,7 +55,7 @@
         </button>
       </controls>
       <galleries>
-        <gallery id="newTemplateGallery" caption="selecteer een webmap" className="NewTemplateGallery" itemsInRow="2" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate2.xaml" templateID="WebMapsGalleryItemTemplate2" resizable="true" largeImage="Images/webmaps.png">
+        <gallery id="newTemplateGallery" caption="selecteer een webmap" className="NewTemplateGallery" itemsInRow="1" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate2.xaml" templateID="WebMapsGalleryItemTemplate2" resizable="true" largeImage="Images/webmaps.png">
           <tooltip heading="nieuwe templates">
             selecteer een webmap en gebruik de knop 'omzetten naar template' om van deze webmap een template te maken<disabledText /></tooltip>
         </gallery>

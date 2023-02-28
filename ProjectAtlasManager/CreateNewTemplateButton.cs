@@ -51,7 +51,18 @@ namespace ProjectAtlasManager
           return;
         }
         var tags = string.Join(",", item.ItemTags);
-        tags += $",Template,ProjectAtlas,PAT{item.ID}";
+        if(!tags.Contains("Template"))
+        {
+          tags += ",Template";
+        }
+        if(!tags.Contains("ProjectAtlas"))
+        {
+          tags += ",ProjectAtlas";
+        }
+        if (!tags.Contains($"PAT{item.ID}"))
+        {
+          tags += $",PAT{item.ID}";
+        }
         if (tags.StartsWith(","))
         {
           tags = tags.Substring(1);

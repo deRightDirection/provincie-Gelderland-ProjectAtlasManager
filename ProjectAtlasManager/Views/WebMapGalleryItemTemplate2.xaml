@@ -5,7 +5,7 @@
     <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
   </ResourceDictionary.MergedDictionaries>
   <DataTemplate x:Key="WebMapsGalleryItemTemplate2">
-    <Grid Margin="2" Width="400">
+    <Grid Margin="2" Width="400" Height="25">
       <Grid.RowDefinitions>
         <RowDefinition Height="auto"/>
         <RowDefinition Height="auto"/>

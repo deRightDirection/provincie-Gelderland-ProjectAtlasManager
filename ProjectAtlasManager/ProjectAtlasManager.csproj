@@ -189,6 +189,8 @@
       <DependentUpon>BackstageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BackstageViewModel.cs" />
+    <Compile Include="Buttons\OpenTemplateButton.cs" />
+    <Compile Include="Buttons\SyncWebmapsButton.cs" />
     <Compile Include="Converters\UriSourceForThumbnailConverter.cs" />
     <Compile Include="CreateNewTemplateButton.cs" />
     <Compile Include="DeleteTemplateButton.cs" />
@@ -246,7 +248,12 @@
   <ItemGroup>
     <AddInContent Include="Images\webmaps.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AddInContent Include="Images\syncwebmaps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="Images\opentemplate.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
   PackageAction can be:

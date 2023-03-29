@@ -9,6 +9,11 @@ namespace ProjectAtlasManager.Events
 {
   class UpdateGalleryEvent : EventBase
   {
+    public UpdateGalleryEvent()
+    {
+      UpdateTemplatesGallery = true;
+      UpdateWebmapsGallery = true;
+    }
     public bool UpdateWebmapsGallery { get; set; }
     public bool UpdateTemplatesGallery { get; set; }
   }

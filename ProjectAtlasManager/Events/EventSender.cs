@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectAtlasManager.Events
 {
-  class EventSender : CompositePresentationEvent<EventBase>
+  class EventSender : CompositePresentationEvent<UpdateGalleryEvent>
     {
       /// <summary>
       /// Allow subscribers to register for our custom event
@@ -16,22 +16,17 @@ namespace ProjectAtlasManager.Events
       /// <param name="action">The callback which will be used to notify the subscriber</param>
       /// <param name="keepSubscriberReferenceAlive">Set to true to retain a strong reference</param>
       /// <returns><see cref="ArcGIS.Core.Events.SubscriptionToken"/></returns>
-      public static SubscriptionToken Subscribe(Action<EventBase> action, bool keepSubscriberReferenceAlive = false)
+      public static SubscriptionToken Subscribe(Action<UpdateGalleryEvent> action, bool keepSubscriberReferenceAlive = false)
       {
         return FrameworkApplication.EventAggregator.GetEvent<EventSender>()
             .Register(action, keepSubscriberReferenceAlive);
       }
 
-    internal static void Subscribe(object update, bool v)
-    {
-      throw new NotImplementedException();
-    }
-
     /// <summary>
     /// Allow subscribers to unregister from our custom event
     /// </summary>
     /// <param name="subscriber">The action that will be unsubscribed</param>
-    public static void Unsubscribe(Action<EventBase> subscriber)
+    public static void Unsubscribe(Action<UpdateGalleryEvent> subscriber)
       {
         FrameworkApplication.EventAggregator.GetEvent<EventSender>().Unregister(subscriber);
       }
@@ -48,7 +43,7 @@ namespace ProjectAtlasManager.Events
       /// Event owner calls publish to raise the event and notify subscribers
       /// </summary>
       /// <param name="payload">The associated event information</param>
-      internal static void Publish(EventBase payload)
+      internal static void Publish(UpdateGalleryEvent payload)
       {
         FrameworkApplication.EventAggregator.GetEvent<EventSender>().Broadcast(payload);
       }

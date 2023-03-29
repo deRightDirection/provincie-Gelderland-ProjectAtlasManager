@@ -57,9 +57,12 @@ namespace ProjectAtlasManager
         SetItemCollection(new ObservableCollection<object>());
       }
     }
-    private void RenewData(EventBase eventData)
+    private void RenewData(UpdateGalleryEvent eventData)
     {
-      LoadItemsAsync(true);
+      if(eventData.UpdateTemplatesGallery)
+      {
+        LoadItemsAsync(true);
+      }
     }
 
     protected override void OnDropDownOpened()

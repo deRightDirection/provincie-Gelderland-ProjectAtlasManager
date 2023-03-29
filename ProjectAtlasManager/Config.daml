@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ArcGIS defaultAssembly="ProjectAtlasManager.dll" defaultNamespace="ProjectAtlasManager" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.3" desktopVersion="2.8.29751">
+  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.4" desktopVersion="2.8.29751">
     <Name>ProjectAtlas Manager</Name>
     <Description>De projectatlas manager voor de provincie Gelderland</Description>
     <Image>Images\button.png</Image>
     <Author>the Right Direction BV</Author>
     <Company>the Right Direction BV</Company>
-    <Date>01/30/2023 3:57:41 PM</Date>
+    <Date>03/29/2023 12:21:41 PM</Date>
     <Subject>Framework</Subject>
   </AddInInfo>
   <conditions>
@@ -29,14 +28,14 @@
       <groups>
         <group id="ProjectAtlasManager_Group1" caption="webmaps" appearsOnAddInTab="false">
           <!-- bekijk alle webmaps en markeer een webmap als template -->
-          <gallery refID="newTemplateGallery" inline="false" size="large"/>
+          <gallery refID="newTemplateGallery" inline="false" size="large" />
           <button refID="ProjectAtlasManager_SyncWebmapsButton" size="large" />
           <button refID="ProjectAtlasManager_CreateNewTemplateButton" size="large" />
         </group>
         <group id="ProjectAtlasManager_Group2" caption="templates" appearsOnAddInTab="false">
           <!-- bekijk alle templates -->
           <gallery refID="showTemplatesGallery" inline="true" size="large" />
-          <button refID="ProjectAtlasManager_OpenTemplateButton" size="large"/>
+          <button refID="ProjectAtlasManager_OpenTemplateButton" size="large" />
           <button refID="ProjectAtlasManager_SynchronizeTemplateButton" size="large" />
           <button refID="ProjectAtlasManager_DeleteTemplateButton" size="large" />
         </group>
@@ -46,7 +45,7 @@
           <button refID="ProjectAtlasManager_OpenViewerButton" size="large" />
         </group>
         <group id="ProjectAtlasManager_Group4" caption="sharing" appearsOnAddInTab="false">
-          <button refID="esri_sharing_SharingAsWebMapPaneBtn"/>
+          <button refID="esri_sharing_SharingAsWebMapPaneBtn" />
         </group>
       </groups>
       <controls>
@@ -55,7 +54,7 @@
             Open de template
           </tooltip>
         </button>
-        <button id="ProjectAtlasManager_SyncWebmapsButton" caption="sync webmaps" className="Buttons.SyncWebmapsButton" loadOnClick="true" smallImage="Images/syncwebmaps.png" largeImage="Images/syncwebmaps.png">
+        <button id="ProjectAtlasManager_SyncWebmapsButton" caption="synchroniseer webmaps" className="Buttons.SyncWebmapsButton" loadOnClick="true" smallImage="Images/syncwebmaps.png" largeImage="Images/syncwebmaps.png">
           <tooltip heading="Synchroniseer webmaps">
             Synchroniseer de lijst met webmaps
           </tooltip>

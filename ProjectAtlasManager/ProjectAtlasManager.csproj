@@ -209,6 +209,7 @@
     <Compile Include="Converters\UriSourceForThumbnailConverter.cs" />
     <Compile Include="CreateNewTemplateButton.cs" />
     <Compile Include="DeleteTemplateButton.cs" />
+    <Compile Include="DeleteViewerButton.cs" />
     <Compile Include="Domain\OperationalLayer.cs" />
     <Compile Include="Domain\PortalInformation.cs" />
     <Compile Include="Domain\WebMap.cs" />
@@ -224,16 +225,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="SynchronizeTemplateButton.cs" />
+    <Compile Include="ViewModels\DeleteViewersWindowViewModel.cs" />
+    <Compile Include="Windows\DeleteViewersWindow.xaml.cs">
+      <DependentUpon>DeleteViewersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SyncViewersFromTemplateWindow.xaml.cs">
       <DependentUpon>SyncViewersFromTemplateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TemplatesGallery.cs" />
-    <Compile Include="Templates\WebMapSynchronizer.cs" />
+    <Compile Include="Services\WebMapManager.cs" />
     <Compile Include="ViewModels\SyncViewersFromTemplateViewModel.cs" />
     <Compile Include="Web\PortalClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="BackstageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DeleteViewersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -276,6 +285,11 @@
   </ItemGroup>
   <ItemGroup>
     <AddInContent Include="Images\opentemplate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="Images\deleteviewer.png" />
+    <AddInContent Include="Images\newviewer.png" />
+    <AddInContent Include="Images\viewer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--

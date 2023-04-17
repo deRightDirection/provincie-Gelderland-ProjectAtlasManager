@@ -13,8 +13,10 @@ namespace ProjectAtlasManager.Events
     {
       UpdateTemplatesGallery = true;
       UpdateWebmapsGallery = true;
+      UpdateViewersGallery = true;
     }
     public bool UpdateWebmapsGallery { get; set; }
     public bool UpdateTemplatesGallery { get; set; }
+    public bool UpdateViewersGallery { get; set; }
   }
 }

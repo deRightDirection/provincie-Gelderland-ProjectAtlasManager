@@ -13,6 +13,7 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
 using ProjectAtlasManager.Events;
+using ProjectAtlasManager.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,25 +44,37 @@ namespace ProjectAtlasManager
         {
           return;
         }
-        var tags = string.Join(",", item.ItemTags);
-        tags = tags.Replace("Template", string.Empty);
-        tags = tags.Replace("ProjectAtlas", string.Empty);
-        tags = tags.Replace($"PAT{item.ID}", string.Empty);
-        tags = tags.Replace(",,", ",");
-        if (tags.StartsWith(","))
+        var tags = UpdateTags(item);
+        var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
+        await portalClient.UpdateTags(item, tags);
+        var viewersBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:0123456789ABCDEF")
         {
-          tags = tags.Substring(1);
+          Limit = 100
+        };
+        var mapsBasedOnTemplate = await ArcGISPortalExtensions.SearchForContentAsync(portal, viewersBasedOnTemplateQuery);
+        foreach(var viewer in mapsBasedOnTemplate.Results)
+        {
+          var tags2 = UpdateTags(viewer);
+          await portalClient.UpdateTags(viewer, tags2);
         }
-        var uri = $"{item.PortalUri}sharing/rest/content/users/{item.Owner}/{item.FolderID}/items/{item.ItemID}/update?f=json&token=" + portal.GetToken();
-        var httpClient = new EsriHttpClient();
-        var formContent = new MultipartFormDataContent();
-        formContent.Add(new StringContent(tags), "tags");
-        formContent.Add(new StringContent("" + true), "clearEmptyFields");
-        await httpClient.PostAsync(uri, formContent);
       });
       Thread.Sleep(750);
       EventSender.Publish(new UpdateGalleryEvent());
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
+    }
+
+    private string UpdateTags(PortalItem item)
+    {
+      var tags = new List<string>();
+      foreach (var tag in item.ItemTags)
+      {
+        if (tag.Equals("ProjectAtlas") || tag.Equals("CopyOfTemplate") || tag.Equals("Template") || tag.StartsWith("PAT"))
+        {
+          continue;
+        }
+        tags.Add(tag);
+      }
+      return string.Join(",", tags);
     }
   }
 }

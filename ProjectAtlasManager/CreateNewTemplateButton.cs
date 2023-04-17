@@ -29,8 +29,6 @@ namespace ProjectAtlasManager
   {
     protected override void OnUpdate()
     {
-//      FrameworkApplication.State.Contains
-      // check for state
     }
     protected override void OnClick()
     {
@@ -68,7 +66,7 @@ namespace ProjectAtlasManager
           tags = tags.Substring(1);
         }
         var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
-        await portalClient.AddTags(item, tags);
+        await portalClient.UpdateTags(item, tags);
       });
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_WebMapSelectedState");
       Thread.Sleep(750);

@@ -36,7 +36,17 @@ namespace ProjectAtlasManager
         return _this ?? (_this = (Module1)FrameworkApplication.FindModule(ModuleID));
       }
     }
+    /// <summary>
+    /// geselecteerde viewer
+    /// </summary>
+    public static string SelectedViewer { get; internal set; }
+    /// <summary>
+    /// het geselecteerde template
+    /// </summary>
     internal static string SelectedProjectTemplate { get; set; }
+    /// <summary>
+    /// de webmap die opgewaardeerd kan worden naar een template
+    /// </summary>
     internal static string SelectedWebMapToUpgradeToTemplate { get; set; }
 
     protected override bool CanUnload()

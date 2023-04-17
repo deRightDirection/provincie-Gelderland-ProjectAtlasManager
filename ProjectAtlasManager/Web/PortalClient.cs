@@ -1,5 +1,6 @@
 using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Portal;
+using Flurl.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProjectAtlasManager.Domain;
@@ -7,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectAtlasManager.Web
@@ -24,13 +24,17 @@ namespace ProjectAtlasManager.Web
       _http = new EsriHttpClient();
     }
 
-    internal Task AddTags(PortalItem item, string tags)
+    internal Task UpdateTags(PortalItem item, string tags)
     {
       var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/{item.FolderID}/items/{item.ItemID}/update?f=json&token=" + _token;
       // TODO thumbnail toevoegen indien die nog niet aanwezig is
       // TODO opzoeken van item die de template informatie bevat
       var formContent = new MultipartFormDataContent();
       formContent.Add(new StringContent(tags), "tags");
+      if (string.IsNullOrEmpty(tags))
+      {
+        formContent.Add(new StringContent(true.ToString()), "clearEmptyFields");
+      }
       return _http.PostAsync(uri, formContent);
     }
 
@@ -38,8 +42,13 @@ namespace ProjectAtlasManager.Web
     {
       var uri = $"{_portalUri}sharing/rest/content/items/{item.ID}/data?f=json&token={_token}";
       var response = await _http.GetAsync(uri);
-      var json = await response.Content.ReadAsStringAsync();
-      return json;
+      return await response.Content.ReadAsStringAsync();
+    }
+
+    internal async Task Delete(PortalItem item)
+    {
+      var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/items/{item.ID}/delete?f=json&token={_token}";
+      await uri.PostAsync();
     }
 
     internal async Task<IEnumerable<OperationalLayer>> RetrieveLayers(PortalItem item)
@@ -56,6 +65,25 @@ namespace ProjectAtlasManager.Web
         result.Add(operationalLayer);
       }
       return result;
+    }
+
+    internal async Task CreateViewerFromTemplate(PortalItem item, string title, string tags)
+    {
+      var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/addItem?f=json&token={_token}";
+      var data = await GetDataFromItem(item);
+      var formContent = new MultipartFormDataContent();
+      formContent.Add(new StringContent(tags), "tags");
+      formContent.Add(new StringContent(title), "title");
+      formContent.Add(new StringContent(data), "text");
+      formContent.Add(new StringContent(item.Type), "type");
+      formContent.Add(new StringContent(item.TypeKeywords), "typeKeywords");
+      formContent.Add(new StringContent(string.IsNullOrEmpty(item.Description) ? string.Empty : item.Description), "description") ;
+      formContent.Add(new StringContent(string.IsNullOrEmpty(item.Summary) ? string.Empty : item.Summary), "snippet");
+      var extent = $"{item.XMin},{item.YMin},{item.XMax},{item.YMax}";
+      formContent.Add(new StringContent(extent), "extent");
+      var json = JsonConvert.SerializeObject(item.ItemCategories);
+      formContent.Add(new StringContent(json), "categories");
+      await _http.PostAsync(uri, formContent);
     }
 
     internal Task<EsriHttpResponseMessage> UpdateData(PortalItem webmap, string webmapData)

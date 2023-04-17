@@ -3,6 +3,7 @@ using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
+using ProjectAtlasManager.Events;
 using ProjectAtlasManager.ViewModels;
 using ProjectAtlasManager.Web;
 using ProjectAtlasManager.Windows;
@@ -10,14 +11,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace ProjectAtlasManager
+namespace ProjectAtlasManager.Viewers
 {
   class DeleteViewerButton : Button
   {
     private DeleteViewersWindow _deleteViewersWindow = null;
     private List<string> _itemIds;
+    private bool _removeAsItem;
 
     private ProgressDialog progDialog;
     protected override async void OnClick()
@@ -34,6 +37,7 @@ namespace ProjectAtlasManager
       {
         var dataContext = _deleteViewersWindow.DataContext as DeleteViewersWindowViewModel;
         _itemIds = dataContext.ItemIds;
+        _removeAsItem = dataContext.RemoveAsItem;
         _deleteViewersWindow = null;
       };
       var result = _deleteViewersWindow.ShowDialog();
@@ -41,40 +45,53 @@ namespace ProjectAtlasManager
       {
         progDialog = new ProgressDialog("Verwijder viewers...");
         progDialog.Show();
-        await DeleteViewersAsync(_itemIds);
+        await DeleteViewersAsync();
+        Thread.Sleep(750);
+        EventSender.Publish(new UpdateGalleryEvent() { UpdateTemplatesGallery = false, UpdateWebmapsGallery = true, UpdateViewersGallery = true });
       }
     }
 
-    private Task DeleteViewersAsync(IEnumerable<string> viewers)
+    private Task DeleteViewersAsync()
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-      var query = PortalQueryParameters.CreateForItemsWithId(Module1.SelectedProjectTemplate);
       var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
       return QueuedTask.Run(async () =>
       {
-        var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
-        var item = results.Results.FirstOrDefault();
-        if (item == null)
+        Parallel.ForEach(_itemIds, async x =>
         {
-          return;
-        }
-        Parallel.ForEach(viewers, async x =>
-        {
-          await DeleteViewer(x, portalClient);
+          var query = PortalQueryParameters.CreateForItemsWithId(x);
+          var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
+          var item = results.Results.FirstOrDefault();
+          if (item == null)
+          {
+            return;
+          }
+          if(_removeAsItem)
+          {
+            await portalClient.Delete(item);
+          }
+          else
+          {
+            var tags = UpdateTags(item);
+            await portalClient.UpdateTags(item, tags);
+          }
         });
         progDialog.Hide();
       });
     }
 
-    private async Task DeleteViewer(string viewerItemId, PortalClient portalClient)
+    private string UpdateTags(PortalItem item)
     {
-      //ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-      //var query = PortalQueryParameters.CreateForItemsWithId(viewerItemId);
-      //var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
-      //var webmap = results.Results.FirstOrDefault();
-      //var webmapData = await portalClient.GetDataFromItem(webmap);
-      //webmapData = webmapSynchronizer.Synchronize(webmapData, layersFromTemplate);
-      //var result = await portalClient.UpdateData(webmap, webmapData);
+      var tags = new List<string>();
+      foreach(var tag in item.ItemTags)
+      {
+        if(tag.Equals("ProjectAtlas") || tag.Equals("CopyOfTemplate") || tag.Equals("Template") || tag.StartsWith("PAT"))
+        {
+          continue;
+        }
+        tags.Add(tag);
+      }
+      return string.Join(",", tags);
     }
   }
 }

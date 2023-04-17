@@ -22,6 +22,7 @@
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="*"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
     <TextBlock Grid.Row="0" Margin="0 0 0 5">selecteer viewers om te verwijderen</TextBlock>
     <xctk:CheckListBox Grid.Row="1"
@@ -29,7 +30,8 @@
                        DisplayMemberPath="Title"
                        ValueMemberPath="Id"
                        SelectedItemsOverride="{Binding ViewersToDelete, Mode=TwoWay}"/>
-    <StackPanel Grid.Row="2" Orientation="Horizontal" MinWidth="200">
+    <CheckBox IsChecked="{Binding RemoveAsItem, Mode=TwoWay}" Grid.Row="2">verwijder de items volledig uit het portaal</CheckBox>
+    <StackPanel Grid.Row="3" Orientation="Horizontal" MinWidth="200">
       <Button Style="{DynamicResource Esri_Button}" 
                 MaxWidth="90" 
                 MaxHeight="25" Command="{Binding CmdOk}" 

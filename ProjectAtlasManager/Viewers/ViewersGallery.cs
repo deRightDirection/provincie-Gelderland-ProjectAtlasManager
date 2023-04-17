@@ -25,13 +25,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace ProjectAtlasManager
+namespace ProjectAtlasManager.Viewers
 {
-  internal class TemplatesGallery : Gallery
+  internal class ViewersGallery : Gallery
   {
     private bool _isInitialized;
 
-    public TemplatesGallery()
+    public ViewersGallery()
     {
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
@@ -59,7 +59,7 @@ namespace ProjectAtlasManager
     }
     private void RenewData(UpdateGalleryEvent eventData)
     {
-      if(eventData.UpdateTemplatesGallery)
+      if(eventData.UpdateViewersGallery)
       {
         LoadItemsAsync(true);
       }
@@ -96,7 +96,8 @@ namespace ProjectAtlasManager
       await QueuedTask.Run(async () =>
       {
         ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:0123456789ABCDEF");
+        var username = portal.GetSignOnUsername();
+        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"PAT{Module1.SelectedProjectTemplate}\" AND tags:\"CopyOfTemplate\" AND orgid:0123456789ABCDEF");
         query.SortField = "title";
         query.Limit = 100;
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
@@ -112,13 +113,28 @@ namespace ProjectAtlasManager
       return lstWebmapItems;
     }
 
-    protected override void OnClick(object item)
+    protected override async void OnClick(object item)
     {
       if (item is WebMapItemGalleryItem)
       {
         var clickedWebMapItem = (WebMapItemGalleryItem)item;
-        Module1.SelectedProjectTemplate = clickedWebMapItem.ID;
-        FrameworkApplication.State.Activate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
+        Module1.SelectedViewer = clickedWebMapItem.ID;
+        ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+        var query = PortalQueryParameters.CreateForItemsWithId(Module1.SelectedViewer);
+        PortalQueryResultSet<PortalItem> results = await portal.SearchForContentAsync(query);
+        var result = results.Results.FirstOrDefault();
+        if (result == null)
+        {
+          return;
+        }
+        QueuedTask.Run(() =>
+        {
+          if (MapFactory.Instance.CanCreateMapFrom(result))
+          {
+            var newMap = MapFactory.Instance.CreateMapFromItem(result);
+            ProApp.Panes.CreateMapPaneAsync(newMap);
+          }
+        });
       }
       base.OnClick(item);
     }

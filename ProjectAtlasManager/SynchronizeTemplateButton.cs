@@ -13,7 +13,7 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
 using ProjectAtlasManager.Domain;
-using ProjectAtlasManager.Templates;
+using ProjectAtlasManager.Services;
 using ProjectAtlasManager.ViewModels;
 using ProjectAtlasManager.Web;
 using ProjectAtlasManager.Windows;
@@ -70,7 +70,7 @@ namespace ProjectAtlasManager
           return;
         }
         var layersFromTemplate = await portalClient.RetrieveLayers(item);
-        var webmapSynchronizer = new WebMapSynchronizer();
+        var webmapSynchronizer = new WebMapManager();
         Parallel.ForEach(viewers, async x =>
         {
           await SynchronizeWebMap(x, portalClient, layersFromTemplate, webmapSynchronizer);
@@ -79,7 +79,7 @@ namespace ProjectAtlasManager
       });
     }
 
-    private async Task SynchronizeWebMap(string viewerItemId, PortalClient portalClient, IEnumerable<OperationalLayer> layersFromTemplate, WebMapSynchronizer webmapSynchronizer)
+    private async Task SynchronizeWebMap(string viewerItemId, PortalClient portalClient, IEnumerable<OperationalLayer> layersFromTemplate, WebMapManager webmapSynchronizer)
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
       var query = PortalQueryParameters.CreateForItemsWithId(viewerItemId);

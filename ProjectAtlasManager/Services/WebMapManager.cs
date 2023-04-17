@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using ProjectAtlasManager.Domain;
 
-namespace ProjectAtlasManager.Templates
+namespace ProjectAtlasManager.Services
 {
-  class WebMapSynchronizer
+  class WebMapManager
   {
     internal string Synchronize(string webmapData, IEnumerable<OperationalLayer> layersFromTemplate)
     {

@@ -1,0 +1,130 @@
+{
+  "operationalLayers": [
+      {
+          "id": "9816b03f108b44d5b8efab99fbe567ae",
+          "title": "groep3",
+          "visibility": true,
+          "blendMode": "normal",
+          "opacity": 1,
+          "layers": [
+              {
+                  "itemId": "2c03f278da1c4d7ebf8decbf22520ba1",
+                  "id": "fbe1bc04006d4c61b6479d2168639823",
+                  "title": "locaties",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/locaties/FeatureServer/0",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": false,
+                  "showLegend": true
+              },
+              {
+                  "itemId": "ebf95b7f0b534485867e85916e7c5318",
+                  "id": "6d2ead7c1766409ba99f8a4aefbf0c62",
+                  "title": "locaties",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/layer_en_tabel_fs/FeatureServer/0",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": false,
+                  "showLegend": true
+              },
+              {
+                  "itemId": "b09d99c07b3043b093a81db2913f93ef",
+                  "id": "06c3f00ed6b54615b03bbb2984e0f809",
+                  "title": "GebiedsinformatieAanvraag",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/KLIC_15_02_2022/FeatureServer/29",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": false,
+                  "showLegend": true
+              }
+          ],
+          "layerType": "GroupLayer"
+      },
+      {
+          "id": "7838bca1082a4e52b0cba537b08c84e7",
+          "title": "groep2",
+          "visibility": true,
+          "blendMode": "normal",
+          "opacity": 1,
+          "layers": [
+              {
+                  "itemId": "ebf95b7f0b534485867e85916e7c5318",
+                  "id": "400efbbe561246ea86701caeba374911",
+                  "title": "locaties",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/layer_en_tabel_fs/FeatureServer/0",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": false,
+                  "showLegend": true
+              },
+              {
+                  "itemId": "b09d99c07b3043b093a81db2913f93ef",
+                  "id": "46cf34a4c4a64730a47d2e32c8ec4963",
+                  "title": "GebiedsinformatieAanvraag",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/KLIC_15_02_2022/FeatureServer/29",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": false,
+                  "showLegend": true
+              }
+          ],
+          "layerType": "GroupLayer"
+      },
+      {
+          "id": "31d83428e2b048db95fb0745db4a3652",
+          "title": "groep1",
+          "visibility": true,
+          "blendMode": "normal",
+          "opacity": 1,
+          "layers": [
+              {
+                  "itemId": "2c03f278da1c4d7ebf8decbf22520ba1",
+                  "id": "d97dad386ecd4643a9fe86e2ed26b03c",
+                  "title": "locaties",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/locaties/FeatureServer/0",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": false,
+                  "showLegend": true
+              },
+              {
+                  "itemId": "ebf95b7f0b534485867e85916e7c5318",
+                  "id": "8675e83c4c704073af1edc66eb580f67",
+                  "title": "locaties",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/layer_en_tabel_fs/FeatureServer/0",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": false,
+                  "showLegend": true
+              },
+              {
+                  "itemId": "b09d99c07b3043b093a81db2913f93ef",
+                  "id": "edd8aa23cda241c894d832d813904843",
+                  "title": "GebiedsinformatieAanvraag",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/KLIC_15_02_2022/FeatureServer/29",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": false,
+                  "showLegend": true
+              }
+          ],
+          "layerType": "GroupLayer"
+      }
+  ]
+}

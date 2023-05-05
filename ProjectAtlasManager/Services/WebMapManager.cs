@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using ProjectAtlasManager.Domain;
+using theRightDirection.Library;
 
 namespace ProjectAtlasManager.Services
 {
@@ -13,6 +14,7 @@ namespace ProjectAtlasManager.Services
   {
     internal string Synchronize(string webmapData, IEnumerable<OperationalLayer> layersFromTemplate)
     {
+      SetIndices(layersFromTemplate);
       var jsonObject = JToken.Parse(webmapData);
       foreach (var operationalLayer in layersFromTemplate)
       {
@@ -20,12 +22,28 @@ namespace ProjectAtlasManager.Services
         if (!layerInWebMap)
         {
           var operationalLayersInWebMap = jsonObject["operationalLayers"] as JArray;
-          operationalLayersInWebMap?.Add(operationalLayer.JsonDefinition);
+          operationalLayersInWebMap?.Insert(operationalLayer.Index, operationalLayer.JsonDefinition);
         }
       }
       return jsonObject.ToString();
     }
 
+    /// <summary>
+    /// voeg een index toe aan alle lagen zodat ik kan bijhouden waar ik de nieuwe laag moet invoegen
+    /// </summary>
+    private void SetIndices(IEnumerable<OperationalLayer> layersFromTemplate)
+    {
+      var index = 0;
+      layersFromTemplate.ForEach(x =>
+      {
+        x.Index = index;
+        index++;
+      });
+    }
+
+    /// <summary>
+    /// opzoeken van een laag en eventueel vervangen, bij true de laag is gevonden en vervangen
+    /// </summary>
     private bool FindLayerInWebMap(JToken jsonObject, OperationalLayer layerFromTemplate)
     {
       var operationalLayersInWebMap = jsonObject["operationalLayers"];

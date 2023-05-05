@@ -1,0 +1,318 @@
+{
+  "operationalLayers": [
+    {
+      "id": "wms_2158",
+      "url": "https://geodata.nationaalgeoregister.nl/natura2000/wms",
+      "visibility": false,
+      "visibleLayers": [
+          "natura2000"
+      ],
+      "opacity": 1,
+      "title": "RUIMTELIJKE ORDENING - Natura2000 (extern)",
+      "version": "1.3.0",
+      "mapUrl": "https://geodata.nationaalgeoregister.nl/natura2000/wms?language=dut",
+      "featureInfoUrl": "https://geodata.nationaalgeoregister.nl/natura2000/wms?language=dut",
+      "featureInfoFormat": "text/html",
+      "layers": [
+          {
+              "name": "natura2000",
+              "title": "natura2000",
+              "legendUrl": "https://geodata.nationaalgeoregister.nl/natura2000/wms?SERVICE=WMS&language=dut&version=1.3.0&service=WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=natura2000&format=image/png&STYLE=natura2000:lnv_natura2000",
+              "queryable": true,
+              "showPopup": true
+          }
+      ],
+      "spatialReferences": [
+          28992,
+          25831,
+          25832,
+          3034,
+          3035,
+          3857,
+          4258,
+          4326
+      ],
+      "extent": [
+          [
+              198260,
+              6480510
+          ],
+          [
+              831799,
+              7574370
+          ]
+      ],
+      "copyright": "otherRestrictions;http://creativecommons.org/publicdomain/mark/1.0/deed.nl;Geen beperkingen",
+      "maxWidth": 4000,
+      "maxHeight": 4000,
+      "type": "WMS",
+      "layerType": "WMS"
+  },
+      {
+          "id": "wms_7548",
+          "url": "https://geodata.nationaalgeoregister.nl/plu/wms",
+          "visibility": false,
+          "visibleLayers": [
+              "Dubbelbestemming",
+              "Enkelbestemming"
+          ],
+          "opacity": 1,
+          "title": "RUIMTELIJKE ORDENING - Ruimtelijke plannen (extern)",
+          "version": "1.3.0",
+          "mapUrl": "https://geodata.nationaalgeoregister.nl/plu/ows",
+          "featureInfoUrl": "https://geodata.nationaalgeoregister.nl/plu/ows",
+          "featureInfoFormat": "text/html",
+          "layers": [
+              {
+                  "name": "Besluitgebied_A",
+                  "title": "Besluitgebied_A",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitgebied_A",
+                  "queryable": true
+              },
+              {
+                  "name": "Besluitgebied_P",
+                  "title": "Besluitgebied_P",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitgebied_P",
+                  "queryable": true
+              },
+              {
+                  "name": "Besluitgebied_X",
+                  "title": "Besluitgebied_X",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitgebied_X",
+                  "queryable": true
+              },
+              {
+                  "name": "Besluitsubvlak_A",
+                  "title": "Besluitsubvlak_A",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitsubvlak_A",
+                  "queryable": true
+              },
+              {
+                  "name": "Besluitsubvlak_P",
+                  "title": "Besluitsubvlak_P",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitsubvlak_P",
+                  "queryable": true
+              },
+              {
+                  "name": "Besluitsubvlak_X",
+                  "title": "Besluitsubvlak_X",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitsubvlak_X",
+                  "queryable": true
+              },
+              {
+                  "name": "Besluitvlak_A",
+                  "title": "Besluitvlak_A",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitvlak_A",
+                  "queryable": true
+              },
+              {
+                  "name": "Besluitvlak_P",
+                  "title": "Besluitvlak_P",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitvlak_P",
+                  "queryable": true
+              },
+              {
+                  "name": "Besluitvlak_X",
+                  "title": "Besluitvlak_X",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Besluitvlak_X",
+                  "queryable": true
+              },
+              {
+                  "name": "Bestemmingsplangebied",
+                  "title": "Bestemmingsplangebied",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Bestemmingsplangebied",
+                  "queryable": true
+              },
+              {
+                  "name": "Bouwaanduiding",
+                  "title": "Bouwaanduiding",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Bouwaanduiding",
+                  "queryable": true
+              },
+              {
+                  "name": "Bouwvlak",
+                  "title": "Bouwvlak",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Bouwvlak",
+                  "queryable": true
+              },
+              {
+                  "name": "Dubbelbestemming",
+                  "title": "Dubbelbestemming",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Dubbelbestemming",
+                  "queryable": true,
+                  "showPopup": true
+              },
+              {
+                  "name": "Enkelbestemming",
+                  "title": "Enkelbestemming",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Enkelbestemming",
+                  "queryable": true,
+                  "showPopup": true
+              },
+              {
+                  "name": "Figuur",
+                  "title": "Figuur",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Figuur",
+                  "queryable": true
+              },
+              {
+                  "name": "Functieaanduiding",
+                  "title": "Functieaanduiding",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Functieaanduiding",
+                  "queryable": true
+              },
+              {
+                  "name": "Gebiedsaanduiding",
+                  "title": "Gebiedsaanduiding",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Gebiedsaanduiding",
+                  "queryable": true
+              },
+              {
+                  "name": "Lettertekenaanduiding",
+                  "title": "Lettertekenaanduiding",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Lettertekenaanduiding",
+                  "queryable": true
+              },
+              {
+                  "name": "Maatvoering",
+                  "title": "Maatvoering",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Maatvoering",
+                  "queryable": true
+              },
+              {
+                  "name": "Plangebied",
+                  "title": "Plangebied",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Plangebied",
+                  "queryable": true
+              },
+              {
+                  "name": "Plangebied_PCP",
+                  "title": "Plangebied_PCP",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Plangebied_PCP",
+                  "queryable": true
+              },
+              {
+                  "name": "ProvinciaalComplex",
+                  "title": "ProvinciaalComplex",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=ProvinciaalComplex",
+                  "queryable": true
+              },
+              {
+                  "name": "ProvinciaalGebied",
+                  "title": "ProvinciaalGebied",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=ProvinciaalGebied",
+                  "queryable": true
+              },
+              {
+                  "name": "ProvinciaalPlangebied",
+                  "title": "ProvinciaalPlangebied",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=ProvinciaalPlangebied",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisiecomplex_G",
+                  "title": "Structuurvisiecomplex_G",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiecomplex_G",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisiecomplex_P",
+                  "title": "Structuurvisiecomplex_P",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiecomplex_P",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisiecomplex_R",
+                  "title": "Structuurvisiecomplex_R",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiecomplex_R",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisiegebied_G",
+                  "title": "Structuurvisiegebied_G",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiegebied_G",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisiegebied_P",
+                  "title": "Structuurvisiegebied_P",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiegebied_P",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisiegebied_R",
+                  "title": "Structuurvisiegebied_R",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisiegebied_R",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisieplangebied_G",
+                  "title": "Structuurvisieplangebied_G",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisieplangebied_G",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisieplangebied_P",
+                  "title": "Structuurvisieplangebied_P",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisieplangebied_P",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisieplangebied_R",
+                  "title": "Structuurvisieplangebied_R",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisieplangebied_R",
+                  "queryable": true
+              },
+              {
+                  "name": "Structuurvisieverklaring_P",
+                  "title": "Structuurvisieverklaring_P",
+                  "legendUrl": "https://geodata.nationaalgeoregister.nl/plu/ows?service=WMS&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=Structuurvisieverklaring_P",
+                  "queryable": true
+              }
+          ],
+          "spatialReferences": [
+              28992,
+              25831,
+              25832,
+              3034,
+              3035,
+              3857,
+              4258,
+              4326
+          ],
+          "extent": [
+              [
+                  26501.06751444797,
+                  5959807.3321047155
+              ],
+              [
+                  1023142.9657138824,
+                  7590960.109979356
+              ]
+          ],
+          "type": "WMS",
+          "layerType": "WMS"
+      }
+  ],
+  "baseMap": {
+      "baseMapLayers": [
+          {
+              "id": "Topo_3076",
+              "layerType": "ArcGISTiledMapServiceLayer",
+              "url": "https://services.arcgisonline.nl/ArcGIS/rest/services/Basiskaarten/Topo/MapServer",
+              "visibility": true,
+              "opacity": 1,
+              "title": "Topo"
+          }
+      ],
+      "title": "Topo RD"
+  },
+  "spatialReference": {
+      "wkid": 28992,
+      "latestWkid": 28992
+  },
+  "authoringApp": "WebMapViewer",
+  "authoringAppVersion": "10.9.1",
+  "version": "2.21",
+  "_ssl": true
+}

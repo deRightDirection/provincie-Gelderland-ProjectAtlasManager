@@ -1,10 +1,12 @@
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 
-namespace ProjectAtlasManager.Domain
+namespace UnitTests.Domain
 {
   public class OperationalLayer
   {
+    [JsonIgnore]
+    public int Index { get; set; }
     public string Id { get; set; }
     public JObject JsonDefinition { get; set; }
   }

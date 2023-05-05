@@ -131,6 +131,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="theRightDirection.Library, Version=4.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\theRightDirection.Library.4.8.0\lib\net48\theRightDirection.Library.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="System.Xaml" />
     <Reference Include="ArcGIS.Desktop.Framework">
@@ -314,6 +317,9 @@
   </ItemGroup>
   <ItemGroup>
     <AddInContent Include="Images\templates.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Logging\Log4NetConfiguration.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--

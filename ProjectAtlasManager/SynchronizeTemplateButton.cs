@@ -88,6 +88,7 @@ namespace ProjectAtlasManager
       var webmapData = await portalClient.GetDataFromItem(webmap);
       webmapData = webmapSynchronizer.Synchronize(webmapData, templateJson);
       var result = await portalClient.UpdateData(webmap, webmapData);
+      var x = await result.Content.ReadAsStringAsync();
     }
   }
 }

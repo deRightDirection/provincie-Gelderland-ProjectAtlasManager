@@ -45,11 +45,13 @@ namespace ProjectAtlasManager
       Initialize();
     }
 
-    private void CheckStatus()
+    private async void CheckStatus()
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
       if (portal != null && portal.IsSignedOn())
       {
+        //var x = await portal.GetPortalInfoAsync();
+        //Module1.OrgId = x.OrganizationId;
         EventSender.Subscribe(RenewData, true);
       }
       else
@@ -97,7 +99,7 @@ namespace ProjectAtlasManager
       {
         ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
         var username = portal.GetSignOnUsername();
-        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:0123456789ABCDEF owner:\"{username}\"");
+        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:{Module1.OrgId} owner:\"{username}\"");
         query.SortField = "title";
         query.Limit = 100;
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);

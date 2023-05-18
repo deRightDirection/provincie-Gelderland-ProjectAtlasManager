@@ -1,25 +1,13 @@
-using ArcGIS.Core.CIM;
-using ArcGIS.Core.Data;
-using ArcGIS.Core.Geometry;
-using ArcGIS.Desktop.Catalog;
 using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Portal;
-using ArcGIS.Desktop.Editing;
-using ArcGIS.Desktop.Extensions;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
-using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
-using ArcGIS.Desktop.Layouts;
-using ArcGIS.Desktop.Mapping;
 using ProjectAtlasManager.Events;
 using ProjectAtlasManager.ViewModels;
 using ProjectAtlasManager.Web;
 using ProjectAtlasManager.Windows;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,6 +18,7 @@ namespace ProjectAtlasManager.Viewers
     private NewViewerWindow _newviewerwindow = null;
     private string _name;
     private ProgressDialog progDialog;
+
     protected override async void OnClick()
     {
       if (_newviewerwindow != null)
@@ -88,7 +77,7 @@ namespace ProjectAtlasManager.Viewers
         }
         tags = tags.Replace(",,", ",");
         var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
-        await portalClient.CreateViewerFromTemplate(item, _name,tags);
+        await portalClient.CreateViewerFromTemplate(item, _name, tags);
       });
       Thread.Sleep(750);
       EventSender.Publish(new UpdateGalleryEvent() { UpdateTemplatesGallery = false, UpdateWebmapsGallery = false, UpdateViewersGallery = true });

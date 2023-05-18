@@ -70,7 +70,7 @@ namespace ProjectAtlasManager
           return;
         }
         var templateWebmapData = await portalClient.GetDataFromItem(item);
-        var webmapSynchronizer = new WebMapManager();
+        var webmapSynchronizer = new WebMapManager(templateWebmapData);
         Parallel.ForEach(viewers, async x =>
         {
           await SynchronizeWebMap(x, portalClient, templateWebmapData, webmapSynchronizer);

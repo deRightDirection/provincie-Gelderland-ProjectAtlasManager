@@ -54,14 +54,16 @@ namespace ProjectAtlasManager.Web
     {
       var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/addItem?f=json&token={_token}";
       var data = await GetDataFromItem(item);
-      var formContent = new MultipartFormDataContent();
-      formContent.Add(new StringContent(tags), "tags");
-      formContent.Add(new StringContent(title), "title");
-      formContent.Add(new StringContent(data), "text");
-      formContent.Add(new StringContent(item.Type), "type");
-      formContent.Add(new StringContent(item.TypeKeywords), "typeKeywords");
-      formContent.Add(new StringContent(string.IsNullOrEmpty(item.Description) ? string.Empty : item.Description), "description") ;
-      formContent.Add(new StringContent(string.IsNullOrEmpty(item.Summary) ? string.Empty : item.Summary), "snippet");
+      var formContent = new MultipartFormDataContent
+      {
+        { new StringContent(tags), "tags" },
+        { new StringContent(title), "title" },
+        { new StringContent(data), "text" },
+        { new StringContent(item.Type), "type" },
+        { new StringContent(item.TypeKeywords), "typeKeywords" },
+        { new StringContent(string.IsNullOrEmpty(item.Description) ? string.Empty : item.Description), "description" },
+        { new StringContent(string.IsNullOrEmpty(item.Summary) ? string.Empty : item.Summary), "snippet" }
+      };
       var extent = $"{item.XMin},{item.YMin},{item.XMax},{item.YMax}";
       formContent.Add(new StringContent(extent), "extent");
       var json = JsonConvert.SerializeObject(item.ItemCategories);

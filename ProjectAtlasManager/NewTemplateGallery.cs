@@ -48,11 +48,13 @@ namespace ProjectAtlasManager
       });
     }
 
-    private void CheckStatus()
+    private async void CheckStatus()
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
       if (portal != null && portal.IsSignedOn())
       {
+        //var x = await portal.GetPortalInfoAsync();
+        //Module1.OrgId = x.OrganizationId;
         _renew = true;
       }
       else
@@ -112,7 +114,7 @@ namespace ProjectAtlasManager
         {
           ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
           var username = portal.GetSignOnUsername();
-          var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:0123456789ABCDEF owner:\"{username}\"");
+          var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:{Module1.OrgId} owner:\"{username}\"");
           query.SortField = "title, modified";
           query.Limit = 100;
           query.SortOrder = PortalQuerySortOrder.Ascending;

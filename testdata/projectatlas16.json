@@ -1,0 +1,27 @@
+{
+  "operationalLayers": [
+      {
+          "id": "9816b03f108b44d5b8efab99fbe567ae",
+          "title": "groep3",
+          "visibility": true,
+          "blendMode": "normal",
+          "opacity": 1,
+          "layers": [
+              {
+                  "itemId": "2c03f278da1c4d7ebf8decbf22520ba1",
+                  "id": "fbe1bc04006d4c61b6479d2168639823",
+                  "title": "locaties",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/locaties/FeatureServer/0",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": true,
+                  "blablabal":"moi!",
+                  "showLegend": true
+              }
+          ],
+          "layerType": "GroupLayer"
+      }
+  ]
+}

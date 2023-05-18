@@ -1,0 +1,18 @@
+{
+  "operationalLayers": [
+    {
+      "id": "1882d5269e4-layer-74",
+      "title": "niveau III",
+      "layers": [
+        {
+          "id": "1882d513b7e-layer-64",
+          "title": "niveau II",
+          "layers": [
+          ],
+          "layerType": "GroupLayer"
+        }
+      ],
+      "layerType": "GroupLayer"
+    }
+  ]
+}

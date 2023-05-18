@@ -50,23 +50,6 @@ namespace ProjectAtlasManager.Web
       var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/items/{item.ID}/delete?f=json&token={_token}";
       await uri.PostAsync();
     }
-
-    internal async Task<IEnumerable<OperationalLayer>> RetrieveLayers(PortalItem item)
-    {
-      var json = await GetDataFromItem(item);
-      var webmap = JToken.Parse(json);
-      var operationalLayers = webmap["operationalLayers"];
-      var result = new List<OperationalLayer>();
-      foreach(var layer in operationalLayers)
-      {
-        var operationalLayer = new OperationalLayer();
-        operationalLayer.Id = layer["id"].ToString();
-        operationalLayer.JsonDefinition = layer as JObject;
-        result.Add(operationalLayer);
-      }
-      return result;
-    }
-
     internal async Task CreateViewerFromTemplate(PortalItem item, string title, string tags)
     {
       var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/addItem?f=json&token={_token}";

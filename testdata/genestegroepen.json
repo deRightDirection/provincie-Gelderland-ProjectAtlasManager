@@ -1,0 +1,437 @@
+{
+    "operationalLayers": [
+        {
+            "id": "1882d5269e4-layer-74",
+            "title": "niveau III",
+            "layers": [
+                {
+                    "id": "1882d522fb5-layer-73",
+                    "title": "Planten - Vaste planten Leidschendam Voorburg shape",
+                    "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/planten/FeatureServer/0",
+                    "visibility": false,
+                    "itemId": "90c6652cc682499cb8e94c0d4b87b4ea",
+                    "layerType": "ArcGISFeatureLayer"
+                },
+                {
+                    "id": "1882d521051-layer-66",
+                    "title": "KLIC_basis",
+                    "visibility": false,
+                    "layers": [
+                        {
+                            "id": "1882d5212ec-layer-67",
+                            "title": "Graafpolygoon",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_basis/FeatureServer/5",
+                            "itemId": "32699a65113844598959172019b7f4d5",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d5212ee-layer-68",
+                            "title": "Kabel",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_basis/FeatureServer/4",
+                            "itemId": "32699a65113844598959172019b7f4d5",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d5212f0-layer-69",
+                            "title": "Kabelbed duct",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_basis/FeatureServer/3",
+                            "itemId": "32699a65113844598959172019b7f4d5",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d5212f2-layer-70",
+                            "title": "Leiding",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_basis/FeatureServer/2",
+                            "itemId": "32699a65113844598959172019b7f4d5",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d5212f5-layer-71",
+                            "title": "Mantelbuis",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_basis/FeatureServer/1",
+                            "itemId": "32699a65113844598959172019b7f4d5",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d5212f8-layer-72",
+                            "title": "Puntobjecten",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_basis/FeatureServer/0",
+                            "itemId": "32699a65113844598959172019b7f4d5",
+                            "layerType": "ArcGISFeatureLayer"
+                        }
+                    ],
+                    "layerType": "GroupLayer"
+                },
+                        {
+            "id": "1882d513b7e-layer-64",
+            "title": "niveau II",
+            "layers": [
+              {
+                "id": "1882d4e0705-layer-53",
+                "title": "niveau I",
+                "layers": [
+                    {
+                        "id": "1882d4dc7c2-layer-11",
+                        "title": "VPA_KLIC",
+                        "visibility": false,
+                        "layers": [
+                            {
+                                "id": "1882d4dce67-layer-12",
+                                "title": "AanduidingEisVoorzorgsmaatregel",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/34",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce6b-layer-13",
+                                "title": "GebiedsinformatieAanvraag",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/33",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce6e-layer-14",
+                                "title": "AnnotatiePunt",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/31",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce70-layer-15",
+                                "title": "AnnotatieLijn",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/30",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce72-layer-16",
+                                "title": "MaatvoeringPunt",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/28",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce76-layer-17",
+                                "title": "MaatvoeringLijn",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/27",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce78-layer-18",
+                                "title": "ExtraDetailinfoVlak",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/25",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce7d-layer-19",
+                                "title": "ExtraDetailinfoLijn",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/24",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce7f-layer-20",
+                                "title": "ExtraDetailinfoPunt",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/23",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce82-layer-21",
+                                "title": "Overig",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/22",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce84-layer-22",
+                                "title": "Mantelbuis",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/21",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce87-layer-23",
+                                "title": "Geul",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/20",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce89-layer-24",
+                                "title": "Kabelbed",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/19",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce8c-layer-25",
+                                "title": "ExtraGeometrieVlak",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/18",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce8d-layer-26",
+                                "title": "ExtraGeometrieLijn",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/17",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce8e-layer-27",
+                                "title": "ExtraGeometriePunt",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/16",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce90-layer-28",
+                                "title": "Waterleiding",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/15",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce92-layer-29",
+                                "title": "Warmteleiding",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/14",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce94-layer-30",
+                                "title": "Rioolleiding",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/13",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce95-layer-31",
+                                "title": "Elektriciteitskabel",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/12",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce98-layer-32",
+                                "title": "OlieGasChemicalienPijpleiding",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/11",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce99-layer-33",
+                                "title": "Telecommunicatiekabel",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/10",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce9b-layer-34",
+                                "title": "DiepteTovMaaiveld",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/9",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce9d-layer-35",
+                                "title": "DiepteNAP",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/8",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce9e-layer-36",
+                                "title": "TechnischGebouw",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/7",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dce9f-layer-37",
+                                "title": "Kast",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/6",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dcea2-layer-38",
+                                "title": "Toren",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/5",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dceaf-layer-39",
+                                "title": "Mast",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/4",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dceb0-layer-40",
+                                "title": "Mangat",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/3",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4dceb1-layer-41",
+                                "title": "Appendage",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/2",
+                                "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+                                "layerType": "ArcGISFeatureLayer"
+                            }
+                        ],
+                        "layerType": "GroupLayer"
+                    },
+                    {
+                        "id": "1882d4da5df-layer-2",
+                        "title": "Levering_23G0313287_1",
+                        "visibility": false,
+                        "layers": [
+                            {
+                                "id": "1882d4da788-layer-3",
+                                "title": "Graafpolygoon",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_9_5_2023_8_22_12345/FeatureServer/7",
+                                "itemId": "7dd625e0faaa44c8aa0e0871cc5d4dda",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4da789-layer-4",
+                                "title": "Eis voorzorgsmaatregelgebied",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_9_5_2023_8_22_12345/FeatureServer/6",
+                                "itemId": "7dd625e0faaa44c8aa0e0871cc5d4dda",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4da78a-layer-5",
+                                "title": "Mantelbuis",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_9_5_2023_8_22_12345/FeatureServer/5",
+                                "itemId": "7dd625e0faaa44c8aa0e0871cc5d4dda",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4da78b-layer-6",
+                                "title": "Kabel",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_9_5_2023_8_22_12345/FeatureServer/4",
+                                "itemId": "7dd625e0faaa44c8aa0e0871cc5d4dda",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4da78c-layer-7",
+                                "title": "Kabelbed duct",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_9_5_2023_8_22_12345/FeatureServer/3",
+                                "itemId": "7dd625e0faaa44c8aa0e0871cc5d4dda",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4da78e-layer-8",
+                                "title": "Leiding",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_9_5_2023_8_22_12345/FeatureServer/2",
+                                "itemId": "7dd625e0faaa44c8aa0e0871cc5d4dda",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4da78f-layer-9",
+                                "title": "Puntobjecten",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_9_5_2023_8_22_12345/FeatureServer/1",
+                                "itemId": "7dd625e0faaa44c8aa0e0871cc5d4dda",
+                                "layerType": "ArcGISFeatureLayer"
+                            },
+                            {
+                                "id": "1882d4da790-layer-10",
+                                "title": "Bijlagen",
+                                "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_9_5_2023_8_22_12345/FeatureServer/0",
+                                "itemId": "7dd625e0faaa44c8aa0e0871cc5d4dda",
+                                "layerType": "ArcGISFeatureLayer"
+                            }
+                        ],
+                        "layerType": "GroupLayer"
+                    }
+                ],
+                "layerType": "GroupLayer"
+            },
+                {
+                    "id": "1882d51b7f8-layer-65",
+                    "title": "PB01a CROW projecten - CROW projecten",
+                    "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/PB01a_CROW_projecten/FeatureServer/0",
+                    "visibility": false,
+                    "itemId": "5ebdbadbabca4d5c99d25158aff310f0",
+                    "layerType": "ArcGISFeatureLayer"
+                },
+                {
+                    "id": "1882d4edccb-layer-54",
+                    "title": "KLIC_3_5_2023_16_1_24101979",
+                    "visibility": false,
+                    "layers": [
+                        {
+                            "id": "1882d4ee68f-layer-55",
+                            "title": "Graafpolygoon",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_3_5_2023_16_1_24101979/FeatureServer/7",
+                            "itemId": "0577ab0a49eb4b6a9bad11d5dae5ce91",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d4ee693-layer-56",
+                            "title": "Eis voorzorgsmaatregelgebied",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_3_5_2023_16_1_24101979/FeatureServer/6",
+                            "itemId": "0577ab0a49eb4b6a9bad11d5dae5ce91",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d4ee695-layer-57",
+                            "title": "Mantelbuis",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_3_5_2023_16_1_24101979/FeatureServer/5",
+                            "itemId": "0577ab0a49eb4b6a9bad11d5dae5ce91",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d4ee698-layer-58",
+                            "title": "Kabel",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_3_5_2023_16_1_24101979/FeatureServer/4",
+                            "itemId": "0577ab0a49eb4b6a9bad11d5dae5ce91",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d4ee69b-layer-59",
+                            "title": "Kabelbed duct",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_3_5_2023_16_1_24101979/FeatureServer/3",
+                            "itemId": "0577ab0a49eb4b6a9bad11d5dae5ce91",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d4ee69e-layer-60",
+                            "title": "Leiding",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_3_5_2023_16_1_24101979/FeatureServer/2",
+                            "itemId": "0577ab0a49eb4b6a9bad11d5dae5ce91",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d4ee6a0-layer-61",
+                            "title": "Puntobjecten",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_3_5_2023_16_1_24101979/FeatureServer/1",
+                            "itemId": "0577ab0a49eb4b6a9bad11d5dae5ce91",
+                            "layerType": "ArcGISFeatureLayer"
+                        },
+                        {
+                            "id": "1882d4ee6a2-layer-62",
+                            "title": "Bijlagen",
+                            "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/KLIC_3_5_2023_16_1_24101979/FeatureServer/0",
+                            "itemId": "0577ab0a49eb4b6a9bad11d5dae5ce91",
+                            "layerType": "ArcGISFeatureLayer"
+                        }
+                    ],
+                    "layerType": "GroupLayer"
+                }
+            ],
+            "layerType": "GroupLayer"
+        }
+            ],
+            "layerType": "GroupLayer"
+        }
+    ]
+}

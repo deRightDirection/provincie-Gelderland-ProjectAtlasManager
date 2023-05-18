@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using UnitTests.Domain;
@@ -24,14 +25,104 @@ namespace UnitTests
       var path = Assembly.GetExecutingAssembly().Location;
       _testdataFolder = path.Replace("\\UnitTests\\bin\\Debug\\UnitTests.dll", "\\testdata");
     }
-
+    [TestMethod]
+    public void ReplaceExistingLayer()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas16.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template16.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(x, x2));
+    }
+    [TestMethod]
+    public void AddAllLayers()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas15.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template15.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(x, x2));
+    }
+    [TestMethod]
+    public void SetLayerIndices()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "layerindices.json"));
+      var layers = _synchronizer.RetrieveLayers(projectTemplateJson);
+      layers.Count(x => x.Level == 1).Should().Be(3);
+      layers.Count(x => x.Level == 0).Should().Be(3);
+    }
+    [TestMethod]
+    public void SynchronizeAllLevelsOfWebMap3()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas14.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template14.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      newWebMap.Should().Contain("1882d4dce67-layer-12");
+      newWebMap.Should().Contain("1899d4dce67-layer-14");
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsFalse(JToken.DeepEquals(x, x2));
+    }
+    [TestMethod]
+    public void SynchronizeAllLevelsOfWebMap2()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas13.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template13.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      newWebMap.Should().Contain("1882d4dce67-layer-14");
+      newWebMap.Should().Contain("1882d4dce67-layer-15");
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsFalse(JToken.DeepEquals(x, x2));
+    }
+    [TestMethod]
+    public void SynchronizeAllLevelsOfWebMap()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas12.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template12.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(x, x2));
+    }
+    [TestMethod]
+    public void SynchronizeLowerLevelOfWebMap2()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas11.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template11.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(x, x2));
+    }
+    [TestMethod]
+    public void SynchronizeLowerLevelOfWebMap()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas10.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template10.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(x, x2));
+    }
+    [TestMethod]
+    public void SynchronizeLowerGroupsLevelOfWebMap()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas9.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template9.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(x, x2));
+    }
     [TestMethod]
     public void SynchronizeTopLevelOfWebMap()
     {
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template.json"));
-      var operationalLayers = RetrieveLayers(projectTemplateJson);
-      var newWebMap = _synchronizer.Synchronize(webmap, operationalLayers);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var x = JToken.Parse(webmap);
       var x2  = JToken.Parse(newWebMap);
       Assert.IsFalse(JToken.DeepEquals(x,x2));
@@ -45,8 +136,7 @@ namespace UnitTests
     {
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas2.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template2.json"));
-      var operationalLayers = RetrieveLayers(projectTemplateJson);
-      var newWebMap = _synchronizer.Synchronize(webmap, operationalLayers);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var x = JToken.Parse(projectTemplateJson);
       var x2 = JToken.Parse(newWebMap);
       Assert.IsTrue(JToken.DeepEquals(x, x2));
@@ -60,8 +150,7 @@ namespace UnitTests
     {
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas3.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template3.json"));
-      var operationalLayers = RetrieveLayers(projectTemplateJson);
-      var newWebMap = _synchronizer.Synchronize(webmap, operationalLayers);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var x = JToken.Parse(projectTemplateJson);
       var x2 = JToken.Parse(newWebMap);
       Assert.IsTrue(JToken.DeepEquals(x, x2));
@@ -75,8 +164,7 @@ namespace UnitTests
     {
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas4.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template4.json"));
-      var operationalLayers = RetrieveLayers(projectTemplateJson);
-      var newWebMap = _synchronizer.Synchronize(webmap, operationalLayers);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var x = JToken.Parse(projectTemplateJson);
       var x2 = JToken.Parse(newWebMap);
       Assert.IsTrue(JToken.DeepEquals(x, x2));
@@ -89,9 +177,12 @@ namespace UnitTests
     public void SynchronizeTopLevelOfWebMap5()
     {
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas5.json"));
+      var layers = _synchronizer.RetrieveLayers(projectTemplateJson);
+      layers.Count(xx => xx.Level == 0).Should().Be(3);
+
+
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template5.json"));
-      var operationalLayers = RetrieveLayers(projectTemplateJson);
-      var newWebMap = _synchronizer.Synchronize(webmap, operationalLayers);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var x = JToken.Parse(projectTemplateJson);
       var x2 = JToken.Parse(newWebMap);
       Assert.IsTrue(JToken.DeepEquals(x, x2));
@@ -105,8 +196,7 @@ namespace UnitTests
     {
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas6.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template6.json"));
-      var operationalLayers = RetrieveLayers(projectTemplateJson);
-      var newWebMap = _synchronizer.Synchronize(webmap, operationalLayers);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var x = JToken.Parse(projectTemplateJson);
       var x2 = JToken.Parse(newWebMap);
       Assert.IsTrue(JToken.DeepEquals(x, x2));
@@ -120,8 +210,7 @@ namespace UnitTests
     {
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas7.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template7.json"));
-      var operationalLayers = RetrieveLayers(projectTemplateJson);
-      var newWebMap = _synchronizer.Synchronize(webmap, operationalLayers);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var x = JToken.Parse(projectTemplateJson);
       var x2 = JToken.Parse(newWebMap);
       Assert.IsTrue(JToken.DeepEquals(x, x2));
@@ -135,26 +224,10 @@ namespace UnitTests
     {
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas8.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template8.json"));
-      var operationalLayers = RetrieveLayers(projectTemplateJson);
-      var newWebMap = _synchronizer.Synchronize(webmap, operationalLayers);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var x = JToken.Parse(projectTemplateJson);
       var x2 = JToken.Parse(newWebMap);
       Assert.IsTrue(JToken.DeepEquals(x, x2));
-    }
-
-    private IEnumerable<OperationalLayer> RetrieveLayers(string json)
-    {
-      var webmap = JToken.Parse(json);
-      var operationalLayers = webmap["operationalLayers"];
-      var result = new List<OperationalLayer>();
-      foreach (var layer in operationalLayers)
-      {
-        var operationalLayer = new OperationalLayer();
-        operationalLayer.Id = layer["id"].ToString();
-        operationalLayer.JsonDefinition = layer as JObject;
-        result.Add(operationalLayer);
-      }
-      return result;
     }
   }
 }

@@ -1,0 +1,26 @@
+{
+  "operationalLayers": [
+    {
+      "id": "1882d5269e4-layer-74",
+      "title": "niveau III",
+      "layers": [
+        {
+          "id": "1882d4dc7c2-layer-11",
+          "title": "VPA_KLIC",
+          "visibility": false,
+          "layers": [
+            {
+              "id": "1882d4dce6b-layer-13",
+              "title": "GebiedsinformatieAanvraagFromTemplate",
+              "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/VPA_KLIC/FeatureServer/33",
+              "itemId": "b59f5613f72d4b3f823e91a42e2b4f52",
+              "layerType": "ArcGISFeatureLayer"
+            }
+          ],
+          "layerType": "GroupLayer"
+        }
+      ],
+      "layerType": "GroupLayer"
+    }
+  ],
+}

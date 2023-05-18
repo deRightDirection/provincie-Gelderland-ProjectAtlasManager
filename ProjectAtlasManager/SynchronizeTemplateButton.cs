@@ -69,24 +69,24 @@ namespace ProjectAtlasManager
         {
           return;
         }
-        var layersFromTemplate = await portalClient.RetrieveLayers(item);
+        var templateWebmapData = await portalClient.GetDataFromItem(item);
         var webmapSynchronizer = new WebMapManager();
         Parallel.ForEach(viewers, async x =>
         {
-          await SynchronizeWebMap(x, portalClient, layersFromTemplate, webmapSynchronizer);
+          await SynchronizeWebMap(x, portalClient, templateWebmapData, webmapSynchronizer);
         });
         progDialog.Hide();
       });
     }
 
-    private async Task SynchronizeWebMap(string viewerItemId, PortalClient portalClient, IEnumerable<OperationalLayer> layersFromTemplate, WebMapManager webmapSynchronizer)
+    private async Task SynchronizeWebMap(string viewerItemId, PortalClient portalClient, string templateJson, WebMapManager webmapSynchronizer)
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
       var query = PortalQueryParameters.CreateForItemsWithId(viewerItemId);
       var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
       var webmap = results.Results.FirstOrDefault();
       var webmapData = await portalClient.GetDataFromItem(webmap);
-      webmapData = webmapSynchronizer.Synchronize(webmapData, layersFromTemplate);
+      webmapData = webmapSynchronizer.Synchronize(webmapData, templateJson);
       var result = await portalClient.UpdateData(webmap, webmapData);
     }
   }

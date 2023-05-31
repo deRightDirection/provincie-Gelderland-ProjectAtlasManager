@@ -26,6 +26,14 @@ namespace UnitTests
       _testdataFolder = path.Replace("\\UnitTests\\bin\\Debug\\UnitTests.dll", "\\testdata");
     }
     [TestMethod]
+    public void SyncTemplate()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas17.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template17.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      newWebMap.Should().Contain("Ziekenhuizen en buitenpoliklinieken gdb - Ziekenhuizen");
+    }
+    [TestMethod]
     public void ReplaceExistingLayer()
     {
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas16.json"));

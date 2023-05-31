@@ -1,0 +1,371 @@
+{
+  "operationalLayers": [
+      {
+          "id": "1882edc7e4d-layer-3",
+          "title": "Group Layer",
+          "layers": [
+              {
+                  "id": "1882edc4f65-layer-2",
+                  "title": "Politiebureaus gdb - Politiebureaus",
+                  "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/Politiebureaus_gdb/FeatureServer/0",
+                  "itemId": "c31fb974c4034462bd9c3a4989822404",
+                  "layerType": "ArcGISFeatureLayer",
+                  "popupInfo": {
+                      "popupElements": [
+                          {
+                              "type": "fields"
+                          },
+                          {
+                              "type": "attachments",
+                              "displayType": "auto"
+                          }
+                      ],
+                      "showAttachments": true,
+                      "fieldInfos": [
+                          {
+                              "fieldName": "OBJECTID",
+                              "label": "OBJECTID",
+                              "visible": false
+                          },
+                          {
+                              "fieldName": "BAG_Id",
+                              "isEditable": true,
+                              "label": "BAG_Id",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "BIJZONDERH",
+                              "isEditable": true,
+                              "label": "BIJZONDERH",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "CODE",
+                              "isEditable": true,
+                              "label": "CODE",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "GEM",
+                              "isEditable": true,
+                              "label": "GEM",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "httpURL",
+                              "isEditable": true,
+                              "label": "httpURL",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Huisnr",
+                              "isEditable": true,
+                              "label": "Huisnr",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "LOC_NAAM",
+                              "isEditable": true,
+                              "label": "LOC_NAAM",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "LOC_STRAAT",
+                              "isEditable": true,
+                              "label": "LOC_STRAAT",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "LOC_TYPE",
+                              "isEditable": true,
+                              "label": "LOC_TYPE",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Organisati",
+                              "isEditable": true,
+                              "label": "Organisati",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Postcode",
+                              "isEditable": true,
+                              "label": "Postcode",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Regio",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 2
+                              },
+                              "isEditable": true,
+                              "label": "Regio",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Telefoon",
+                              "isEditable": true,
+                              "label": "Telefoon",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Woonplaats",
+                              "isEditable": true,
+                              "label": "Woonplaats",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "X",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 2
+                              },
+                              "isEditable": true,
+                              "label": "X",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "X_inprik",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 2
+                              },
+                              "isEditable": true,
+                              "label": "X_inprik",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Y",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 2
+                              },
+                              "isEditable": true,
+                              "label": "Y",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Y_inprik",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 2
+                              },
+                              "isEditable": true,
+                              "label": "Y_inprik",
+                              "visible": true
+                          }
+                      ],
+                      "title": "Politiebureaus gdb - Politiebureaus"
+                  }
+              },
+              {
+                  "id": "1882edeb723-layer-5",
+                  "title": "Ziekenhuizen en buitenpoliklinieken gdb - Ziekenhuizen",
+                  "url": "https://services.arcgis.com/v16XTZeIhHAZEpwh/arcgis/rest/services/Ziekenhuizen_en_buitenpoliklinieken_gdb/FeatureServer/0",
+                  "itemId": "04249dabb0b04296b74a947bb4229cdb",
+                  "layerType": "ArcGISFeatureLayer",
+                  "popupInfo": {
+                      "popupElements": [
+                          {
+                              "type": "fields"
+                          },
+                          {
+                              "type": "attachments",
+                              "displayType": "auto"
+                          }
+                      ],
+                      "showAttachments": true,
+                      "fieldInfos": [
+                          {
+                              "fieldName": "OBJECTID",
+                              "label": "OBJECTID",
+                              "visible": false
+                          },
+                          {
+                              "fieldName": "bagvboid",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 2
+                              },
+                              "isEditable": true,
+                              "label": "bagvboid",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "bijzonderh",
+                              "isEditable": true,
+                              "label": "bijzonderh",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "code",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 0
+                              },
+                              "isEditable": true,
+                              "label": "code",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "gemeente",
+                              "isEditable": true,
+                              "label": "gemeente",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Huisnr",
+                              "isEditable": true,
+                              "label": "Huisnr",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "loc_naam",
+                              "isEditable": true,
+                              "label": "loc_naam",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "loc_straat",
+                              "isEditable": true,
+                              "label": "loc_straat",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "loc_type",
+                              "isEditable": true,
+                              "label": "loc_type",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "Organisati",
+                              "isEditable": true,
+                              "label": "Organisati",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "postcode",
+                              "isEditable": true,
+                              "label": "postcode",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "regionr",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 0
+                              },
+                              "isEditable": true,
+                              "label": "regionr",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "telefoon",
+                              "isEditable": true,
+                              "label": "telefoon",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "website",
+                              "isEditable": true,
+                              "label": "website",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "woonplaats",
+                              "isEditable": true,
+                              "label": "woonplaats",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "x",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 0
+                              },
+                              "isEditable": true,
+                              "label": "x",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "x_nav",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 0
+                              },
+                              "isEditable": true,
+                              "label": "x-nav",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "y",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 0
+                              },
+                              "isEditable": true,
+                              "label": "y",
+                              "visible": true
+                          },
+                          {
+                              "fieldName": "y_nav",
+                              "format": {
+                                  "digitSeparator": true,
+                                  "places": 0
+                              },
+                              "isEditable": true,
+                              "label": "y-nav",
+                              "visible": true
+                          }
+                      ],
+                      "title": "Ziekenhuizen en buitenpoliklinieken gdb - Ziekenhuizen"
+                  }
+              }
+          ],
+          "layerType": "GroupLayer"
+      }
+  ],
+  "baseMap": {
+      "baseMapLayers": [
+          {
+              "id": "World_Hillshade_3805",
+              "opacity": 1,
+              "title": "World Hillshade",
+              "url": "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer",
+              "visibility": true,
+              "layerType": "ArcGISTiledMapServiceLayer"
+          },
+          {
+              "id": "VectorTile_2333",
+              "opacity": 1,
+              "title": "World Topographic Map",
+              "visibility": true,
+              "layerType": "VectorTileLayer",
+              "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/7dc6cea0b1764a1f9af2e679f642f0f5/resources/styles/root.json"
+          }
+      ],
+      "title": "Topographic"
+  },
+  "authoringApp": "ArcGISMapViewer",
+  "authoringAppVersion": "2023.1",
+  "initialState": {
+      "viewpoint": {
+          "targetGeometry": {
+              "spatialReference": {
+                  "latestWkid": 3857,
+                  "wkid": 102100
+              },
+              "xmin": -71788.21961162146,
+              "ymin": 6413880.890100846,
+              "xmax": 1258216.0725503792,
+              "ymax": 7240012.29180699
+          }
+      }
+  },
+  "spatialReference": {
+      "latestWkid": 3857,
+      "wkid": 102100
+  },
+  "version": "2.27"
+}

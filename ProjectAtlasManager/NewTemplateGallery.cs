@@ -7,7 +7,6 @@ using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Events;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Editing;
-using ArcGIS.Desktop.Extensions;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Dialogs;
@@ -53,8 +52,6 @@ namespace ProjectAtlasManager
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
       if (portal != null && portal.IsSignedOn())
       {
-        //var x = await portal.GetPortalInfoAsync();
-        //Module1.OrgId = x.OrganizationId;
         _renew = true;
       }
       else
@@ -62,7 +59,6 @@ namespace ProjectAtlasManager
         SetItemCollection(new ObservableCollection<object>());
       }
     }
-
     private void RenewData(EventBase eventData)
     {
       _renew = true;
@@ -84,7 +80,9 @@ namespace ProjectAtlasManager
         SetItemCollection(new ObservableCollection<object>());
         return;
       }
-      var items = await GetWebMapsAsync();
+      var portalInfo = await activePortal.GetPortalInfoAsync();
+      var orgId = portalInfo.OrganizationId;
+      var items = await GetWebMapsAsync(orgId);
       SetItemCollection(new ObservableCollection<object>(items));
       _isInitialized = true;
       _renew = false;
@@ -105,7 +103,7 @@ namespace ProjectAtlasManager
     /// Gets a collection of web map items from ArcGIS Online
     /// </summary>
     /// <returns></returns>
-    private async Task<List<WebMapItemGalleryItem>> GetWebMapsAsync()
+    private async Task<List<WebMapItemGalleryItem>> GetWebMapsAsync(string orgId)
     {
       var lstWebmapItems = new List<WebMapItemGalleryItem>();
       try
@@ -114,7 +112,7 @@ namespace ProjectAtlasManager
         {
           ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
           var username = portal.GetSignOnUsername();
-          var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:{Module1.OrgId} owner:\"{username}\"");
+          var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:{orgId} owner:\"{username}\"");
           query.SortField = "title, modified";
           query.Limit = 100;
           query.SortOrder = PortalQuerySortOrder.Ascending;

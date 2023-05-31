@@ -7,7 +7,6 @@ using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Events;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Editing;
-using ArcGIS.Desktop.Extensions;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Dialogs;
@@ -96,8 +95,10 @@ namespace ProjectAtlasManager.Viewers
       await QueuedTask.Run(async () =>
       {
         ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+        var portalInfo = await portal.GetPortalInfoAsync();
+        var orgId = portalInfo.OrganizationId;
         var username = portal.GetSignOnUsername();
-        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"PAT{Module1.SelectedProjectTemplate}\" AND tags:\"CopyOfTemplate\" AND orgid:{Module1.OrgId} owner:\"{username}\"");
+        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"PAT{Module1.SelectedProjectTemplate}\" AND tags:\"CopyOfTemplate\" AND orgid:{orgId} owner:\"{username}\"");
         query.SortField = "title";
         query.Limit = 100;
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);

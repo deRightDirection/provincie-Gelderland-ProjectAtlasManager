@@ -18,17 +18,6 @@ namespace ProjectAtlasManager
         return _this ?? (_this = (Module1)FrameworkApplication.FindModule(ModuleID));
       }
     }
-    public static string OrgId
-    {
-      get
-      {
-#if DEBUG
-        return "v16XTZeIhHAZEpwh";
-#else
-        return "0123456789ABCDEF";
-#endif
-      }
-    }
     /// <summary>
     /// geselecteerde viewer
     /// </summary>

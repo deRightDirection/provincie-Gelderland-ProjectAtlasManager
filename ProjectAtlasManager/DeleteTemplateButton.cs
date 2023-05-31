@@ -5,7 +5,6 @@ using ArcGIS.Desktop.Catalog;
 using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Editing;
-using ArcGIS.Desktop.Extensions;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Dialogs;
@@ -34,6 +33,8 @@ namespace ProjectAtlasManager
     private async Task RemoveTagsFromTemplateAsync()
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+      var portalInfo = await portal.GetPortalInfoAsync();
+      var orgId = portalInfo.OrganizationId;
       var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
       query.Limit = 100;
       await QueuedTask.Run(async () =>
@@ -47,7 +48,7 @@ namespace ProjectAtlasManager
         var tags = UpdateTags(item);
         var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
         await portalClient.UpdateTags(item, tags);
-        var viewersBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:{Module1.OrgId}")
+        var viewersBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:{orgId}")
         {
           Limit = 100
         };

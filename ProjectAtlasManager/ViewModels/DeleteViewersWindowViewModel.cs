@@ -40,6 +40,8 @@ namespace ProjectAtlasManager.ViewModels
     private async void FillList()
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+      var portalInfo = await portal.GetPortalInfoAsync();
+      var orgId = portalInfo.OrganizationId;
       var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
       query.Limit = 100;
       var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
@@ -48,7 +50,7 @@ namespace ProjectAtlasManager.ViewModels
       {
         return;
       }
-      var viewersBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:{Module1.OrgId}")
+      var viewersBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:{orgId}")
       {
         Limit = 100
       };

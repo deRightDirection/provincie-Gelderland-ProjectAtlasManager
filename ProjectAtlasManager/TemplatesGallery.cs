@@ -7,7 +7,6 @@ using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Events;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Editing;
-using ArcGIS.Desktop.Extensions;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Dialogs;
@@ -87,19 +86,21 @@ namespace ProjectAtlasManager
         SetItemCollection(new ObservableCollection<object>());
         return;
       }
-      var items = await GetWebMapsAsync();
+      var portalInfo = await activePortal.GetPortalInfoAsync();
+      var orgId = portalInfo.OrganizationId;
+      var items = await GetWebMapsAsync(orgId);
       SetItemCollection(new ObservableCollection<object>(items));
       _isInitialized = true;
     }
 
-    private async Task<List<WebMapItemGalleryItem>> GetWebMapsAsync()
+    private async Task<List<WebMapItemGalleryItem>> GetWebMapsAsync(string orgId)
     {
       var lstWebmapItems = new List<WebMapItemGalleryItem>();
       await QueuedTask.Run(async () =>
       {
         ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
         var username = portal.GetSignOnUsername();
-        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:{Module1.OrgId} owner:\"{username}\"");
+        var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:{orgId} owner:\"{username}\"");
         query.SortField = "title";
         query.Limit = 100;
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);

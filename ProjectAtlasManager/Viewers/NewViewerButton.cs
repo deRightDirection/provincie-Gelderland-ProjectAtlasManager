@@ -4,6 +4,7 @@ using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ProjectAtlasManager.Events;
+using ProjectAtlasManager.Services;
 using ProjectAtlasManager.ViewModels;
 using ProjectAtlasManager.Web;
 using ProjectAtlasManager.Windows;
@@ -41,6 +42,7 @@ namespace ProjectAtlasManager.Viewers
         progDialog = new ProgressDialog($"Aanmaken viewer [{_name}]...");
         progDialog.Show();
         await CreateNewViewerFromTemplate();
+        progDialog.Hide();
       }
     }
 
@@ -57,7 +59,7 @@ namespace ProjectAtlasManager.Viewers
         {
           return;
         }
-        var tags = string.Join(",", item.ItemTags);
+        var tags = TagsHelper.ParseTags(item);
         if (tags.Contains("Template"))
         {
           tags = tags.Replace("Template", string.Empty);

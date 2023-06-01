@@ -4,6 +4,7 @@ using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ProjectAtlasManager.Events;
+using ProjectAtlasManager.Services;
 using ProjectAtlasManager.ViewModels;
 using ProjectAtlasManager.Web;
 using ProjectAtlasManager.Windows;
@@ -48,6 +49,7 @@ namespace ProjectAtlasManager.Viewers
         await DeleteViewersAsync();
         Thread.Sleep(750);
         EventSender.Publish(new UpdateGalleryEvent() { UpdateTemplatesGallery = false, UpdateWebmapsGallery = true, UpdateViewersGallery = true });
+        progDialog.Hide();
       }
     }
 
@@ -72,26 +74,12 @@ namespace ProjectAtlasManager.Viewers
           }
           else
           {
-            var tags = UpdateTags(item);
+            var tags = TagsHelper.UpdateTags(item);
             await portalClient.UpdateTags(item, tags);
           }
         });
         progDialog.Hide();
       });
-    }
-
-    private string UpdateTags(PortalItem item)
-    {
-      var tags = new List<string>();
-      foreach(var tag in item.ItemTags)
-      {
-        if(tag.Equals("ProjectAtlas") || tag.Equals("CopyOfTemplate") || tag.Equals("Template") || tag.StartsWith("PAT"))
-        {
-          continue;
-        }
-        tags.Add(tag);
-      }
-      return string.Join(",", tags);
     }
   }
 }

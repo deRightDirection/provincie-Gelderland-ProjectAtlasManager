@@ -44,11 +44,11 @@ namespace ProjectAtlasManager.Web
       var response = await _http.GetAsync(uri);
       return await response.Content.ReadAsStringAsync();
     }
-
     internal async Task Delete(PortalItem item)
     {
       var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/items/{item.ID}/delete?f=json&token={_token}";
       await uri.PostAsync();
+//      await uri.PostAsync(new StringContent(string.Empty));
     }
     internal async Task CreateViewerFromTemplate(PortalItem item, string title, string tags)
     {

@@ -227,6 +227,7 @@
     <Compile Include="Converters\UriSourceForThumbnailConverter.cs" />
     <Compile Include="CreateNewTemplateButton.cs" />
     <Compile Include="DeleteTemplateButton.cs" />
+    <Compile Include="Services\TagsHelper.cs" />
     <Compile Include="Viewers\DeleteViewerButton.cs" />
     <Compile Include="Domain\OperationalLayer.cs" />
     <Compile Include="Domain\PortalInformation.cs" />

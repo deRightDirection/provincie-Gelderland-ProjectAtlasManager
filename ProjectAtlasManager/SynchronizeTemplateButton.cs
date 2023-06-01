@@ -52,6 +52,7 @@ namespace ProjectAtlasManager
         progDialog = new ProgressDialog("Synchroniseren webmaps...");
         progDialog.Show();
         await SynchronizeTemplatesAsync(_itemIds);
+        progDialog.Hide();
       }
     }
 

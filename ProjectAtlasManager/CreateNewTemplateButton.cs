@@ -13,6 +13,7 @@ using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
 using Newtonsoft.Json;
 using ProjectAtlasManager.Events;
+using ProjectAtlasManager.Services;
 using ProjectAtlasManager.Web;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace ProjectAtlasManager
         {
           return;
         }
-        var tags = string.Join(",", item.ItemTags);
+        var tags = TagsHelper.ParseTags(item);
         if(!tags.Contains("Template"))
         {
           tags += ",Template";

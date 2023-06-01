@@ -12,6 +12,7 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
 using ProjectAtlasManager.Events;
+using ProjectAtlasManager.Services;
 using ProjectAtlasManager.Web;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace ProjectAtlasManager
         {
           return;
         }
-        var tags = UpdateTags(item);
+        var tags = TagsHelper.UpdateTags(item);
         var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
         await portalClient.UpdateTags(item, tags);
         var viewersBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:{orgId}")
@@ -55,27 +56,13 @@ namespace ProjectAtlasManager
         var mapsBasedOnTemplate = await ArcGISPortalExtensions.SearchForContentAsync(portal, viewersBasedOnTemplateQuery);
         foreach(var viewer in mapsBasedOnTemplate.Results)
         {
-          var tags2 = UpdateTags(viewer);
+          var tags2 = TagsHelper.UpdateTags(viewer);
           await portalClient.UpdateTags(viewer, tags2);
         }
       });
       Thread.Sleep(750);
       EventSender.Publish(new UpdateGalleryEvent());
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
-    }
-
-    private string UpdateTags(PortalItem item)
-    {
-      var tags = new List<string>();
-      foreach (var tag in item.ItemTags)
-      {
-        if (tag.Equals("ProjectAtlas") || tag.Equals("CopyOfTemplate") || tag.Equals("Template") || tag.StartsWith("PAT"))
-        {
-          continue;
-        }
-        tags.Add(tag);
-      }
-      return string.Join(",", tags);
     }
   }
 }

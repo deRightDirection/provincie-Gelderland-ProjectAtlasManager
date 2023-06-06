@@ -5,18 +5,6 @@
     <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
   </ResourceDictionary.MergedDictionaries>
   <DataTemplate x:Key="WebMapsGalleryItemTemplate">
-    <Grid Margin="2" Width="400" Height="25">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="auto"/>
-        <RowDefinition Height="auto"/>
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="175"/>
-        <ColumnDefinition Width="10"/>
-        <ColumnDefinition Width="200"/>
-      </Grid.ColumnDefinitions>
-      <TextBlock Grid.Column="0" Width="175" Text="{Binding Path=Title}" Style="{DynamicResource Esri_TextBlockRegular}" FontWeight="Bold"/>
-      <TextBlock Grid.Column="2" Width="200" Text="{Binding Path=ID}" Style="{DynamicResource Esri_TextBlockRegular}"/>
-    </Grid>
+      <TextBlock Text="{Binding Path=Title}" Style="{DynamicResource Esri_TextBlockRegular}" FontWeight="Bold"/>
   </DataTemplate>
 </ResourceDictionary>

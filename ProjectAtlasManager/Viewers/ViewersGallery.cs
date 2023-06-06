@@ -106,7 +106,7 @@ namespace ProjectAtlasManager.Viewers
         {
           return;
         }
-        foreach (var item in results.Results.OfType<PortalItem>())
+        foreach (var item in results.Results.OfType<PortalItem>().OrderBy(x => x.Title))
         {
           lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
         }

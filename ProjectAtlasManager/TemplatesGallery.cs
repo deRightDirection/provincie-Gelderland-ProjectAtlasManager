@@ -108,7 +108,7 @@ namespace ProjectAtlasManager
         {
           return;
         }
-        foreach (var item in results.Results.OfType<PortalItem>())
+        foreach (var item in results.Results.OfType<PortalItem>().OrderBy(x => x.Title))
         {
           lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
         }
@@ -116,13 +116,29 @@ namespace ProjectAtlasManager
       return lstWebmapItems;
     }
 
-    protected override void OnClick(object item)
+    protected async override void OnClick(object item)
     {
       if (item is WebMapItemGalleryItem)
       {
         var clickedWebMapItem = (WebMapItemGalleryItem)item;
         Module1.SelectedProjectTemplate = clickedWebMapItem.ID;
         FrameworkApplication.State.Activate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
+        var query = PortalQueryParameters.CreateForItemsWithId(clickedWebMapItem.ID);
+        ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+        PortalQueryResultSet<PortalItem> results = await portal.SearchForContentAsync(query);
+        var result = results.Results.FirstOrDefault();
+        if (result == null)
+        {
+          return;
+        }
+        QueuedTask.Run(() =>
+        {
+          if (MapFactory.Instance.CanCreateMapFrom(result))
+          {
+            var newMap = MapFactory.Instance.CreateMapFromItem(result);
+            ProApp.Panes.CreateMapPaneAsync(newMap);
+          }
+        });
       }
       base.OnClick(item);
     }

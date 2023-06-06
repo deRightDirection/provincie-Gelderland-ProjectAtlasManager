@@ -36,7 +36,6 @@
         <group id="ProjectAtlasManager_Group2" caption="templates" appearsOnAddInTab="false">
           <!-- bekijk alle templates -->
           <gallery refID="showTemplatesGallery" inline="false" size="large" />
-          <button refID="ProjectAtlasManager_OpenTemplateButton" size="large" />
           <button refID="ProjectAtlasManager_SynchronizeTemplateButton" size="large" />
           <button refID="ProjectAtlasManager_DeleteTemplateButton" size="large" />
         </group>
@@ -51,11 +50,6 @@
         </group>
       </groups>
       <controls>
-        <button id="ProjectAtlasManager_OpenTemplateButton" caption="open template" className="Buttons.OpenTemplateButton" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" loadOnClick="true" smallImage="Images/opentemplate.png" largeImage="Images/opentemplate.png">
-          <tooltip heading="Open template">
-            Open het template
-          </tooltip>
-        </button>
         <button id="ProjectAtlasManager_SyncWebmapsButton" caption="synchroniseer webmaps" className="Buttons.SyncWebmapsButton" loadOnClick="true" smallImage="Images/syncwebmaps.png" largeImage="Images/syncwebmaps.png">
           <tooltip heading="Synchroniseer webmaps">
             Synchroniseer de lijst met webmaps
@@ -88,7 +82,7 @@
         </gallery>
         <gallery id="showTemplatesGallery" caption="selecteer een bestaand template" className="TemplatesGallery" itemsInRow="1" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml" templateID="WebMapsGalleryItemTemplate" resizable="true" itemWidth="415" largeImage="Images/templates.png" loadingMessage="inladen templates">
           <tooltip heading="selecteer template">
-            Selecteer een template en voer hier een actie mee uit. De query om templates te vinden is: zoek alle webmaps die de tags 'ProjectAtlas' en 'Template' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.<disabledText>geen templates beschikbaar</disabledText></tooltip>
+            Selecteer een template, open de template en voer hier een actie mee uit. De query om templates te vinden is: zoek alle webmaps die de tags 'ProjectAtlas' en 'Template' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.<disabledText>geen templates beschikbaar</disabledText></tooltip>
         </gallery>
         <gallery id="viewersGallery" caption="selecteer een webmap" className="Viewers.ViewersGallery" itemsInRow="1" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml" templateID="WebMapsGalleryItemTemplate" resizable="true" largeImage="Images/viewer.png" itemWidth="415" loadingMessage="inladen webmaps">
           <tooltip heading="selecteer webmap">

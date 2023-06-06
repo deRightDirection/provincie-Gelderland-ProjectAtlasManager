@@ -12,7 +12,7 @@ namespace ProjectAtlasManager.Services
   {
     internal static bool HasTemplateTags(this PortalItem item)
     {
-      var tags = item.ItemTags.Select(x => x.ToLowerInvariant());
+      var tags = item.ItemTags.Select(x => x.ToLowerInvariant().Trim());
       var one = tags.Contains("projectatlas");
       var two = tags.Contains("template");
       var three = tags.Contains($"pat{item.ID.ToLowerInvariant()}");
@@ -22,8 +22,8 @@ namespace ProjectAtlasManager.Services
     internal static void UpdateTagsForTemplate(this PortalItem item)
     {
       var xml = XElement.Parse(item.GetXml());
-      var keysTags = xml.Element("searchKeys");
-      var tags = item.ItemTags.Select(x => x.ToLowerInvariant());
+      var keysTags = xml.Element("dataIdInfo").Element("searchKeys");
+      var tags = item.ItemTags.Select(x => x.ToLowerInvariant().Trim());
       if (keysTags != null)
       {
         var one = tags.Contains("projectatlas");

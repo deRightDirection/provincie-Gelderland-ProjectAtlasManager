@@ -23,6 +23,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using ProjectAtlasManager.Services;
 
 namespace ProjectAtlasManager
 {
@@ -135,6 +136,10 @@ namespace ProjectAtlasManager
         {
           if (MapFactory.Instance.CanCreateMapFrom(result))
           {
+            if (!result.HasTemplateTags())
+            {
+                result.UpdateTagsForTemplate();
+            }
             var newMap = MapFactory.Instance.CreateMapFromItem(result);
             ProApp.Panes.CreateMapPaneAsync(newMap);
           }

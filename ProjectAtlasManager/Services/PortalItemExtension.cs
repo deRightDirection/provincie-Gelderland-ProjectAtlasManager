@@ -1,0 +1,56 @@
+using ArcGIS.Desktop.Core.Portal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace ProjectAtlasManager.Services
+{
+  internal static class PortalItemExtension
+  {
+    internal static bool HasTemplateTags(this PortalItem item)
+    {
+      var tags = item.ItemTags.Select(x => x.ToLowerInvariant());
+      var one = tags.Contains("projectatlas");
+      var two = tags.Contains("template");
+      var three = tags.Contains($"pat{item.ID.ToLowerInvariant()}");
+      return one && two && three;
+    }
+
+    internal static void UpdateTagsForTemplate(this PortalItem item)
+    {
+      var xml = XElement.Parse(item.GetXml());
+      var keysTags = xml.Element("searchKeys");
+      var tags = item.ItemTags.Select(x => x.ToLowerInvariant());
+      if (keysTags != null)
+      {
+        var one = tags.Contains("projectatlas");
+        if (!one)
+        {
+          keysTags.Add(new XElement("keyword", "ProjectAtlas"));
+        }
+        var two = tags.Contains("template");
+        if (!two)
+        {
+          keysTags.Add(new XElement("keyword", "Template"));
+        }
+        var three = tags.Contains($"pat{item.ID.ToLowerInvariant()}");
+        if (!three)
+        {
+          keysTags.Add(new XElement("keyword", $"PAT{item.ID}"));
+        }
+      }
+      else
+      {
+        var keysTag = new XElement("searchKeys");
+        keysTag.Add(new XElement("keyword", "ProjectAtlas"));
+        keysTag.Add(new XElement("keyword", "Template"));
+        keysTag.Add(new XElement("keyword", $"PAT{item.ID}"));
+        xml.Add(keysTag);
+      }
+      item.SetXml(xml.ToString());
+    }
+  }
+}

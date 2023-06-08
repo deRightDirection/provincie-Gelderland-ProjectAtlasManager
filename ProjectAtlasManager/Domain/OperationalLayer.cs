@@ -13,5 +13,9 @@ namespace ProjectAtlasManager.Domain
     public string LayerType { get; set; }
     public int Level { get; set; }
     public string Parent { get; set; }
+    [JsonIgnore]
+    public int NewIndex { get; set; }
+    [JsonIgnore]
+    public List<OperationalLayer> SubLayers { get; set; }
   }
 }

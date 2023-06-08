@@ -1,0 +1,172 @@
+{
+  "operationalLayers": [
+    {
+      "id": "a020e7a452fb436dab0b936a6ca011d7",
+      "title": "Groepslaag",
+      "visibility": true,
+      "blendMode": "normal",
+      "opacity": 1,
+      "layers": [
+        {
+          "id": "c22d29b0dbbe49d4bfa035b6c484494a",
+          "title": "Wegtypen",
+          "visibility": true,
+          "blendMode": "normal",
+          "opacity": 1,
+          "url": "https://geoportaal.gelderland.nl/gisserver/rest/services/Infra/Infra/MapServer/39",
+          "layerType": "ArcGISFeatureLayer"
+        },
+        {
+          "id": "b89ce61513554a2ba4d6852d8607fcaa",
+          "title": "Eigendomsgebied",
+          "visibility": false,
+          "blendMode": "normal",
+          "opacity": 1,
+          "url": "https://geoportaal.gelderland.nl/gisserver/rest/services/Grenzen/Grenzen/MapServer/1",
+          "layerType": "ArcGISFeatureLayer"
+        },
+        {
+          "id": "2a601ccf71704ee98659bda654f0ae8d",
+          "title": "Beheergebied provinciale wegen",
+          "visibility": false,
+          "blendMode": "normal",
+          "opacity": 1,
+          "url": "https://geoportaal.gelderland.nl/gisserver/rest/services/Grenzen/Grenzen/MapServer/0",
+          "layerType": "ArcGISFeatureLayer",
+          "layerDefinition": {
+              "geometryType": "esriGeometryPolygon",
+              "objectIdField": "objectid",
+              "drawingInfo": {
+                  "renderer": {
+                      "type": "simple",
+                      "symbol": {
+                          "type": "esriSFS",
+                          "style": "esriSFSSolid",
+                          "color": [
+                              0,
+                              115,
+                              76,
+                              255
+                          ],
+                          "outline": {
+                              "type": "esriSLS",
+                              "style": "esriSLSSolid",
+                              "color": [
+                                  0,
+                                  115,
+                                  76,
+                                  255
+                              ],
+                              "width": 0.56
+                          }
+                      }
+                  },
+                  "scaleSymbols": true
+              }
+          },
+          "popupInfo": {
+              "title": "{BEHEERDER}",
+              "mediaInfos": [],
+              "popupElements": [
+                  {
+                      "fieldInfos": [
+                          {
+                              "fieldName": "objectid",
+                              "isEditable": true,
+                              "format": {
+                                  "places": 0,
+                                  "digitSeparator": false
+                              },
+                              "visible": true,
+                              "label": "Object id"
+                          },
+                          {
+                              "fieldName": "beheerder",
+                              "isEditable": true,
+                              "visible": true,
+                              "label": "Beheerder"
+                          },
+                          {
+                              "fieldName": "st_area(shape)",
+                              "isEditable": true,
+                              "format": {
+                                  "places": 6,
+                                  "digitSeparator": false
+                              },
+                              "visible": true,
+                              "label": "st_area(shape)"
+                          },
+                          {
+                              "fieldName": "st_length(shape)",
+                              "isEditable": true,
+                              "format": {
+                                  "places": 6,
+                                  "digitSeparator": false
+                              },
+                              "visible": true,
+                              "label": "st_length(shape)"
+                          }
+                      ],
+                      "type": "fields"
+                  }
+              ],
+              "fieldInfos": [
+                  {
+                      "fieldName": "objectid",
+                      "isEditable": true,
+                      "format": {
+                          "places": 0,
+                          "digitSeparator": false
+                      },
+                      "visible": true,
+                      "label": "Object id"
+                  },
+                  {
+                      "fieldName": "beheerder",
+                      "isEditable": true,
+                      "visible": true,
+                      "label": "Beheerder"
+                  },
+                  {
+                      "fieldName": "st_area(shape)",
+                      "isEditable": true,
+                      "format": {
+                          "places": 6,
+                          "digitSeparator": false
+                      },
+                      "visible": true,
+                      "label": "st_area(shape)"
+                  },
+                  {
+                      "fieldName": "st_length(shape)",
+                      "isEditable": true,
+                      "format": {
+                          "places": 6,
+                          "digitSeparator": false
+                      },
+                      "visible": true,
+                      "label": "st_length(shape)"
+                  }
+              ],
+              "expressionInfos": []
+          },
+          "disablePopup": false,
+          "showLegend": true
+      }
+      ],
+      "layerType": "GroupLayer"
+    },
+    {
+      "id": "17da705920db4463b3d407c6259340df",
+      "title": "Webcams",
+      "visibility": true,
+      "blendMode": "normal",
+      "opacity": 1,
+      "url": "https://geoportaal.gelderland.nl/gisserver/rest/services/Infra/Infra/MapServer/73",
+      "layerType": "ArcGISFeatureLayer",
+      "disablePopup": false,
+      "showLabels": true,
+      "showLegend": true
+    }
+  ]
+}

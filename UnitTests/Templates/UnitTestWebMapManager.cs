@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using theRightDirection.Library;
@@ -42,7 +43,64 @@ namespace UnitTests.Templates
       {
         webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToReplace);
       }
-      return webmapData;
+      layersInWebMap = RetrieveLayers(webmapData);
+      var newOrder = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, 0, null);
+      var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
+      var webmap = JObject.Parse(webmapData);
+      webmap["operationalLayers"] = json;
+      return webmap.ToString();
+    }
+
+    private JArray CreateNewOperationalLayerJsonObject(IEnumerable<OperationalLayer> layers, JArray rootObject)
+    {
+      foreach (var webmapLayer in layers)
+      {
+        var newObject = webmapLayer.JsonDefinition;
+        if (webmapLayer.LayerType.Equals("GroupLayer"))
+        {
+          newObject["layers"] = CreateNewOperationalLayerJsonObject(webmapLayer.SubLayers, new JArray());
+        }
+        rootObject.Add(newObject);
+      }
+      return rootObject;
+    }
+
+    private IEnumerable<OperationalLayer> MakeIndicesLayersEqual(IEnumerable<OperationalLayer> layersInTemplate, IEnumerable<OperationalLayer> layersInWebMap, int level, string parent)
+    {
+      var templateLayers = layersInTemplate.Where(x => x.Level == level && x.Parent == parent);
+      var webmapLayers = layersInWebMap.Where(x => x.Level == level && x.Parent == parent);
+      int indexSkip = 0;
+      foreach (var webmapLayer in webmapLayers)
+      {
+        if (webmapLayer.LayerType.Equals("GroupLayer"))
+        {
+          var newSubLayers = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, webmapLayer.Level + 1, webmapLayer.Id);
+          webmapLayer.SubLayers = newSubLayers.ToList();
+        }
+        var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
+        webmapLayer.NewIndex = templateLayer?.Index ?? webmapLayer.Index;
+      }
+      var newList = new List<OperationalLayer>();
+      foreach (var webmapLayer in webmapLayers.OrderBy(x => x.NewIndex))
+      {
+        var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
+        if (templateLayer == null)
+        {
+          if(newList.Count >= webmapLayer.Index)
+          {
+            newList.Insert(webmapLayer.Index, webmapLayer);
+          }
+          else
+          {
+            newList.Add(webmapLayer);
+          }
+        }
+        else
+        {
+          newList.Add(webmapLayer);
+        }
+      }
+      return newList;
     }
 
     /// <summary>

@@ -25,6 +25,96 @@ namespace UnitTests
       var path = Assembly.GetExecutingAssembly().Location;
       _testdataFolder = path.Replace("\\UnitTests\\bin\\Debug\\UnitTests.dll", "\\testdata");
     }
+
+    [TestMethod]
+    // template en viewer hebben exact dezelfde lagen en geneste groepslagen
+    // op alle niveuas zijn er lagen verwisseld
+    public void Reorder5()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas22.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template22.json"));
+      var jsonTemplate = JToken.Parse(projectTemplateJson);
+      var jsonOldWebmap = JToken.Parse(webmap);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var jsonNewWebmap = JToken.Parse(newWebMap);
+      var x = jsonNewWebmap.ToString();
+      Assert.IsFalse(JToken.DeepEquals(jsonTemplate, jsonOldWebmap));
+      Assert.IsTrue(JToken.DeepEquals(jsonTemplate, jsonNewWebmap));
+      //File.WriteAllText(@"c:\temp\abc1.json", jsonTemplate.ToString());
+      //File.WriteAllText(@"c:\temp\abc2.json", jsonNewWebmap.ToString());
+    }
+
+    [TestMethod]
+    // template en viewer hebben exact dezelfde lagen maar viewer heeft in groepslaag 1 extra laag
+    // waarbij die extra laag in het midden van de 2 andere lagen zitten in de groepslaag die in de template verwisseld zijn
+    // daarnaast zijn de normale laag en groepslaag ook verwisseld
+    public void Reorder4()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas21.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template21.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var jsonTemplate = JToken.Parse(projectTemplateJson);
+      var jsonOldWebmap = JToken.Parse(webmap);
+      var jsonNewWebmap = JToken.Parse(newWebMap);
+      var firstOperationLayer = jsonTemplate["operationalLayers"].First();
+      var lastOperationLayer = jsonTemplate["operationalLayers"].Last();
+      var oldFirstOperationLayer = jsonOldWebmap["operationalLayers"].First();
+      var newFirstOperationLayer = jsonNewWebmap["operationalLayers"].First();
+      var newLastOperationLayer = jsonNewWebmap["operationalLayers"].Last();
+      firstOperationLayer["id"].ToString().Should().Be(jsonOldWebmap["operationalLayers"].Last["id"].ToString());
+      firstOperationLayer["id"].ToString().Should().Be(newFirstOperationLayer["id"].ToString());
+      jsonTemplate["operationalLayers"].Last["id"].ToString().Should().Be(oldFirstOperationLayer["id"].ToString());
+      jsonTemplate["operationalLayers"].Last["id"].ToString().Should().Be(jsonNewWebmap["operationalLayers"].Last["id"].ToString());
+      lastOperationLayer["layers"].First["id"].ToString().Should().Be(oldFirstOperationLayer["layers"].Last["id"].ToString());
+      lastOperationLayer["layers"].First["id"].ToString().Should().Be(newLastOperationLayer["layers"].First["id"].ToString());
+      //File.WriteAllText(@"c:\temp\abc1.json", jsonTemplate.ToString());
+      //File.WriteAllText(@"c:\temp\abc2.json", jsonNewWebmap.ToString());
+    }
+
+    [TestMethod]
+    // template en viewer hebben exact dezelfde lagen maar viewer heeft er 1 extra
+    // waarbij die extra laag in het midden van de 2 andere lagen zitten die in de template verwisseld zijn
+    public void Reorder3()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas20.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template20.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var jsonTemplate = JToken.Parse(projectTemplateJson);
+      var jsonOldWebmap = JToken.Parse(webmap);
+      var jsonNewWebmap = JToken.Parse(newWebMap);
+      jsonTemplate["operationalLayers"].First["id"].ToString().Should().Be(jsonOldWebmap["operationalLayers"].Last["id"].ToString());
+      jsonTemplate["operationalLayers"].First["id"].ToString().Should().Be(jsonNewWebmap["operationalLayers"].First["id"].ToString());
+      jsonTemplate["operationalLayers"].Last["id"].ToString().Should().Be(jsonOldWebmap["operationalLayers"].First["id"].ToString());
+      jsonTemplate["operationalLayers"].Last["id"].ToString().Should().Be(jsonNewWebmap["operationalLayers"].Last["id"].ToString());
+    }
+    [TestMethod]
+    // template en viewer hebben exact dezelfde lagen maar viewer heeft er 1 extra
+    // maar in een andere volgorde
+    public void Reorder2()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas19.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template19.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var jsonTemplate = JToken.Parse(projectTemplateJson);
+      var jsonOldWebmap = JToken.Parse(webmap);
+      var jsonNewWebmap = JToken.Parse(newWebMap);
+      jsonTemplate["operationalLayers"].First["id"].ToString().Should().NotBe(jsonOldWebmap["operationalLayers"].First["id"].ToString());
+      jsonTemplate["operationalLayers"].First["id"].ToString().Should().Be(jsonNewWebmap["operationalLayers"].First["id"].ToString());
+    }
+
+    [TestMethod]
+    // template en viewer hebben exact dezelfde lagen
+    // maar in een andere volgorde
+    public void Reorder()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas18.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template18.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var jsonTemplate = JToken.Parse(projectTemplateJson);
+      var jsonNewWebmap = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(jsonTemplate, jsonNewWebmap));
+    }
+
     [TestMethod]
     public void SyncTemplate()
     {

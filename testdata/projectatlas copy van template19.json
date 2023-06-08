@@ -1,0 +1,1602 @@
+{
+  "operationalLayers": [
+    {
+      "id": "a020e7a452fb436dab0b936a6ca011d7",
+      "title": "Groepslaag",
+      "visibility": true,
+      "blendMode": "normal",
+      "opacity": 1,
+      "layers": [
+          {
+              "id": "2a601ccf71704ee98659bda654f0ae8d",
+              "title": "Beheergebied provinciale wegen",
+              "visibility": false,
+              "blendMode": "normal",
+              "opacity": 1,
+              "url": "https://geoportaal.gelderland.nl/gisserver/rest/services/Grenzen/Grenzen/MapServer/0",
+              "layerType": "ArcGISFeatureLayer",
+              "layerDefinition": {
+                  "geometryType": "esriGeometryPolygon",
+                  "objectIdField": "objectid",
+                  "drawingInfo": {
+                      "renderer": {
+                          "type": "simple",
+                          "symbol": {
+                              "type": "esriSFS",
+                              "style": "esriSFSSolid",
+                              "color": [
+                                  0,
+                                  115,
+                                  76,
+                                  255
+                              ],
+                              "outline": {
+                                  "type": "esriSLS",
+                                  "style": "esriSLSSolid",
+                                  "color": [
+                                      0,
+                                      115,
+                                      76,
+                                      255
+                                  ],
+                                  "width": 0.56
+                              }
+                          }
+                      },
+                      "scaleSymbols": true
+                  }
+              },
+              "popupInfo": {
+                  "title": "{BEHEERDER}",
+                  "mediaInfos": [],
+                  "popupElements": [
+                      {
+                          "fieldInfos": [
+                              {
+                                  "fieldName": "objectid",
+                                  "isEditable": true,
+                                  "format": {
+                                      "places": 0,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "Object id"
+                              },
+                              {
+                                  "fieldName": "beheerder",
+                                  "isEditable": true,
+                                  "visible": true,
+                                  "label": "Beheerder"
+                              },
+                              {
+                                  "fieldName": "st_area(shape)",
+                                  "isEditable": true,
+                                  "format": {
+                                      "places": 6,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "st_area(shape)"
+                              },
+                              {
+                                  "fieldName": "st_length(shape)",
+                                  "isEditable": true,
+                                  "format": {
+                                      "places": 6,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "st_length(shape)"
+                              }
+                          ],
+                          "type": "fields"
+                      }
+                  ],
+                  "fieldInfos": [
+                      {
+                          "fieldName": "objectid",
+                          "isEditable": true,
+                          "format": {
+                              "places": 0,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "Object id"
+                      },
+                      {
+                          "fieldName": "beheerder",
+                          "isEditable": true,
+                          "visible": true,
+                          "label": "Beheerder"
+                      },
+                      {
+                          "fieldName": "st_area(shape)",
+                          "isEditable": true,
+                          "format": {
+                              "places": 6,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "st_area(shape)"
+                      },
+                      {
+                          "fieldName": "st_length(shape)",
+                          "isEditable": true,
+                          "format": {
+                              "places": 6,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "st_length(shape)"
+                      }
+                  ],
+                  "expressionInfos": []
+              },
+              "disablePopup": false,
+              "showLegend": true
+          },
+          {
+              "id": "b89ce61513554a2ba4d6852d8607fcaa",
+              "title": "Eigendomsgebied",
+              "visibility": false,
+              "blendMode": "normal",
+              "opacity": 1,
+              "url": "https://geoportaal.gelderland.nl/gisserver/rest/services/Grenzen/Grenzen/MapServer/1",
+              "layerType": "ArcGISFeatureLayer",
+              "layerDefinition": {
+                  "geometryType": "esriGeometryPolygon",
+                  "objectIdField": "objectid",
+                  "drawingInfo": {
+                      "renderer": {
+                          "type": "simple",
+                          "symbol": {
+                              "type": "esriSFS",
+                              "style": "esriSFSSolid",
+                              "color": [
+                                  255,
+                                  170,
+                                  0,
+                                  255
+                              ],
+                              "outline": {
+                                  "type": "esriSLS",
+                                  "style": "esriSLSSolid",
+                                  "color": [
+                                      255,
+                                      170,
+                                      0,
+                                      255
+                                  ],
+                                  "width": 1
+                              }
+                          }
+                      },
+                      "scaleSymbols": true
+                  }
+              },
+              "popupInfo": {
+                  "title": "{NAM_EIGENAAR}",
+                  "mediaInfos": [],
+                  "popupElements": [
+                      {
+                          "fieldInfos": [
+                              {
+                                  "fieldName": "objectid",
+                                  "isEditable": true,
+                                  "format": {
+                                      "places": 0,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "OBJECTID"
+                              },
+                              {
+                                  "fieldName": "nam_eigenaar",
+                                  "isEditable": true,
+                                  "visible": true,
+                                  "label": "Eigenaar"
+                              },
+                              {
+                                  "fieldName": "st_area(shape)",
+                                  "isEditable": true,
+                                  "format": {
+                                      "places": 6,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "st_area(shape)"
+                              },
+                              {
+                                  "fieldName": "st_length(shape)",
+                                  "isEditable": true,
+                                  "format": {
+                                      "places": 6,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "st_length(shape)"
+                              }
+                          ],
+                          "type": "fields"
+                      }
+                  ],
+                  "fieldInfos": [
+                      {
+                          "fieldName": "objectid",
+                          "isEditable": true,
+                          "format": {
+                              "places": 0,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "OBJECTID"
+                      },
+                      {
+                          "fieldName": "nam_eigenaar",
+                          "isEditable": true,
+                          "visible": true,
+                          "label": "Eigenaar"
+                      },
+                      {
+                          "fieldName": "st_area(shape)",
+                          "isEditable": true,
+                          "format": {
+                              "places": 6,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "st_area(shape)"
+                      },
+                      {
+                          "fieldName": "st_length(shape)",
+                          "isEditable": true,
+                          "format": {
+                              "places": 6,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "st_length(shape)"
+                      }
+                  ],
+                  "expressionInfos": []
+              },
+              "disablePopup": false,
+              "showLegend": true
+          },
+          {
+              "id": "c22d29b0dbbe49d4bfa035b6c484494a",
+              "title": "Wegtypen",
+              "visibility": true,
+              "blendMode": "normal",
+              "opacity": 1,
+              "url": "https://geoportaal.gelderland.nl/gisserver/rest/services/Infra/Infra/MapServer/39",
+              "layerType": "ArcGISFeatureLayer",
+              "layerDefinition": {
+                  "geometryType": "esriGeometryPolyline",
+                  "objectIdField": "objectid",
+                  "drawingInfo": {
+                      "renderer": {
+                          "type": "uniqueValue",
+                          "field1": "type_weg_naam",
+                          "uniqueValueInfos": [
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          115,
+                                          223,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Autosnelweg",
+                                  "label": "Autosnelweg"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          115,
+                                          223,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Autosnelweg met rangeerwegen",
+                                  "label": "Autosnelweg"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          115,
+                                          223,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Autosnelweg met twee vrijliggende fietspaden",
+                                  "label": "Autosnelweg"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          170,
+                                          255,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansautoweg met een vrijliggend fietspad",
+                                  "label": "Autoweg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          170,
+                                          255,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansautoweg met twee parallelwegen",
+                                  "label": "Autoweg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          170,
+                                          255,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansautoweg zonder parallelwegen en fietspaden (2x1)",
+                                  "label": "Autoweg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          170,
+                                          255,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansautoweg zonder parallelwegen en fietspaden (2x2)",
+                                  "label": "Autoweg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          170,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Autoweg met een parallelweg",
+                                  "label": "Autoweg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          170,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Autoweg zonder parallelweg(en) en/of fietspaden",
+                                  "label": "Autoweg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          112,
+                                          168,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansweg met een par.weg en een vrijliggend fietspad",
+                                  "label": "Overige weg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          112,
+                                          168,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansweg met een parallelweg",
+                                  "label": "Overige weg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          112,
+                                          168,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansweg met een vrijliggend fietspad",
+                                  "label": "Overige weg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          112,
+                                          168,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansweg met twee parallelwegen",
+                                  "label": "Overige weg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          112,
+                                          168,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansweg met twee vrijliggende fietspaden",
+                                  "label": "Overige weg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          112,
+                                          168,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansweg zonder parallelvoorziening",
+                                  "label": "Overige weg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          112,
+                                          168,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Dubbelbaansweg zonder parallelvoorziening en met gesloten verklaring",
+                                  "label": "Overige weg - dubbelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een aanliggend fietspad",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een fietsstrook",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een fietssuggestiestrook",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een parallelweg",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een parallelweg en een vrijliggend fietspad",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een parallelweg en twee vrijliggende fietspaden",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een vrijliggend fietspad",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een vrijliggend fietspad en een fietssuggestiestrook",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een vrijliggende fietspad en aanliggend fietspad",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met een vrijliggende fietspad en fietsstrook",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met twee aanliggende fietspaden",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met twee fietsstroken",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met twee fietssuggestiestroken",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met twee parallelwegen",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg met twee vrijliggende fietspaden",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg zonder parallelvoorziening en met gesloten verklaring",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg zonder parallelweg(en) en/of fietspaden",
+                                  "label": "Overige weg - enkelbaans"
+                              },
+                              {
+                                  "symbol": {
+                                      "type": "esriSLS",
+                                      "style": "esriSLSSolid",
+                                      "color": [
+                                          255,
+                                          127,
+                                          127,
+                                          255
+                                      ],
+                                      "width": 2
+                                  },
+                                  "value": "Weg zonder parallelweg(en) en/of fietspaden br<5.1",
+                                  "label": "Overige weg - enkelbaans"
+                              }
+                          ],
+                          "fieldDelimiter": ",",
+                          "authoringInfo": {
+                              "colorRamp": {
+                                  "type": "multipart",
+                                  "colorRamps": [
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              252,
+                                              182,
+                                              191,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              252,
+                                              182,
+                                              191,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              185,
+                                              252,
+                                              182,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              185,
+                                              252,
+                                              182,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              180,
+                                              179,
+                                              252,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              180,
+                                              179,
+                                              252,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              210,
+                                              245,
+                                              252,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              210,
+                                              245,
+                                              252,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              252,
+                                              232,
+                                              182,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              252,
+                                              232,
+                                              182,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              252,
+                                              189,
+                                              250,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              252,
+                                              189,
+                                              250,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              226,
+                                              212,
+                                              252,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              226,
+                                              212,
+                                              252,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              252,
+                                              225,
+                                              215,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              252,
+                                              225,
+                                              215,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              204,
+                                              252,
+                                              220,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              204,
+                                              252,
+                                              220,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              231,
+                                              252,
+                                              194,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              231,
+                                              252,
+                                              194,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              187,
+                                              220,
+                                              252,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              187,
+                                              220,
+                                              252,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              252,
+                                              202,
+                                              233,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              252,
+                                              202,
+                                              233,
+                                              255
+                                          ]
+                                      },
+                                      {
+                                          "type": "algorithmic",
+                                          "algorithm": "esriCIELabAlgorithm",
+                                          "fromColor": [
+                                              179,
+                                              251,
+                                              252,
+                                              255
+                                          ],
+                                          "toColor": [
+                                              179,
+                                              251,
+                                              252,
+                                              255
+                                          ]
+                                      }
+                                  ]
+                              }
+                          }
+                      },
+                      "scaleSymbols": true
+                  }
+              },
+              "popupInfo": {
+                  "title": "{WEG_NR}",
+                  "mediaInfos": [],
+                  "popupElements": [
+                      {
+                          "fieldInfos": [
+                              {
+                                  "fieldName": "objectid",
+                                  "isEditable": false,
+                                  "format": {
+                                      "places": 0,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "Object id"
+                              },
+                              {
+                                  "fieldName": "weg_nr",
+                                  "isEditable": true,
+                                  "visible": true,
+                                  "label": "Wegnummer"
+                              },
+                              {
+                                  "fieldName": "hm_van",
+                                  "isEditable": true,
+                                  "format": {
+                                      "places": 6,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "KM van"
+                              },
+                              {
+                                  "fieldName": "hm_tot",
+                                  "isEditable": true,
+                                  "format": {
+                                      "places": 6,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "KM tot"
+                              },
+                              {
+                                  "fieldName": "type_weg_naam",
+                                  "isEditable": true,
+                                  "visible": true,
+                                  "label": "Type weg"
+                              },
+                              {
+                                  "fieldName": "st_length(shape)",
+                                  "isEditable": true,
+                                  "format": {
+                                      "places": 6,
+                                      "digitSeparator": false
+                                  },
+                                  "visible": true,
+                                  "label": "st_length(shape)"
+                              }
+                          ],
+                          "type": "fields"
+                      }
+                  ],
+                  "fieldInfos": [
+                      {
+                          "fieldName": "objectid",
+                          "isEditable": false,
+                          "format": {
+                              "places": 0,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "Object id"
+                      },
+                      {
+                          "fieldName": "weg_nr",
+                          "isEditable": true,
+                          "visible": true,
+                          "label": "Wegnummer"
+                      },
+                      {
+                          "fieldName": "hm_van",
+                          "isEditable": true,
+                          "format": {
+                              "places": 6,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "KM van"
+                      },
+                      {
+                          "fieldName": "hm_tot",
+                          "isEditable": true,
+                          "format": {
+                              "places": 6,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "KM tot"
+                      },
+                      {
+                          "fieldName": "type_weg_naam",
+                          "isEditable": true,
+                          "visible": true,
+                          "label": "Type weg"
+                      },
+                      {
+                          "fieldName": "st_length(shape)",
+                          "isEditable": true,
+                          "format": {
+                              "places": 6,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "st_length(shape)"
+                      }
+                  ],
+                  "expressionInfos": []
+              },
+              "disablePopup": false,
+              "showLegend": true
+          }
+      ],
+      "layerType": "GroupLayer"
+  },    {
+      "id": "17da705920db4463b3d407c6259340df",
+      "title": "Webcams",
+      "visibility": true,
+      "blendMode": "normal",
+      "opacity": 1,
+      "url": "https://geoportaal.gelderland.nl/gisserver/rest/services/Infra/Infra/MapServer/73",
+      "layerType": "ArcGISFeatureLayer",
+      "layerDefinition": {
+          "geometryType": "esriGeometryPoint",
+          "objectIdField": "objectid",
+          "drawingInfo": {
+              "renderer": {
+                  "type": "simple",
+                  "symbol": {
+                      "type": "esriPMS",
+                      "url": "45d31125e7ad1e8bf3a89dc1cbb74b38",
+                      "imageData": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABdElEQVQ4jbWTsUsCYRiHn6PDzFM8Qmx3MBHjoEQQSRBti7YQ3HR08Q8IBxFBHJ2D1kDEpSFTkRpCxENocgjCzUmHhkKEa/FE85RA+s3f83w/eN9XZMeI/yWQFcKBCxJOlcZhm+or0PuTIEUuohBKu/ApZiTzOVemDOXxC7XhM7WSSqu9UZAiF3HhLbk5PbEh7wsIWLCioR1Fibt9BOUUZ2mgbySQFULpZViPgICMY09E9Beo5G+4vlwTKIQDLnzKb3g5EnbRQ+AYiAHNFcEFCacZybwJ1pscINmSZL135FcFKo3Dc65MFqwbBQAzpnwwWPyyELSpvmYojzW0o00tNDRA+LJiH60JgN4LtWGUuFvGsWcEfzL+7lLvPnD7ZCTgmVrJR1AWEf0SdlFvosPvvKkdHovAxFCg0mqnOEsXqOQ9BI4PkGwzpoDw1aXe7fBYbHLfX2aMVrk/n3MsSdb7wUCwYh/Na09+P952TE19VNuy8zX+AO2UakPcDXEnAAAAAElFTkSuQmCC",
+                      "contentType": "image/png",
+                      "width": 12,
+                      "height": 12,
+                      "angle": 0,
+                      "xoffset": 0,
+                      "yoffset": 0
+                  }
+              },
+              "labelingInfo": [
+                  {
+                      "labelExpression": "[LOCATIE]",
+                      "labelPlacement": "esriServerPointLabelPlacementAboveRight",
+                      "useCodedValues": true,
+                      "maxScale": 0,
+                      "minScale": 200000,
+                      "name": "Default",
+                      "symbol": {
+                          "type": "esriTS",
+                          "color": [
+                              0,
+                              0,
+                              0,
+                              255
+                          ],
+                          "backgroundColor": null,
+                          "borderLineColor": null,
+                          "borderLineSize": null,
+                          "verticalAlignment": "bottom",
+                          "horizontalAlignment": "center",
+                          "rightToLeft": false,
+                          "angle": 0,
+                          "xoffset": 0,
+                          "yoffset": 0,
+                          "kerning": true,
+                          "haloColor": null,
+                          "haloSize": null,
+                          "font": {
+                              "family": "Arial",
+                              "size": 11,
+                              "style": "normal",
+                              "weight": "normal",
+                              "decoration": "none"
+                          }
+                      }
+                  }
+              ],
+              "scaleSymbols": true
+          }
+      },
+      "popupInfo": {
+          "title": "{LOCATIE}",
+          "mediaInfos": [],
+          "popupElements": [
+              {
+                  "fieldInfos": [
+                      {
+                          "fieldName": "objectid",
+                          "isEditable": false,
+                          "format": {
+                              "places": 0,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "Object id"
+                      },
+                      {
+                          "fieldName": "locatie",
+                          "isEditable": true,
+                          "visible": true,
+                          "label": "Locatie"
+                      },
+                      {
+                          "fieldName": "weg_nr",
+                          "isEditable": true,
+                          "visible": true,
+                          "label": "Wegnummer"
+                      },
+                      {
+                          "fieldName": "hm_camera",
+                          "isEditable": true,
+                          "format": {
+                              "places": 6,
+                              "digitSeparator": false
+                          },
+                          "visible": true,
+                          "label": "KM camera"
+                      },
+                      {
+                          "fieldName": "datum_camera",
+                          "isEditable": true,
+                          "visible": true,
+                          "label": "Datum plaatsing camera"
+                      },
+                      {
+                          "fieldName": "url_camera",
+                          "isEditable": true,
+                          "visible": true,
+                          "label": "URL camera"
+                      },
+                      {
+                          "fieldName": "img_foto",
+                          "isEditable": true,
+                          "visible": true,
+                          "label": "Foto"
+                      }
+                  ],
+                  "type": "fields"
+              }
+          ],
+          "fieldInfos": [
+              {
+                  "fieldName": "objectid",
+                  "isEditable": false,
+                  "format": {
+                      "places": 0,
+                      "digitSeparator": false
+                  },
+                  "visible": true,
+                  "label": "Object id"
+              },
+              {
+                  "fieldName": "locatie",
+                  "isEditable": true,
+                  "visible": true,
+                  "label": "Locatie"
+              },
+              {
+                  "fieldName": "weg_nr",
+                  "isEditable": true,
+                  "visible": true,
+                  "label": "Wegnummer"
+              },
+              {
+                  "fieldName": "hm_camera",
+                  "isEditable": true,
+                  "format": {
+                      "places": 6,
+                      "digitSeparator": false
+                  },
+                  "visible": true,
+                  "label": "KM camera"
+              },
+              {
+                  "fieldName": "datum_camera",
+                  "isEditable": true,
+                  "visible": true,
+                  "label": "Datum plaatsing camera"
+              },
+              {
+                  "fieldName": "url_camera",
+                  "isEditable": true,
+                  "visible": true,
+                  "label": "URL camera"
+              },
+              {
+                  "fieldName": "img_foto",
+                  "isEditable": true,
+                  "visible": true,
+                  "label": "Foto"
+              }
+          ],
+          "expressionInfos": []
+      },
+      "disablePopup": false,
+      "showLabels": true,
+      "showLegend": true
+  },
+      {
+          "id": "045ec0578ce643838d0def2b8e2db71d",
+          "title": "DKKv4",
+          "visibility": true,
+          "blendMode": "normal",
+          "opacity": 1,
+          "minScale": 81390,
+          "url": "https://basisregistraties.arcgisonline.nl/arcgis/rest/services/DKK/DKKv4/MapServer",
+          "layerType": "ArcGISMapServiceLayer",
+          "timeAnimation": false,
+          "visibleLayers": [
+              0,
+              1,
+              2
+          ],
+          "layers": [
+              {
+                  "id": "0",
+                  "name": "Perceelnummer",
+                  "minScale": 5000,
+                  "maxScale": 0,
+                  "defaultVisibility": true,
+                  "layerDefinition": {
+                      "source": {
+                          "type": "mapLayer",
+                          "mapLayerId": 0
+                      },
+                      "drawingInfo": {
+                          "labelingInfo": [
+                              {
+                                  "name": "Class 1",
+                                  "labelExpression": "[perceelnummer]",
+                                  "labelExpressionInfo": {
+                                      "expression": "$feature.perceelnummer"
+                                  },
+                                  "labelPlacement": "esriServerPointLabelPlacementCenterCenter",
+                                  "symbol": {
+                                      "type": "esriTS",
+                                      "color": [
+                                          0,
+                                          0,
+                                          0,
+                                          255
+                                      ],
+                                      "font": {
+                                          "family": "Tahoma",
+                                          "size": 10
+                                      },
+                                      "horizontalAlignment": "left",
+                                      "kerning": true,
+                                      "rightToLeft": false,
+                                      "rotated": false,
+                                      "text": "",
+                                      "verticalAlignment": "bottom",
+                                      "xoffset": 0,
+                                      "yoffset": 0,
+                                      "angle": 0
+                                  },
+                                  "useCodedValues": true
+                              }
+                          ],
+                          "showLabels": true,
+                          "transparency": 0,
+                          "renderer": {
+                              "type": "simple",
+                              "symbol": {
+                                  "type": "esriSMS",
+                                  "color": [
+                                      0,
+                                      0,
+                                      0,
+                                      0
+                                  ],
+                                  "angle": 0,
+                                  "xoffset": 0,
+                                  "yoffset": 0,
+                                  "size": 5,
+                                  "style": "esriSMSCircle",
+                                  "outline": {
+                                      "type": "esriSLS",
+                                      "color": [
+                                          0,
+                                          0,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 0,
+                                      "style": "esriSLSSolid"
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "parentLayerId": -1
+              },
+              {
+                  "id": "1",
+                  "name": "KadastraleGrens",
+                  "minScale": 5000,
+                  "maxScale": 0,
+                  "defaultVisibility": true,
+                  "layerDefinition": {
+                      "source": {
+                          "type": "mapLayer",
+                          "mapLayerId": 1
+                      },
+                      "drawingInfo": {
+                          "showLabels": true,
+                          "transparency": 0,
+                          "renderer": {
+                              "authoringInfo": {
+                                  "colorRamp": {
+                                      "type": "multipart",
+                                      "colorRamps": [
+                                          {
+                                              "type": "algorithmic",
+                                              "algorithm": "esriCIELabAlgorithm",
+                                              "fromColor": [
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  255
+                                              ],
+                                              "toColor": [
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  255
+                                              ]
+                                          }
+                                      ]
+                                  }
+                              },
+                              "type": "uniqueValue",
+                              "field1": "typegrens",
+                              "defaultLabel": "",
+                              "defaultSymbol": {
+                                  "type": "esriSLS",
+                                  "color": [
+                                      130,
+                                      130,
+                                      130,
+                                      255
+                                  ],
+                                  "width": 1,
+                                  "style": "esriSLSSolid"
+                              },
+                              "fieldDelimiter": ",",
+                              "uniqueValueInfos": [
+                                  {
+                                      "label": "Voorlopig",
+                                      "symbol": {
+                                          "type": "esriSLS",
+                                          "color": [
+                                              230,
+                                              152,
+                                              0,
+                                              255
+                                          ],
+                                          "width": 1.5,
+                                          "style": "esriSLSSolid"
+                                      },
+                                      "value": "1"
+                                  },
+                                  {
+                                      "label": "Administratief",
+                                      "symbol": {
+                                          "type": "esriSLS",
+                                          "color": [
+                                              115,
+                                              255,
+                                              223,
+                                              255
+                                          ],
+                                          "width": 1.5,
+                                          "style": "esriSLSSolid"
+                                      },
+                                      "value": "2"
+                                  },
+                                  {
+                                      "label": "Definitief",
+                                      "symbol": {
+                                          "type": "esriSLS",
+                                          "color": [
+                                              0,
+                                              0,
+                                              0,
+                                              255
+                                          ],
+                                          "width": 1.5,
+                                          "style": "esriSLSSolid"
+                                      },
+                                      "value": "3"
+                                  }
+                              ]
+                          }
+                      }
+                  },
+                  "parentLayerId": -1
+              },
+              {
+                  "id": "2",
+                  "name": "Perceel",
+                  "minScale": 28956,
+                  "maxScale": 0,
+                  "defaultVisibility": true,
+                  "layerDefinition": {
+                      "source": {
+                          "type": "mapLayer",
+                          "mapLayerId": 2
+                      },
+                      "drawingInfo": {
+                          "showLabels": true,
+                          "transparency": 0,
+                          "renderer": {
+                              "type": "simple",
+                              "symbol": {
+                                  "type": "esriSFS",
+                                  "color": [
+                                      130,
+                                      130,
+                                      130,
+                                      0
+                                  ],
+                                  "outline": {
+                                      "type": "esriSLS",
+                                      "color": [
+                                          0,
+                                          0,
+                                          0,
+                                          255
+                                      ],
+                                      "width": 1,
+                                      "style": "esriSLSSolid"
+                                  },
+                                  "style": "esriSFSSolid"
+                              }
+                          }
+                      }
+                  },
+                  "parentLayerId": -1
+              }
+          ]
+      }
+  ],
+  "baseMap": {
+      "baseMapLayers": [
+          {
+              "id": "98d6e8b8dd92403ab3f7321fd35746a4",
+              "title": "Topo Grijs",
+              "visibility": true,
+              "blendMode": "normal",
+              "opacity": 1,
+              "url": "https://services.arcgisonline.nl/ArcGIS/rest/services/Basiskaarten/Canvas/MapServer",
+              "layerType": "ArcGISTiledMapServiceLayer"
+          }
+      ],
+      "title": "Topo Grijs"
+  },
+  "spatialReference": {
+      "wkid": 28992,
+      "latestWkid": 28992
+  },
+  "initialState": {
+      "viewpoint": {
+          "targetGeometry": {
+              "xmin": 102017.76213076313,
+              "ymin": 375401.1909643144,
+              "xmax": 293800.5049422068,
+              "ymax": 534713.7862304542,
+              "spatialReference": {
+                  "wkid": 28992,
+                  "latestWkid": 28992
+              }
+          }
+      }
+  },
+  "version": "2.22",
+  "authoringApp": "ArcGIS Pro",
+  "authoringAppVersion": "12.9.5.32739",
+  "tables": []
+}

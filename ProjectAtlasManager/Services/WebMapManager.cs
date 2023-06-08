@@ -12,22 +12,16 @@ namespace ProjectAtlasManager.Services
 {
   class WebMapManager
   {
-    private readonly IEnumerable<OperationalLayer> _layersInTemplate;
-
-    public WebMapManager(string templateJson)
-    {
-      _layersInTemplate = RetrieveLayers(templateJson);
-
-    }
     internal string Synchronize(string webmapData, string templateData)
     {
+      var layersInTemplate = RetrieveLayers(templateData);
       var layersInWebMap = RetrieveLayers(webmapData);
-      var levelsInTemplate = _layersInTemplate.Select(x => x.Level).Distinct().OrderBy(x => x);
+      var levelsInTemplate = layersInTemplate.Select(x => x.Level).Distinct().OrderBy(x => x);
       var layersToAdd = new List<OperationalLayer>();
       var layersToReplace = new List<OperationalLayer>();
       foreach (var level in levelsInTemplate)
       {
-        var layersOnLevel = _layersInTemplate.Where(x => x.Level == level);
+        var layersOnLevel = layersInTemplate.Where(x => x.Level == level);
         foreach (var templateLayer in layersOnLevel)
         {
           var foundInWebMap = layersInWebMap.FirstOrDefault(x => x.Level == level && x.Id.Equals(templateLayer.Id));
@@ -50,7 +44,68 @@ namespace ProjectAtlasManager.Services
       {
         webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToReplace);
       }
-      return webmapData;
+      layersInWebMap = RetrieveLayers(webmapData);
+      var newOrder = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, 0, null);
+      var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
+      var webmap = JObject.Parse(webmapData);
+      webmap["operationalLayers"] = json;
+      return webmap.ToString();
+    }
+    /// <summary>
+    /// maak een nieuw json object van de bijgewerkte lagen
+    /// </summary>
+    private JArray CreateNewOperationalLayerJsonObject(IEnumerable<OperationalLayer> layers, JArray rootObject)
+    {
+      foreach (var webmapLayer in layers)
+      {
+        var newObject = webmapLayer.JsonDefinition;
+        if (webmapLayer.LayerType.Equals("GroupLayer"))
+        {
+          newObject["layers"] = CreateNewOperationalLayerJsonObject(webmapLayer.SubLayers, new JArray());
+        }
+        rootObject.Add(newObject);
+      }
+      return rootObject;
+    }
+    /// <summary>
+    /// herrangschik de lagen indien ze van volgorde zijn veranderd
+    /// </summary>
+    private IEnumerable<OperationalLayer> MakeIndicesLayersEqual(IEnumerable<OperationalLayer> layersInTemplate, IEnumerable<OperationalLayer> layersInWebMap, int level, string parent)
+    {
+      var templateLayers = layersInTemplate.Where(x => x.Level == level && x.Parent == parent);
+      var webmapLayers = layersInWebMap.Where(x => x.Level == level && x.Parent == parent);
+      int indexSkip = 0;
+      foreach (var webmapLayer in webmapLayers)
+      {
+        if (webmapLayer.LayerType.Equals("GroupLayer"))
+        {
+          var newSubLayers = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, webmapLayer.Level + 1, webmapLayer.Id);
+          webmapLayer.SubLayers = newSubLayers.ToList();
+        }
+        var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
+        webmapLayer.NewIndex = templateLayer?.Index ?? webmapLayer.Index;
+      }
+      var newList = new List<OperationalLayer>();
+      foreach (var webmapLayer in webmapLayers.OrderBy(x => x.NewIndex))
+      {
+        var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
+        if (templateLayer == null)
+        {
+          if (newList.Count >= webmapLayer.Index)
+          {
+            newList.Insert(webmapLayer.Index, webmapLayer);
+          }
+          else
+          {
+            newList.Add(webmapLayer);
+          }
+        }
+        else
+        {
+          newList.Add(webmapLayer);
+        }
+      }
+      return newList;
     }
 
     /// <summary>
@@ -117,7 +172,7 @@ namespace ProjectAtlasManager.Services
     /// <summary>
     /// haal alle lagen op die in de webmap, het level bepaalt hoe diep in de boom
     /// </summary>
-    private IEnumerable<OperationalLayer> RetrieveLayers(string json)
+    internal IEnumerable<OperationalLayer> RetrieveLayers(string json)
     {
       var webmap = JToken.Parse(json);
       var result = new List<OperationalLayer>();

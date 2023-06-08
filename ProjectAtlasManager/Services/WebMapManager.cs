@@ -12,16 +12,22 @@ namespace ProjectAtlasManager.Services
 {
   class WebMapManager
   {
+    private readonly IEnumerable<OperationalLayer> _layersInTemplate;
+
+    public WebMapManager(string templateJson)
+    {
+      _layersInTemplate = RetrieveLayers(templateJson);
+
+    }
     internal string Synchronize(string webmapData, string templateData)
     {
-      var layersInTemplate = RetrieveLayers(templateData);
       var layersInWebMap = RetrieveLayers(webmapData);
-      var levelsInTemplate = layersInTemplate.Select(x => x.Level).Distinct().OrderBy(x => x);
+      var levelsInTemplate = _layersInTemplate.Select(x => x.Level).Distinct().OrderBy(x => x);
       var layersToAdd = new List<OperationalLayer>();
       var layersToReplace = new List<OperationalLayer>();
       foreach (var level in levelsInTemplate)
       {
-        var layersOnLevel = layersInTemplate.Where(x => x.Level == level);
+        var layersOnLevel = _layersInTemplate.Where(x => x.Level == level);
         foreach (var templateLayer in layersOnLevel)
         {
           var foundInWebMap = layersInWebMap.FirstOrDefault(x => x.Level == level && x.Id.Equals(templateLayer.Id));
@@ -45,7 +51,7 @@ namespace ProjectAtlasManager.Services
         webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToReplace);
       }
       layersInWebMap = RetrieveLayers(webmapData);
-      var newOrder = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, 0, null);
+      var newOrder = MakeIndicesLayersEqual(_layersInTemplate, layersInWebMap, 0, null);
       var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
       var webmap = JObject.Parse(webmapData);
       webmap["operationalLayers"] = json;

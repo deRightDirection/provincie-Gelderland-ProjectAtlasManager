@@ -132,7 +132,7 @@ namespace ProjectAtlasManager
         {
           return;
         }
-        QueuedTask.Run(() =>
+        await QueuedTask.Run(() =>
         {
           if (MapFactory.Instance.CanCreateMapFrom(result))
           {

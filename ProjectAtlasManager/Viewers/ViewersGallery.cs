@@ -128,7 +128,7 @@ namespace ProjectAtlasManager.Viewers
         {
           return;
         }
-        QueuedTask.Run(() =>
+        await QueuedTask.Run(() =>
         {
           if (MapFactory.Instance.CanCreateMapFrom(result))
           {

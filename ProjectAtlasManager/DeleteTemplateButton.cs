@@ -33,14 +33,14 @@ namespace ProjectAtlasManager
 
     private async Task RemoveTagsFromTemplateAsync()
     {
-      ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+      var portal = ArcGISPortalManager.Current.GetActivePortal();
       var portalInfo = await portal.GetPortalInfoAsync();
       var orgId = portalInfo.OrganizationId;
       var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
       query.Limit = 100;
       await QueuedTask.Run(async () =>
       {
-        var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
+        var results = await portal.SearchForContentAsync(query);
         var item = results.Results.FirstOrDefault();
         if (item == null)
         {
@@ -49,11 +49,12 @@ namespace ProjectAtlasManager
         var tags = TagsHelper.UpdateTags(item);
         var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
         await portalClient.UpdateTags(item, tags);
+        await portalClient.UpdateTemplate(item, false);
         var viewersBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:{orgId}")
         {
           Limit = 100
         };
-        var mapsBasedOnTemplate = await ArcGISPortalExtensions.SearchForContentAsync(portal, viewersBasedOnTemplateQuery);
+        var mapsBasedOnTemplate = await portal.SearchForContentAsync(viewersBasedOnTemplateQuery);
         foreach(var viewer in mapsBasedOnTemplate.Results)
         {
           var tags2 = TagsHelper.UpdateTags(viewer);

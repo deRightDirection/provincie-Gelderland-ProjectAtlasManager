@@ -22,12 +22,93 @@ namespace ProjectAtlasManager.Services
     internal string Synchronize(string webmapData, string templateData)
     {
       var layersInWebMap = RetrieveLayers(webmapData);
+      webmapData = MakeGroupLayerIndicesEqual(_layersInTemplate, layersInWebMap, webmapData);
       var levelsInTemplate = _layersInTemplate.Select(x => x.Level).Distinct().OrderBy(x => x);
       var layersToAdd = new List<OperationalLayer>();
       var layersToReplace = new List<OperationalLayer>();
+      var layersToRemove = new List<OperationalLayer>();
+      DetermineLayersToAddOrReplace(levelsInTemplate, _layersInTemplate, layersInWebMap, layersToAdd, layersToReplace);
+      DetermineLayersToRemove(levelsInTemplate, _layersInTemplate, layersInWebMap, layersToRemove);
+      if (layersToRemove.Any())
+      {
+        webmapData = RemoveLayersFromTemplate(webmapData, layersToRemove);
+      }
+      if (layersToAdd.Any())
+      {
+        webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToAdd);
+      }
+      layersToReplace = layersToReplace.Where(x => !x.IsGroupLayer).ToList();
+      if (layersToReplace.Any())
+      {
+        webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToReplace);
+      }
+      layersInWebMap = RetrieveLayers(webmapData);
+      var newOrder = MakeIndicesLayersEqual(_layersInTemplate, layersInWebMap, 0, null);
+      var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
+      var webmap = JObject.Parse(webmapData);
+      webmap["operationalLayers"] = json;
+      return webmap.ToString();
+    }
+    /// <summary>
+    /// in ArcGIS Pro worden bij het opslaan van een webmap de id's van een grouplayer veranderd, voor de logica
+    /// maken we de layerid's dan in de webmap/viewer gelijk waarbij de match nu wordt gelegd op title
+    /// </summary>
+    private string MakeGroupLayerIndicesEqual(IEnumerable<OperationalLayer> layersInTemplate, IEnumerable<OperationalLayer> layersInWebMap, string webmapData)
+    {
+      foreach (var templateGroupLayer in layersInTemplate.Where(x => x.IsGroupLayer))
+      {
+        var webmapLayer = layersInWebMap.FirstOrDefault(x => LayerFound(templateGroupLayer, x));
+        if (webmapLayer != null)
+        {
+          webmapData = webmapData.Replace(webmapLayer.Id, templateGroupLayer.Id);
+          var json = webmapLayer.JsonDefinition.ToString();
+          json = json.Replace(webmapLayer.Id, templateGroupLayer.Id);
+          webmapLayer.JsonDefinition = JObject.Parse(json);
+          webmapLayer.Id = templateGroupLayer.Id;
+        }
+      }
+      return webmapData;
+    }
+    private bool LayerFound(OperationalLayer webmapLayer, OperationalLayer templateLayer)
+    {
+      if (webmapLayer.Level != templateLayer.Level)
+      {
+        return false;
+      }
+      if (templateLayer.Id.Equals(webmapLayer.Id))
+      {
+        return true;
+      }
+      if (templateLayer.IsGroupLayer)
+      {
+        return webmapLayer.Title.ToLowerInvariant().Equals(templateLayer.Title.ToLowerInvariant());
+      }
+      return false;
+    }
+    /// <summary>
+    /// verwijder lagen uit de webmap
+    /// </summary>
+    private string RemoveLayersFromTemplate(string webmapData, List<OperationalLayer> layersToRemove)
+    {
+      var webmap = JObject.Parse(webmapData);
+      foreach (var layerToRemove in layersToRemove)
+      {
+        var filter = $"..*[?(@.id == '{layerToRemove.Id}')]";
+        var webmapLayer = (JObject)webmap.SelectToken(filter);
+        webmapLayer.Remove();
+      }
+      return webmap.ToString();
+    }
+
+    /// <summary>
+    /// bepaal welke lagen in de webmap vervangen moeten worden of er aan toegevoegd vanuit het template
+    /// </summary>
+    private void DetermineLayersToAddOrReplace(IOrderedEnumerable<int> levelsInTemplate, IEnumerable<OperationalLayer> layersInTemplate,
+      IEnumerable<OperationalLayer> layersInWebMap, List<OperationalLayer> layersToAdd, List<OperationalLayer> layersToReplace)
+    {
       foreach (var level in levelsInTemplate)
       {
-        var layersOnLevel = _layersInTemplate.Where(x => x.Level == level);
+        var layersOnLevel = layersInTemplate.Where(x => x.Level == level);
         foreach (var templateLayer in layersOnLevel)
         {
           var foundInWebMap = layersInWebMap.FirstOrDefault(x => x.Level == level && x.Id.Equals(templateLayer.Id));
@@ -41,21 +122,26 @@ namespace ProjectAtlasManager.Services
           }
         }
       }
-      if (layersToAdd.Any())
+    }
+
+    /// <summary>
+    /// bepaal welke lagen in de webmap die verwijderd moeten worden
+    /// </summary>
+    private void DetermineLayersToRemove(IOrderedEnumerable<int> levelsInTemplate, IEnumerable<OperationalLayer> layersInTemplate,
+      IEnumerable<OperationalLayer> layersInWebMap, List<OperationalLayer> layersToRemove)
+    {
+      foreach (var level in levelsInTemplate)
       {
-        webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToAdd);
+        var layersOnLevel = layersInWebMap.Where(x => x.Level == level && x.IsPATLayer);
+        foreach (var webmapLayer in layersOnLevel)
+        {
+          var foundInTemplate = layersInTemplate.FirstOrDefault(x => x.Level == level && x.Id.Equals(webmapLayer.Id));
+          if (foundInTemplate == null)
+          {
+            layersToRemove.Add(webmapLayer);
+          }
+        }
       }
-      layersToReplace = layersToReplace.Where(x => !x.LayerType.Equals("GroupLayer")).ToList();
-      if (layersToReplace.Any())
-      {
-        webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToReplace);
-      }
-      layersInWebMap = RetrieveLayers(webmapData);
-      var newOrder = MakeIndicesLayersEqual(_layersInTemplate, layersInWebMap, 0, null);
-      var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
-      var webmap = JObject.Parse(webmapData);
-      webmap["operationalLayers"] = json;
-      return webmap.ToString();
     }
     /// <summary>
     /// maak een nieuw json object van de bijgewerkte lagen
@@ -192,13 +278,15 @@ namespace ProjectAtlasManager.Services
       var currentLevel = level + 1;
       foreach (var layer in operationalLayers)
       {
-        var operationalLayer = new OperationalLayer();
-        operationalLayer.Id = layer["id"].ToString();
-        operationalLayer.JsonDefinition = layer as JObject;
-        operationalLayer.Level = currentLevel;
-        operationalLayer.Index = index;
-        operationalLayer.LayerType = layer["layerType"].ToString();
-        operationalLayer.Parent = parent;
+        var operationalLayer = new OperationalLayer
+        {
+          Id = layer["id"].ToString(),
+          JsonDefinition = layer as JObject,
+          Level = currentLevel,
+          Index = index,
+          LayerType = layer["layerType"].ToString(),
+          Parent = parent
+        };
         result.Add(operationalLayer);
         index++;
         if (operationalLayer.LayerType.Equals("GroupLayer"))

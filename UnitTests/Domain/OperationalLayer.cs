@@ -9,6 +9,8 @@ namespace UnitTests.Domain
     [JsonIgnore]
     public int Index { get; set; }
     public string Id { get; set; }
+    [JsonIgnore]
+    public bool IsPATLayer => Id.StartsWith("PAT_");
     public JObject JsonDefinition { get; set; }
     public string LayerType { get; set; }
     public int Level { get; set; }

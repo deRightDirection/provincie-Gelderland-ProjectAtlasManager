@@ -29,15 +29,16 @@ namespace ProjectAtlasManager.Web
       var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/{item.FolderID}/items/{item.ItemID}/update?f=json&token=" + _token;
       // TODO thumbnail toevoegen indien die nog niet aanwezig is
       // TODO opzoeken van item die de template informatie bevat
-      var formContent = new MultipartFormDataContent();
-      formContent.Add(new StringContent(tags), "tags");
+      var formContent = new MultipartFormDataContent
+      {
+        { new StringContent(tags), "tags" }
+      };
       if (string.IsNullOrEmpty(tags))
       {
         formContent.Add(new StringContent(true.ToString()), "clearEmptyFields");
       }
       return _http.PostAsync(uri, formContent);
     }
-
     internal async Task<string> GetDataFromItem(PortalItem item)
     {
       var uri = $"{_portalUri}sharing/rest/content/items/{item.ID}/data?f=json&token={_token}";
@@ -73,9 +74,32 @@ namespace ProjectAtlasManager.Web
     internal Task<EsriHttpResponseMessage> UpdateData(PortalItem webmap, string webmapData)
     {
       var uri = $"{_portalUri}sharing/rest/content/users/{webmap.Owner}/{webmap.FolderID}/items/{webmap.ID}/update?f=json&token={_token}";
-      var formContent = new MultipartFormDataContent();
-      formContent.Add(new StringContent(webmapData), "text");
+      var formContent = new MultipartFormDataContent
+      {
+        { new StringContent(webmapData), "text" }
+      };
       return _http.PostAsync(uri, formContent);
+    }
+
+    public async Task UpdateTemplate(PortalItem item, bool addPATToLayerId)
+    {
+      var data = await GetDataFromItem(item);
+      var json = JObject.Parse(data);
+      var identifiers = json.SelectTokens("id").ToList();
+      identifiers.ForEach(x =>
+      {
+        var value = (string) x;
+        if (!value.StartsWith("PAT_") && addPATToLayerId)
+        {
+          x = $"PAT_{value}";
+        }
+        if (value.StartsWith("PAT_") && !addPATToLayerId)
+        {
+          x = value.Replace("PAT_", string.Empty);
+        }
+      });
+      data = json.ToString();
+      await UpdateData(item, data);
     }
   }
 }

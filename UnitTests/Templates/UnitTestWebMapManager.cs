@@ -19,21 +19,12 @@ namespace UnitTests.Templates
       var levelsInTemplate = layersInTemplate.Select(x => x.Level).Distinct().OrderBy(x => x);
       var layersToAdd = new List<OperationalLayer>();
       var layersToReplace = new List<OperationalLayer>();
-      foreach (var level in levelsInTemplate)
+      var layersToRemove = new List<OperationalLayer>();
+      DetermineLayersToAddOrReplace(levelsInTemplate, layersInTemplate, layersInWebMap, layersToAdd, layersToReplace);
+      DetermineLayersToRemove(levelsInTemplate, layersInTemplate, layersInWebMap, layersToRemove);
+      if (layersToRemove.Any())
       {
-        var layersOnLevel = layersInTemplate.Where(x => x.Level == level);
-        foreach (var templateLayer in layersOnLevel)
-        {
-          var foundInWebMap = layersInWebMap.FirstOrDefault(x => x.Level == level && x.Id.Equals(templateLayer.Id));
-          if (foundInWebMap == null)
-          {
-            layersToAdd.Add(templateLayer);
-          }
-          else
-          {
-            layersToReplace.Add(templateLayer);
-          }
-        }
+        webmapData = RemoveLayersFromTemplate(webmapData, layersToRemove);
       }
       if (layersToAdd.Any())
       {
@@ -51,6 +42,66 @@ namespace UnitTests.Templates
       webmap["operationalLayers"] = json;
       return webmap.ToString();
     }
+
+    /// <summary>
+    /// verwijder lagen uit de webmap
+    /// </summary>
+    private string RemoveLayersFromTemplate(string webmapData, List<OperationalLayer> layersToRemove)
+    {
+      var webmap = JObject.Parse(webmapData);
+      foreach (var layerToRemove in layersToRemove)
+      {
+        var filter = $"..*[?(@.id == '{layerToRemove.Id}')]";
+        var webmapLayer = (JObject)webmap.SelectToken(filter);
+        webmapLayer.Remove();
+      }
+      return webmap.ToString();
+    }
+
+    /// <summary>
+    /// bepaal welke lagen in de webmap vervangen moeten worden of er aan toegevoegd vanuit het template
+    /// </summary>
+    private void DetermineLayersToAddOrReplace(IOrderedEnumerable<int> levelsInTemplate, IEnumerable<OperationalLayer> layersInTemplate,
+      IEnumerable<OperationalLayer> layersInWebMap, List<OperationalLayer> layersToAdd, List<OperationalLayer> layersToReplace)
+    {
+      foreach (var level in levelsInTemplate)
+      {
+        var layersOnLevel = layersInTemplate.Where(x => x.Level == level);
+        foreach (var templateLayer in layersOnLevel)
+        {
+          var foundInWebMap = layersInWebMap.FirstOrDefault(x => x.Level == level && x.Id.Equals(templateLayer.Id));
+          if (foundInWebMap == null)
+          {
+            layersToAdd.Add(templateLayer);
+          }
+          else
+          {
+            layersToReplace.Add(templateLayer);
+          }
+        }
+      }
+    }
+
+    /// <summary>
+    /// bepaal welke lagen in de webmap die verwijderd moeten worden
+    /// </summary>
+    private void DetermineLayersToRemove(IOrderedEnumerable<int> levelsInTemplate, IEnumerable<OperationalLayer> layersInTemplate,
+      IEnumerable<OperationalLayer> layersInWebMap, List<OperationalLayer> layersToRemove)
+    {
+      foreach (var level in levelsInTemplate)
+      {
+        var layersOnLevel = layersInWebMap.Where(x => x.Level == level && x.IsPATLayer);
+        foreach (var webmapLayer in layersOnLevel)
+        {
+          var foundInTemplate = layersInTemplate.FirstOrDefault(x => x.Level == level && x.Id.Equals(webmapLayer.Id));
+          if (foundInTemplate == null)
+          {
+            layersToRemove.Add(webmapLayer);
+          }
+        }
+      }
+    }
+
     /// <summary>
     /// in ArcGIS Pro worden bij het opslaan van een webmap de id's van een grouplayer veranderd, voor de logica
     /// maken we de layerid's dan in de webmap/viewer gelijk waarbij de match nu wordt gelegd op title

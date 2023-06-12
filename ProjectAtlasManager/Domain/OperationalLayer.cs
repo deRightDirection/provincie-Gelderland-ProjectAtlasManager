@@ -17,5 +17,10 @@ namespace ProjectAtlasManager.Domain
     public int NewIndex { get; set; }
     [JsonIgnore]
     public List<OperationalLayer> SubLayers { get; set; }
+    [JsonIgnore]
+    public bool IsPATLayer => Id.StartsWith("PAT_");
+    public string Title { get; set; }
+    [JsonIgnore]
+    public bool IsGroupLayer => LayerType.Equals("GroupLayer");
   }
 }

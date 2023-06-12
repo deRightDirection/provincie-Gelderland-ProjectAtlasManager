@@ -1,7 +1,7 @@
 {
   "operationalLayers": [
       {
-          "id": "9816b03f108b44d5b8efab99fbe567ae",
+          "id": "PAT_9816b03f108b44d5b8efab99fbe567ae",
           "title": "groep3",
           "visibility": true,
           "blendMode": "normal",
@@ -9,7 +9,7 @@
           "layers": [
               {
                   "itemId": "2c03f278da1c4d7ebf8decbf22520ba1",
-                  "id": "fbe1bc04006d4c61b6479d2168639823",
+                  "id": "PAT_fbe1bc04006d4c61b6479d2168639823",
                   "title": "locaties",
                   "visibility": true,
                   "blendMode": "normal",

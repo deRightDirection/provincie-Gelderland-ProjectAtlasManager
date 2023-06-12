@@ -25,6 +25,33 @@ namespace UnitTests
       var path = Assembly.GetExecutingAssembly().Location;
       _testdataFolder = path.Replace("\\UnitTests\\bin\\Debug\\UnitTests.dll", "\\testdata");
     }
+
+    [TestMethod]
+    // in template zitten drie lagen minder dan in viewer en die worden verwijderd uit viewer
+    // hierna is viewer op 1 laag na gelijk aan template
+    public void RemoveLayersFromTemplate2()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas26.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template26.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsFalse(JToken.DeepEquals(x, x2));
+    }
+
+    [TestMethod]
+    // in template zitten drie lagen minder dan in viewer en die worden verwijderd uit viewer
+    // hierna is viewer gelijk aan template
+    public void RemoveLayersFromTemplate()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas25.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template25.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(x, x2));
+    }
+
     [TestMethod]
     // template heeft alle grouplayers een ander id dan die in de viewer
     public void SynchronizeAllLevelsOfWebMap_With_Changing_Id()
@@ -296,8 +323,6 @@ namespace UnitTests
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas5.json"));
       var layers = _synchronizer.RetrieveLayers(projectTemplateJson);
       layers.Count(xx => xx.Level == 0).Should().Be(3);
-
-
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template5.json"));
       var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var x = JToken.Parse(projectTemplateJson);

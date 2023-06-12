@@ -53,7 +53,7 @@ namespace ProjectAtlasManager.Viewers
       query.Limit = 1;
       await QueuedTask.Run(async () =>
       {
-        var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
+        var results = await portal.SearchForContentAsync(query);
         var item = results.Results.FirstOrDefault();
         if (item == null)
         {
@@ -79,6 +79,7 @@ namespace ProjectAtlasManager.Viewers
         }
         tags = tags.Replace(",,", ",");
         var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
+        await portalClient.UpdateTemplate(item, true);
         await portalClient.CreateViewerFromTemplate(item, _name, tags);
       });
       Thread.Sleep(750);

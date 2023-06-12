@@ -4,6 +4,7 @@ using Flurl.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProjectAtlasManager.Domain;
+using ProjectAtlasManager.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,21 +85,23 @@ namespace ProjectAtlasManager.Web
     public async Task UpdateTemplate(PortalItem item, bool addPATToLayerId)
     {
       var data = await GetDataFromItem(item);
-      var json = JObject.Parse(data);
-      var identifiers = json.SelectTokens("id").ToList();
-      identifiers.ForEach(x =>
+      var layers = data.RetrieveLayers();
+      foreach(var layer in layers)
       {
-        var value = (string) x;
-        if (!value.StartsWith("PAT_") && addPATToLayerId)
+        var newId = "";
+        if (!layer.Id.StartsWith("PAT_") && addPATToLayerId)
         {
-          x = $"PAT_{value}";
+          newId = $"PAT_{layer.Id}";
         }
-        if (value.StartsWith("PAT_") && !addPATToLayerId)
+        if (layer.Id.StartsWith("PAT_") && !addPATToLayerId)
         {
-          x = value.Replace("PAT_", string.Empty);
+          newId = layer.Id.Replace("PAT_", string.Empty);
         }
-      });
-      data = json.ToString();
+        if(!string.IsNullOrEmpty(newId))
+        {
+          data = data.Replace(layer.Id, newId);
+        }
+      }
       await UpdateData(item, data);
     }
   }

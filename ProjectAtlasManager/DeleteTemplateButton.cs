@@ -59,6 +59,7 @@ namespace ProjectAtlasManager
         {
           var tags2 = TagsHelper.UpdateTags(viewer);
           await portalClient.UpdateTags(viewer, tags2);
+          await portalClient.UpdateTemplate(viewer, false);
         }
       });
       Thread.Sleep(750);

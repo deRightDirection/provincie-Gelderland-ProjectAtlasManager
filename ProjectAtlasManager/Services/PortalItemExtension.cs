@@ -50,7 +50,14 @@ namespace ProjectAtlasManager.Services
         keysTag.Add(new XElement("keyword", $"PAT{item.ID}"));
         xml.Add(keysTag);
       }
-      item.SetXml(xml.ToString());
+      try
+      {
+        item.SetXml(xml.ToString());
+      }
+      catch(InvalidOperationException)
+      {
+
+      }
     }
   }
 }

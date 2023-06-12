@@ -1,0 +1,33 @@
+{
+  "operationalLayers": [
+    {
+      "id": "a1882d5269e4-layer-74",
+      "title": "niveau III",
+      "layers": [
+        {
+          "id": "b1882d513b7e-layer-64",
+          "title": "niveau II",
+          "layers": [
+            {
+              "id": "c1882d4e0705-layer-53",
+              "title": "niveau I",
+              "layers": [
+                {
+                  "id": "d1882d4dc7c2-layer-11",
+                  "title": "VPA_KLIC",
+                  "visibility": false,
+                  "layers": [
+                  ],
+                  "layerType": "GroupLayer"
+                }
+              ],
+              "layerType": "GroupLayer"
+            }
+          ],
+          "layerType": "GroupLayer"
+        }
+      ],
+      "layerType": "GroupLayer"
+    }
+  ]
+}

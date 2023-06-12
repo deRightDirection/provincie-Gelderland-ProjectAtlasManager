@@ -15,6 +15,7 @@ namespace UnitTests.Templates
     {
       var layersInTemplate = RetrieveLayers(templateData);
       var layersInWebMap = RetrieveLayers(webmapData);
+      webmapData = MakeGroupLayerIndicesEqual(layersInTemplate, layersInWebMap, webmapData);
       var levelsInTemplate = layersInTemplate.Select(x => x.Level).Distinct().OrderBy(x => x);
       var layersToAdd = new List<OperationalLayer>();
       var layersToReplace = new List<OperationalLayer>();
@@ -38,7 +39,7 @@ namespace UnitTests.Templates
       {
         webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToAdd);
       }
-      layersToReplace = layersToReplace.Where(x => !x.LayerType.Equals("GroupLayer")).ToList();
+      layersToReplace = layersToReplace.Where(x => !x.IsGroupLayer).ToList();
       if (layersToReplace.Any())
       {
         webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToReplace);
@@ -50,13 +51,50 @@ namespace UnitTests.Templates
       webmap["operationalLayers"] = json;
       return webmap.ToString();
     }
+    /// <summary>
+    /// in ArcGIS Pro worden bij het opslaan van een webmap de id's van een grouplayer veranderd, voor de logica
+    /// maken we de layerid's dan in de webmap/viewer gelijk waarbij de match nu wordt gelegd op title
+    /// </summary>
+    private string MakeGroupLayerIndicesEqual(IEnumerable<OperationalLayer> layersInTemplate, IEnumerable<OperationalLayer> layersInWebMap, string webmapData)
+    {
+      foreach (var templateGroupLayer in layersInTemplate.Where(x => x.IsGroupLayer))
+      {
+        var webmapLayer = layersInWebMap.FirstOrDefault(x => LayerFound(templateGroupLayer, x));
+        if (webmapLayer != null)
+        {
+          webmapData = webmapData.Replace(webmapLayer.Id, templateGroupLayer.Id);
+          var json = webmapLayer.JsonDefinition.ToString();
+          json = json.Replace(webmapLayer.Id, templateGroupLayer.Id);
+          webmapLayer.JsonDefinition = JObject.Parse(json);
+          webmapLayer.Id = templateGroupLayer.Id;
+        }
+      }
+      return webmapData;
+    }
+
+    private bool LayerFound(OperationalLayer webmapLayer, OperationalLayer templateLayer)
+    {
+      if (webmapLayer.Level != templateLayer.Level)
+      {
+        return false;
+      }
+      if (templateLayer.Id.Equals(webmapLayer.Id))
+      {
+        return true;
+      }
+      if (templateLayer.IsGroupLayer)
+      {
+        return webmapLayer.Title.ToLowerInvariant().Equals(templateLayer.Title.ToLowerInvariant());
+      }
+      return false;
+    }
 
     private JArray CreateNewOperationalLayerJsonObject(IEnumerable<OperationalLayer> layers, JArray rootObject)
     {
       foreach (var webmapLayer in layers)
       {
         var newObject = webmapLayer.JsonDefinition;
-        if (webmapLayer.LayerType.Equals("GroupLayer"))
+        if (webmapLayer.IsGroupLayer)
         {
           newObject["layers"] = CreateNewOperationalLayerJsonObject(webmapLayer.SubLayers, new JArray());
         }
@@ -72,7 +110,7 @@ namespace UnitTests.Templates
       int indexSkip = 0;
       foreach (var webmapLayer in webmapLayers)
       {
-        if (webmapLayer.LayerType.Equals("GroupLayer"))
+        if (webmapLayer.IsGroupLayer)
         {
           var newSubLayers = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, webmapLayer.Level + 1, webmapLayer.Id);
           webmapLayer.SubLayers = newSubLayers.ToList();
@@ -188,9 +226,10 @@ namespace UnitTests.Templates
         operationalLayer.Index = index;
         operationalLayer.LayerType = layer["layerType"].ToString();
         operationalLayer.Parent = parent;
+        operationalLayer.Title = layer["title"].ToString();
         result.Add(operationalLayer);
         index++;
-        if (operationalLayer.LayerType.Equals("GroupLayer"))
+        if (operationalLayer.IsGroupLayer)
         {
           RetrieveLayers(operationalLayer.JsonDefinition, "layers", result, currentLevel, operationalLayer.Id);
         }

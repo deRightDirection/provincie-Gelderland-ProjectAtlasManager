@@ -15,7 +15,11 @@ namespace UnitTests.Domain
     public string Parent { get; set; }
     [JsonIgnore]
     public int NewIndex { get; set; }
+    public string Title { get; set; }
     [JsonIgnore]
     public List<OperationalLayer> SubLayers { get; set; }
+
+    [JsonIgnore]
+    public bool IsGroupLayer => LayerType.Equals("GroupLayer");
   }
 }

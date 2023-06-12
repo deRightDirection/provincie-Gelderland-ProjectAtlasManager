@@ -25,6 +25,30 @@ namespace UnitTests
       var path = Assembly.GetExecutingAssembly().Location;
       _testdataFolder = path.Replace("\\UnitTests\\bin\\Debug\\UnitTests.dll", "\\testdata");
     }
+    [TestMethod]
+    // template heeft alle grouplayers een ander id dan die in de viewer
+    public void SynchronizeAllLevelsOfWebMap_With_Changing_Id()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas24.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template24.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(x, x2));
+    }
+    [TestMethod]
+    // template heeft voor de grouplayer een ander id dan die in de viewer
+    public void GroupLayer_With_Changing_Id()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas23.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template23.json"));
+      var jsonTemplate = JToken.Parse(projectTemplateJson);
+      var jsonOldWebmap = JToken.Parse(webmap);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var jsonNewWebmap = JToken.Parse(newWebMap);
+      Assert.IsFalse(JToken.DeepEquals(jsonTemplate, jsonOldWebmap));
+      Assert.IsTrue(JToken.DeepEquals(jsonTemplate, jsonNewWebmap));
+    }
 
     [TestMethod]
     // template en viewer hebben exact dezelfde lagen en geneste groepslagen
@@ -37,11 +61,8 @@ namespace UnitTests
       var jsonOldWebmap = JToken.Parse(webmap);
       var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
       var jsonNewWebmap = JToken.Parse(newWebMap);
-      var x = jsonNewWebmap.ToString();
       Assert.IsFalse(JToken.DeepEquals(jsonTemplate, jsonOldWebmap));
       Assert.IsTrue(JToken.DeepEquals(jsonTemplate, jsonNewWebmap));
-      //File.WriteAllText(@"c:\temp\abc1.json", jsonTemplate.ToString());
-      //File.WriteAllText(@"c:\temp\abc2.json", jsonNewWebmap.ToString());
     }
 
     [TestMethod]
@@ -67,8 +88,6 @@ namespace UnitTests
       jsonTemplate["operationalLayers"].Last["id"].ToString().Should().Be(jsonNewWebmap["operationalLayers"].Last["id"].ToString());
       lastOperationLayer["layers"].First["id"].ToString().Should().Be(oldFirstOperationLayer["layers"].Last["id"].ToString());
       lastOperationLayer["layers"].First["id"].ToString().Should().Be(newLastOperationLayer["layers"].First["id"].ToString());
-      //File.WriteAllText(@"c:\temp\abc1.json", jsonTemplate.ToString());
-      //File.WriteAllText(@"c:\temp\abc2.json", jsonNewWebmap.ToString());
     }
 
     [TestMethod]

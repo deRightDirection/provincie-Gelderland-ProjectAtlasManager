@@ -34,6 +34,7 @@ namespace ProjectAtlasManager.Services
           JsonDefinition = layer as JObject,
           Level = currentLevel,
           Index = index,
+          Title = layer["title"].ToString(),
           LayerType = layer["layerType"].ToString(),
           Parent = parent
         };

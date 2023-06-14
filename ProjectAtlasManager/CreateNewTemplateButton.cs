@@ -38,8 +38,10 @@ namespace ProjectAtlasManager
     private async Task SetTagsForNewTemplateAsync()
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-      var query = new PortalQueryParameters("id:" + Module1.SelectedWebMapToUpgradeToTemplate);
-      query.Limit = 100;
+      var query = new PortalQueryParameters("id:" + Module1.SelectedWebMapToUpgradeToTemplate)
+      {
+        Limit = 100
+      };
       await QueuedTask.Run(async () =>
       {
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
@@ -66,6 +68,7 @@ namespace ProjectAtlasManager
           tags = tags.Substring(1);
         }
         var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
+        await portalClient.UpdateTemplate(item, true);
         await portalClient.UpdateTags(item, tags);
       });
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_WebMapSelectedState");

@@ -28,22 +28,26 @@ namespace ProjectAtlasManager.ViewModels
 
     private async void FillList()
     {
-      ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+      var portal = ArcGISPortalManager.Current.GetActivePortal();
       var portalInfo = await portal.GetPortalInfoAsync();
       var orgId = portalInfo.OrganizationId;
-      var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
-      query.Limit = 100;
-      var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
+      var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate)
+      {
+        Limit = 100
+      };
+      var results = await portal.SearchForContentAsync(query);
       var item = results.Results.FirstOrDefault();
       if (item == null)
       {
         return;
       }
+      var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
+      await portalClient.UpdateTemplate(item, true);
       var mapsBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:{orgId}")
       {
         Limit = 100
       };
-      var mapsBasedOnTemplate = await ArcGISPortalExtensions.SearchForContentAsync(portal, mapsBasedOnTemplateQuery);
+      var mapsBasedOnTemplate = await portal.SearchForContentAsync(mapsBasedOnTemplateQuery);
       Viewers = mapsBasedOnTemplate.Results;
       CmdOk.RaiseCanExecuteChanged();
     }

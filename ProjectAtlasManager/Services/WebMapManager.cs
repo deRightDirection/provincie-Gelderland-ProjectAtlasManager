@@ -103,7 +103,7 @@ namespace ProjectAtlasManager.Services
     /// bepaal welke lagen in de webmap vervangen moeten worden of er aan toegevoegd vanuit het template
     /// </summary>
     private void DetermineLayersToAddOrReplace(IOrderedEnumerable<int> levelsInTemplate, IEnumerable<OperationalLayer> layersInTemplate,
-      IEnumerable<OperationalLayer> layersInWebMap, List<OperationalLayer> layersToAdd, List<OperationalLayer> layersToReplace)
+      IEnumerable<OperationalLayer> layersInWebMap, List<OperationalLayer> layersToAdd, ICollection<OperationalLayer> layersToReplace)
     {
       foreach (var level in levelsInTemplate)
       {
@@ -126,8 +126,8 @@ namespace ProjectAtlasManager.Services
     /// <summary>
     /// bepaal welke lagen in de webmap die verwijderd moeten worden
     /// </summary>
-    private void DetermineLayersToRemove(IOrderedEnumerable<int> levelsInTemplate, IEnumerable<OperationalLayer> layersInTemplate,
-      IEnumerable<OperationalLayer> layersInWebMap, List<OperationalLayer> layersToRemove)
+    private void DetermineLayersToRemove(IEnumerable<int> levelsInTemplate, IEnumerable<OperationalLayer> layersInTemplate,
+      IEnumerable<OperationalLayer> layersInWebMap, ICollection<OperationalLayer> layersToRemove)
     {
       foreach (var level in levelsInTemplate)
       {

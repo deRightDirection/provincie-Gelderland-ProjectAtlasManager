@@ -36,8 +36,10 @@ namespace ProjectAtlasManager
       var portal = ArcGISPortalManager.Current.GetActivePortal();
       var portalInfo = await portal.GetPortalInfoAsync();
       var orgId = portalInfo.OrganizationId;
-      var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
-      query.Limit = 100;
+      var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate)
+      {
+        Limit = 100
+      };
       await QueuedTask.Run(async () =>
       {
         var results = await portal.SearchForContentAsync(query);

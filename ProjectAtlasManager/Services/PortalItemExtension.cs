@@ -21,7 +21,19 @@ namespace ProjectAtlasManager.Services
 
     internal static void UpdateTagsForTemplate(this PortalItem item)
     {
-      var xml = XElement.Parse(item.GetXml());
+      XElement xml = null;
+      try
+      {
+        xml = XElement.Parse(item.GetXml());
+      }
+      catch (Exception e)
+      {
+        return;
+      }
+      if(xml == null)
+      {
+        return;
+      }
       var keysTags = xml.Element("dataIdInfo").Element("searchKeys");
       var tags = item.ItemTags.Select(x => x.ToLowerInvariant().Trim());
       if (keysTags != null)

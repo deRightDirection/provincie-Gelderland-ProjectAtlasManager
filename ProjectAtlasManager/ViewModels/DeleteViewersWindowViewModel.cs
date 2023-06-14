@@ -55,7 +55,7 @@ namespace ProjectAtlasManager.ViewModels
         Limit = 100
       };
       var mapsBasedOnTemplate = await ArcGISPortalExtensions.SearchForContentAsync(portal, viewersBasedOnTemplateQuery);
-      Viewers = mapsBasedOnTemplate.Results;
+      Viewers = mapsBasedOnTemplate.Results.OrderBy(x => x.Title);
       CmdOk.RaiseCanExecuteChanged();
     }
 

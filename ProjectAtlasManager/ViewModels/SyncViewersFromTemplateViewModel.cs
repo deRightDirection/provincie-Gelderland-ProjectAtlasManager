@@ -48,7 +48,7 @@ namespace ProjectAtlasManager.ViewModels
         Limit = 100
       };
       var mapsBasedOnTemplate = await portal.SearchForContentAsync(mapsBasedOnTemplateQuery);
-      Viewers = mapsBasedOnTemplate.Results;
+      Viewers = mapsBasedOnTemplate.Results.OrderBy(x => x.Title);
       CmdOk.RaiseCanExecuteChanged();
     }
 

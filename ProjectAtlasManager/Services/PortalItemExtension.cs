@@ -66,7 +66,7 @@ namespace ProjectAtlasManager.Services
       {
         item.SetXml(xml.ToString());
       }
-      catch(InvalidOperationException)
+      catch(InvalidOperationException e)
       {
 
       }

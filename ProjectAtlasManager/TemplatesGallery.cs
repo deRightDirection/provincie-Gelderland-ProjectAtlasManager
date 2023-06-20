@@ -140,6 +140,13 @@ namespace ProjectAtlasManager
             {
                 result.UpdateTagsForTemplate();
             }
+            var mapProjectItems = Project.Current.GetItems<MapProjectItem>();
+            var mapTitle = result.Title;
+            if(!string.IsNullOrEmpty(mapTitle))
+            {
+              var mapsWithSameTitleAsPortalItem = mapProjectItems.Where(x => !string.IsNullOrEmpty(x.Title) && x.Title.Equals(mapTitle, StringComparison.CurrentCultureIgnoreCase));
+              Project.Current.RemoveItems(mapsWithSameTitleAsPortalItem);
+            }
             var newMap = MapFactory.Instance.CreateMapFromItem(result);
             ProApp.Panes.CreateMapPaneAsync(newMap);
           }

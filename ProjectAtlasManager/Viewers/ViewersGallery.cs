@@ -1,12 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using ArcGIS.Core.CIM;
 using ArcGIS.Core.Data;
-using ArcGIS.Core.Events;
 using ArcGIS.Core.Geometry;
 using ArcGIS.Desktop.Catalog;
 using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Events;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Editing;
+using ArcGIS.Desktop.Extensions;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Dialogs;
@@ -15,20 +20,13 @@ using ArcGIS.Desktop.Layouts;
 using ArcGIS.Desktop.Mapping;
 using ProjectAtlasManager.Domain;
 using ProjectAtlasManager.Events;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
 
 namespace ProjectAtlasManager.Viewers
 {
   internal class ViewersGallery : Gallery
   {
     private bool _isInitialized;
+    private bool _gallery_busy;
 
     public ViewersGallery()
     {
@@ -114,37 +112,77 @@ namespace ProjectAtlasManager.Viewers
       return lstWebmapItems;
     }
 
-    protected override async void OnClick(object item)
+    protected override void OnClick(object item)
     {
-      if (item is WebMapItemGalleryItem)
+      if (item == null)
+        return;
+      OpenWebMapAsync(item);
+    }
+
+    /// <summary>
+    /// Opens a web map item in a map pane.
+    /// </summary>
+    /// <param name="item"></param>
+    private async void OpenWebMapAsync(object item)
+    {
+      if (_gallery_busy)
+        return;
+      if (item is WebMapItem clickedWebMapItem)
       {
-        var clickedWebMapItem = (WebMapItemGalleryItem)item;
-        Module1.SelectedViewer = clickedWebMapItem.ID;
-        ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-        var query = PortalQueryParameters.CreateForItemsWithId(Module1.SelectedViewer);
-        PortalQueryResultSet<PortalItem> results = await portal.SearchForContentAsync(query);
-        var result = results.Results.FirstOrDefault();
-        if (result == null)
+        _gallery_busy = true;
+        FrameworkApplication.State.Activate("ViewersGallery_Is_Busy_State");
+        try
         {
-          return;
-        }
-        await QueuedTask.Run(() =>
-        {
-          if (MapFactory.Instance.CanCreateMapFrom(result))
+          await QueuedTask.Run(async () =>
           {
+            //Open WebMap
+            var currentItem = ItemFactory.Instance.Create(clickedWebMapItem.ID, ItemFactory.ItemType.PortalItem);
+            var mapTitle = clickedWebMapItem.Title;
             var mapProjectItems = Project.Current.GetItems<MapProjectItem>();
-            var mapTitle = result.Title;
             if (!string.IsNullOrEmpty(mapTitle))
             {
-              var mapsWithSameTitleAsPortalItem = mapProjectItems.Where(x => !string.IsNullOrEmpty(x.Title) && x.Title.Equals(mapTitle, StringComparison.CurrentCultureIgnoreCase));
-              Project.Current.RemoveItems(mapsWithSameTitleAsPortalItem);
+              var mapsWithSameTitleAsPortalItem = mapProjectItems.Where(
+                x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(
+                  mapTitle, StringComparison.CurrentCultureIgnoreCase));
+              var mapItem = mapsWithSameTitleAsPortalItem.FirstOrDefault();
+              if (mapItem != null)
+              {
+                var map = mapItem.GetMap();
+                //is this map already active?
+                if (MapView.Active?.Map?.URI == map.URI)
+                  return;
+                //has this map already been opened?
+                var map_panes =
+                  FrameworkApplication.Panes.OfType<IMapPane>();
+                foreach (var map_pane in map_panes)
+                {
+                  if (map_pane.MapView.Map.URI == map.URI)
+                  {
+                    var pane = map_pane as Pane;
+                      await FrameworkApplication.Current.Dispatcher.BeginInvoke((Action)(() => pane.Activate()));
+                    return;
+                  }
+                }
+                //open a new pane
+                await FrameworkApplication.Panes.CreateMapPaneAsync(map);
+                return;
+              }
             }
-            var newMap = MapFactory.Instance.CreateMapFromItem(result);
-            ProApp.Panes.CreateMapPaneAsync(newMap);
-          }
-        });
+            //open a new pane
+            if (MapFactory.Instance.CanCreateMapFrom(currentItem))
+            {
+              var newMap = MapFactory.Instance.CreateMapFromItem(currentItem);
+              await FrameworkApplication.Panes.CreateMapPaneAsync(newMap);
+            }
+
+          });
+        }
+        finally
+        {
+          _gallery_busy = false;
+          FrameworkApplication.State.Deactivate("ViewersGallery_Is_Busy_State");
+        }
       }
-      base.OnClick(item);
     }
   }
 }

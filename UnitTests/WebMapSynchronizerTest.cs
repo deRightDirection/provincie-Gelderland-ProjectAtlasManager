@@ -27,6 +27,19 @@ namespace UnitTests
     }
 
     [TestMethod]
+    // in template zit een laag en een groepslaag met visibility op true, in template zitten zelfde lagen
+    // met visibility = false, na sync moeten die ook op visibility = true staan
+    public void VisibilityOfLayerAndGroupLayer()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas27.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template27.json"));
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      Assert.IsTrue(JToken.DeepEquals(x, x2));
+    }
+
+    [TestMethod]
     // in template zitten drie lagen minder dan in viewer en die worden verwijderd uit viewer
     // hierna is viewer op 1 laag na gelijk aan template
     public void RemoveLayersFromTemplate2()

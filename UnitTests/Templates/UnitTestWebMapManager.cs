@@ -30,16 +30,48 @@ namespace UnitTests.Templates
       {
         webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToAdd);
       }
+      var groupLayersToUpdate = layersToReplace.Where(x => x.IsGroupLayer).ToList();
       layersToReplace = layersToReplace.Where(x => !x.IsGroupLayer).ToList();
       if (layersToReplace.Any())
       {
         webmapData = InsertLayersFromTemplate(webmapData, templateData, layersToReplace);
+      }
+      if (groupLayersToUpdate.Any())
+      {
+        webmapData = UpdateGrouplayerInformation(webmapData, templateData, groupLayersToUpdate);
       }
       layersInWebMap = RetrieveLayers(webmapData);
       var newOrder = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, 0, null);
       var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
       var webmap = JObject.Parse(webmapData);
       webmap["operationalLayers"] = json;
+      return webmap.ToString();
+    }
+
+    /// <summary>
+    /// zorg ervoor dat de visibility-instelling van een grouplayer wordt overgenomen in de webmap vanuit het template
+    /// </summary>
+    private string UpdateGrouplayerInformation(string webmapData, string templateData, List<OperationalLayer> groupLayersToUpdate)
+    {
+      var webmap = JObject.Parse(webmapData);
+      var template = JObject.Parse(templateData);
+      foreach (var grouplayerToUpdate in groupLayersToUpdate)
+      {
+        var filter = $"..*[?(@.id == '{grouplayerToUpdate.Id}')]";
+        var templateLayer = (JObject)template.SelectToken(filter);
+        if (templateLayer != null)
+        {
+          var webmapLayer = (JObject)webmap.SelectToken(filter);
+          if (webmapLayer != null)
+          {
+            var visibilityValue = templateLayer["visibility"];
+            if (visibilityValue != null)
+            {
+              webmapLayer["visibility"] = visibilityValue;
+            }
+          }
+        }
+      }
       return webmap.ToString();
     }
 

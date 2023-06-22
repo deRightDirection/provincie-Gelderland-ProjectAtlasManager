@@ -1,14 +1,22 @@
 <ArcGIS defaultAssembly="ProjectAtlasManager.dll" defaultNamespace="ProjectAtlasManager" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.14" desktopVersion="2.9.8">
+  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.15" desktopVersion="2.9.8">
     <Name>ProjectAtlas Manager</Name>
     <Description>De projectatlas manager voor de provincie Gelderland</Description>
     <Image>Images\button.png</Image>
     <Author>the Right Direction BV</Author>
     <Company>the Right Direction BV</Company>
-    <Date>20/06/2023 10:30:00</Date>
+    <Date>22/06/2023 7:30:00</Date>
     <Subject>Framework</Subject>
   </AddInInfo>
   <conditions>
+    <insertCondition id="ViewersGallery_Is_Ready">
+      <not>
+        <state id="ViewersGallery_Is_Busy_State"/>
+      </not>
+      <and>
+        <state id="ProjectAtlasManager_Module_ProjectTemplateSelectedState" />
+      </and>
+    </insertCondition>
     <insertCondition id="ProjectAtlasManager_Module_WebMap_Selected">
       <state id="ProjectAtlasManager_Module_WebMapSelectedState" />
     </insertCondition>
@@ -84,7 +92,18 @@
           <tooltip heading="selecteer template">
             Selecteer een template, open de template en voer hier een actie mee uit. De query om templates te vinden is: zoek alle webmaps die de tags 'ProjectAtlas' en 'Template' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.<disabledText>geen templates beschikbaar</disabledText></tooltip>
         </gallery>
-        <gallery id="viewersGallery" caption="selecteer een webmap" className="Viewers.ViewersGallery" itemsInRow="1" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml" templateID="WebMapsGalleryItemTemplate" resizable="true" largeImage="Images/viewer.png" itemWidth="415" loadingMessage="inladen webmaps">
+        <gallery
+          id="viewersGallery"
+          caption="selecteer een webmap"
+          className="Viewers.ViewersGallery"
+          itemsInRow="1"
+          condition="ViewersGallery_Is_Ready"
+          dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml"
+          templateID="WebMapsGalleryItemTemplate"
+          resizable="true"
+          largeImage="Images/viewer.png"
+          itemWidth="415"
+          loadingMessage="inladen webmaps">
           <tooltip heading="selecteer webmap">
             Open een webmap. De query om webmaps te vinden is: zoek alle webmaps die de tags 'ProjectAtlas', 'CopyOfTemplate' en 'PAT[id van template webmap]' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.<disabledText>geen templates beschikbaar</disabledText></tooltip>
         </gallery>

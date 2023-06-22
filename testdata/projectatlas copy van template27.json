@@ -1,0 +1,42 @@
+{
+  "operationalLayers": [
+      {
+          "id": "PAT_a9816b03f108b44d5b8efab99fbe567ae",
+          "title": "groep3",
+          "visibility": false,
+          "blendMode": "normal",
+          "opacity": 1,
+          "layers": [
+              {
+                  "itemId": "2c03f278da1c4d7ebf8decbf22520ba1",
+                  "id": "PAT_fbe1bc04006d4c61b6479d2168639823",
+                  "title": "locaties",
+                  "visibility": true,
+                  "blendMode": "normal",
+                  "opacity": 1,
+                  "url": "https://www.therightdirectionserver.nl/portal/rest/services/Hosted/locaties/FeatureServer/0",
+                  "layerType": "ArcGISFeatureLayer",
+                  "disablePopup": false,
+                  "showLegend": true
+              },
+          ],
+          "layerType": "GroupLayer"
+      },
+      {
+        "id": "4b47ae4b7a6a46d3bb2dc8dec9de86d0",
+        "title": "Infra VRI kasten - VRI kasten",
+        "visibility": false,
+        "blendMode": "normal",
+        "opacity": 1,
+        "url": "https://geoportaal.gelderland.nl/gisserver/rest/services/Infra/Infra/MapServer/179",
+        "layerType": "ArcGISFeatureLayer",
+        "layerDefinition": {
+          "geometryType": "esriGeometryPoint",
+          "objectIdField": "objectid",
+        },
+        "disablePopup": false,
+        "showLabels": true,
+        "showLegend": true
+      }
+    ]
+}

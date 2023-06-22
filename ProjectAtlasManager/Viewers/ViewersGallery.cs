@@ -40,12 +40,12 @@ namespace ProjectAtlasManager.Viewers
         LoadItemsAsync();
       });
       Initialize();
-      EventSender.Subscribe(RenewData, true);
     }
     private void RenewData(UpdateGalleryEvent eventData)
     {
       if(eventData.UpdateViewersGallery)
       {
+        Clear();
         LoadItemsAsync();
       }
     }
@@ -66,6 +66,11 @@ namespace ProjectAtlasManager.Viewers
     {
       if (_galleryBusy)
         return;
+      if(string.IsNullOrEmpty(Module1.SelectedProjectTemplate))
+      {
+        Clear();
+        return;
+      }
       _galleryBusy = true;
       LoadingMessage = "Loading viewers...";
       FrameworkApplication.State.Activate("ViewersGallery_Is_Busy_State");

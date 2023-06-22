@@ -26,90 +26,89 @@ namespace ProjectAtlasManager.Viewers
   internal class ViewersGallery : Gallery
   {
     private bool _isInitialized;
-    private bool _gallery_busy;
+    private bool _galleryBusy;
 
     public ViewersGallery()
     {
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
       {
-        CheckStatus();
+        LoadItemsAsync();
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
-        CheckStatus();
+        LoadItemsAsync();
       });
       Initialize();
-    }
-
-    private void CheckStatus()
-    {
-      ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-      if (portal != null && portal.IsSignedOn())
-      {
-        EventSender.Subscribe(RenewData, true);
-      }
-      else
-      {
-        SetItemCollection(new ObservableCollection<object>());
-      }
+      EventSender.Subscribe(RenewData, true);
     }
     private void RenewData(UpdateGalleryEvent eventData)
     {
       if(eventData.UpdateViewersGallery)
       {
-        LoadItemsAsync(true);
+        LoadItemsAsync();
       }
     }
 
     protected override void OnDropDownOpened()
     {
-      LoadItemsAsync(true);
+      Initialize();
     }
-    private async void Initialize()
+    private void Initialize()
     {
-      await LoadItemsAsync();
-    }
-    private async Task LoadItemsAsync(bool renew = false)
-    {
-      if (_isInitialized && !renew)
-      {
+      if (_isInitialized)
         return;
-      }
-      var activePortal = ArcGISPortalManager.Current.GetActivePortal();
-      if (activePortal == null || activePortal.IsSignedOn() == false)
-      {
-        SetItemCollection(new ObservableCollection<object>());
-        return;
-      }
-      var items = await GetWebMapsAsync();
-      SetItemCollection(new ObservableCollection<object>(items));
       _isInitialized = true;
+      LoadItemsAsync();
     }
 
-    private async Task<List<WebMapItemGalleryItem>> GetWebMapsAsync()
+    private async void LoadItemsAsync()
     {
-      var lstWebmapItems = new List<WebMapItemGalleryItem>();
-      await QueuedTask.Run(async () =>
+      if (_galleryBusy)
+        return;
+      _galleryBusy = true;
+      LoadingMessage = "Loading viewers...";
+      FrameworkApplication.State.Activate("ViewersGallery_Is_Busy_State");
+
+      try
       {
-        ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
+        var portal = ArcGISPortalManager.Current.GetActivePortal();
+        if (portal == null)
+        {
+          Clear();
+          LoadingMessage = "Sign on to retrieve web maps";
+          return;
+        }
+        var signedOn = await QueuedTask.Run(() => portal.IsSignedOn());
+        if (!signedOn)
+        {
+          Clear();
+          LoadingMessage = "Sign on to retrieve web maps";
+          return;
+        }
         var portalInfo = await portal.GetPortalInfoAsync();
         var orgId = portalInfo.OrganizationId;
         var username = portal.GetSignOnUsername();
+        var token = await QueuedTask.Run(() => portal.GetToken());
         var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"PAT{Module1.SelectedProjectTemplate}\" AND tags:\"CopyOfTemplate\" AND orgid:{orgId} owner:\"{username}\"");
         query.SortField = "title";
         query.Limit = 100;
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
         if (results == null)
         {
+          Clear();
           return;
         }
         foreach (var item in results.Results.OfType<PortalItem>().OrderBy(x => x.Title))
         {
-          lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
+          Add(new WebMapItem(item, token));
         }
-      });
-      return lstWebmapItems;
+      }
+      finally
+      {
+        _galleryBusy = false;
+        FrameworkApplication.State.Deactivate("ViewersGallery_Is_Busy_State");
+      }
     }
 
     protected override void OnClick(object item)
@@ -125,11 +124,11 @@ namespace ProjectAtlasManager.Viewers
     /// <param name="item"></param>
     private async void OpenWebMapAsync(object item)
     {
-      if (_gallery_busy)
+      if (_galleryBusy)
         return;
       if (item is WebMapItem clickedWebMapItem)
       {
-        _gallery_busy = true;
+        _galleryBusy = true;
         FrameworkApplication.State.Activate("ViewersGallery_Is_Busy_State");
         try
         {
@@ -179,7 +178,7 @@ namespace ProjectAtlasManager.Viewers
         }
         finally
         {
-          _gallery_busy = false;
+          _galleryBusy = false;
           FrameworkApplication.State.Deactivate("ViewersGallery_Is_Busy_State");
         }
       }

@@ -22,6 +22,11 @@
         <state id="WebmapsGallery_Is_Busy_State"/>
       </not>
     </insertCondition>
+    <insertCondition id="TemplatesGallery_Is_Ready">
+      <not>
+        <state id="TemplatesGallery_Is_Busy_State"/>
+      </not>
+    </insertCondition>
     <insertCondition id="ProjectAtlasManager_Module_WebMap_Selected">
       <state id="ProjectAtlasManager_Module_WebMapSelectedState" />
     </insertCondition>
@@ -105,7 +110,18 @@
           <tooltip heading="nieuwe templates">
             selecteer een webmap en gebruik de knop 'omzetten naar template' om van deze webmap een template te maken. De query om alle webmaps te vinden is: zoek alle webmaps die van de ingelogde gebruiker zijn binnen de organisatie en die geen tag 'ProjectAtlas' heeft.<disabledText /></tooltip>
         </gallery>
-        <gallery id="showTemplatesGallery" caption="selecteer een bestaand template" className="TemplatesGallery" itemsInRow="1" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml" templateID="WebMapsGalleryItemTemplate" resizable="true" itemWidth="415" largeImage="Images/templates.png" loadingMessage="inladen templates">
+        <gallery
+          id="showTemplatesGallery"
+          caption="selecteer een bestaand template"
+          className="TemplatesGallery"
+          condition="TemplatesGallery_Is_Ready"
+          itemsInRow="1"
+          dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml"
+          templateID="WebMapsGalleryItemTemplate"
+          resizable="true"
+          itemWidth="415"
+          largeImage="Images/templates.png"
+          loadingMessage="inladen templates">
           <tooltip heading="selecteer template">
             Selecteer een template, open de template en voer hier een actie mee uit. De query om templates te vinden is: zoek alle webmaps die de tags 'ProjectAtlas' en 'Template' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.<disabledText>geen templates beschikbaar</disabledText></tooltip>
         </gallery>

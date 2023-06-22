@@ -95,7 +95,6 @@ namespace ProjectAtlasManager.Viewers
         var portalInfo = await portal.GetPortalInfoAsync();
         var orgId = portalInfo.OrganizationId;
         var username = portal.GetSignOnUsername();
-        var token = await QueuedTask.Run(() => portal.GetToken());
         var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"PAT{Module1.SelectedProjectTemplate}\" AND tags:\"CopyOfTemplate\" AND orgid:{orgId} owner:\"{username}\"");
         query.SortField = "title";
         query.Limit = 100;
@@ -107,7 +106,7 @@ namespace ProjectAtlasManager.Viewers
         }
         foreach (var item in results.Results.OfType<PortalItem>().OrderBy(x => x.Title))
         {
-          Add(new WebMapItem(item, token));
+          Add(new WebMapItem(item));
         }
       }
       finally

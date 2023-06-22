@@ -13,7 +13,7 @@ namespace ProjectAtlasManager.Domain
     private string _title;
     private string _name;
 
-    public WebMapItem(PortalItem portalItem, string token)
+    public WebMapItem(PortalItem portalItem)
     {
       _id = portalItem.ID;
       _title = portalItem.Title;

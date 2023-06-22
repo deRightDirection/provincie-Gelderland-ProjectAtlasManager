@@ -28,10 +28,12 @@ namespace ProjectAtlasManager
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
       {
+        Clear();
         LoadItemsAsync();
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
+        Clear();
         LoadItemsAsync();
       });
       Initialize();
@@ -81,7 +83,6 @@ namespace ProjectAtlasManager
         var portalInfo = await portal.GetPortalInfoAsync();
         var orgId = portalInfo.OrganizationId;
         var username = portal.GetSignOnUsername();
-        var token = await QueuedTask.Run(() => portal.GetToken());
         var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:{orgId} owner:\"{username}\"");
         query.SortField = "title, modified";
         query.Limit = 100;
@@ -97,7 +98,7 @@ namespace ProjectAtlasManager
           {
             if (!item.Owner.ToLowerInvariant().StartsWith("esri"))
             {
-              Add(new WebMapItem(item, token));
+              Add(new WebMapItem(item));
             }
           }
         }

@@ -234,7 +234,6 @@
     <Compile Include="Domain\OperationalLayer.cs" />
     <Compile Include="Domain\PortalInformation.cs" />
     <Compile Include="Domain\WebMap.cs" />
-    <Compile Include="Domain\WebMapGalleryItem.cs" />
     <Compile Include="Events\EventSender.cs" />
     <Compile Include="Events\UpdateGalleryEvent.cs" />
     <Compile Include="Module1.cs" />

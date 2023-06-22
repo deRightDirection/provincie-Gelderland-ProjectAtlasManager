@@ -1,29 +1,17 @@
-using ArcGIS.Core.CIM;
-using ArcGIS.Core.Data;
 using ArcGIS.Core.Events;
-using ArcGIS.Core.Geometry;
-using ArcGIS.Desktop.Catalog;
 using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Events;
 using ArcGIS.Desktop.Core.Portal;
-using ArcGIS.Desktop.Editing;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
-using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
-using ArcGIS.Desktop.Layouts;
-using ArcGIS.Desktop.Mapping;
 using ProjectAtlasManager.Domain;
 using ProjectAtlasManager.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace ProjectAtlasManager
 {
@@ -33,109 +21,103 @@ namespace ProjectAtlasManager
   internal class NewTemplateGallery : Gallery
   {
     private bool _isInitialized;
-    private bool _renew;
+    private bool _galleryBusy;
+
     public NewTemplateGallery()
     {
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
       {
-        CheckStatus();
+        LoadItemsAsync();
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
-        CheckStatus();
+        LoadItemsAsync();
       });
+      Initialize();
     }
 
-    private async void CheckStatus()
-    {
-      ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-      if (portal != null && portal.IsSignedOn())
-      {
-        _renew = true;
-      }
-      else
-      {
-        SetItemCollection(new ObservableCollection<object>());
-      }
-    }
     private void RenewData(EventBase eventData)
     {
-      _renew = true;
-    }
-    protected override void OnDropDownOpened()
-    {
+      Clear();
       LoadItemsAsync();
     }
 
-    private async Task LoadItemsAsync()
+    protected override void OnDropDownOpened()
     {
-      if (_isInitialized && _renew == false)
-      {
+      Initialize();
+    }
+    private void Initialize()
+    {
+      if (_isInitialized)
         return;
-      }
-      var activePortal = ArcGISPortalManager.Current.GetActivePortal();
-      if (activePortal == null || activePortal.IsSignedOn() == false)
-      {
-        SetItemCollection(new ObservableCollection<object>());
-        return;
-      }
-      var portalInfo = await activePortal.GetPortalInfoAsync();
-      var orgId = portalInfo.OrganizationId;
-      var items = await GetWebMapsAsync(orgId);
-      SetItemCollection(new ObservableCollection<object>(items));
       _isInitialized = true;
-      _renew = false;
+      LoadItemsAsync();
+    }
+
+    private async void LoadItemsAsync()
+    {
+      if (_galleryBusy)
+        return;
+      _galleryBusy = true;
+      LoadingMessage = "Loading webmaps...";
+      FrameworkApplication.State.Activate("WebmapsGallery_Is_Busy_State");
+      try
+      {
+        var portal = ArcGISPortalManager.Current.GetActivePortal();
+        if (portal == null)
+        {
+          Clear();
+          LoadingMessage = "Sign on to retrieve web maps";
+          return;
+        }
+        var signedOn = await QueuedTask.Run(() => portal.IsSignedOn());
+        if (!signedOn)
+        {
+          Clear();
+          LoadingMessage = "Sign on to retrieve web maps";
+          return;
+        }
+        var portalInfo = await portal.GetPortalInfoAsync();
+        var orgId = portalInfo.OrganizationId;
+        var username = portal.GetSignOnUsername();
+        var token = await QueuedTask.Run(() => portal.GetToken());
+        var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:{orgId} owner:\"{username}\"");
+        query.SortField = "title, modified";
+        query.Limit = 100;
+        var results = await portal.SearchForContentAsync(query);
+        if (results == null)
+        {
+          Clear();
+          return;
+        }
+        if (results.TotalResultsCount > 0)
+        {
+          foreach (var item in results.Results.OfType<PortalItem>().OrderBy(x => x.Title))
+          {
+            if (!item.Owner.ToLowerInvariant().StartsWith("esri"))
+            {
+              Add(new WebMapItem(item, token));
+            }
+          }
+        }
+      }
+      finally
+      {
+        _galleryBusy = false;
+        FrameworkApplication.State.Deactivate("WebmapsGallery_Is_Busy_State");
+      }
     }
 
     protected override void OnClick(object item)
     {
-      if (item is WebMapItemGalleryItem)
+      if (item is WebMapItem)
       {
-        var clickedWebMapItem = (WebMapItemGalleryItem)item;
+        var clickedWebMapItem = (WebMapItem)item;
         Module1.SelectedWebMapToUpgradeToTemplate = clickedWebMapItem.ID;
       }
       FrameworkApplication.State.Activate("ProjectAtlasManager_Module_WebMapSelectedState");
       base.OnClick(item);
-    }
-
-    /// <summary>
-    /// Gets a collection of web map items from ArcGIS Online
-    /// </summary>
-    /// <returns></returns>
-    private async Task<List<WebMapItemGalleryItem>> GetWebMapsAsync(string orgId)
-    {
-      var lstWebmapItems = new List<WebMapItemGalleryItem>();
-      try
-      {
-        await QueuedTask.Run(async () =>
-        {
-          ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-          var username = portal.GetSignOnUsername();
-          var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:{orgId} owner:\"{username}\"");
-          query.SortField = "title, modified";
-          query.Limit = 100;
-          query.SortOrder = PortalQuerySortOrder.Ascending;
-          var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
-          if (results == null)
-            return;
-          if(results.TotalResultsCount > 0)
-          {
-            foreach (var item in results.Results.OfType<PortalItem>().OrderBy(x => x.Title))
-            {
-              if (!item.Owner.ToLowerInvariant().StartsWith("esri"))
-              {
-                lstWebmapItems.Add(new WebMapItemGalleryItem(item, portal.GetToken()));
-              }
-            }
-          }
-        });
-      }
-      catch (Exception ex)
-      {
-        System.Diagnostics.Debug.WriteLine(ex.Message);
-      }
-      return lstWebmapItems;
     }
   }
 }

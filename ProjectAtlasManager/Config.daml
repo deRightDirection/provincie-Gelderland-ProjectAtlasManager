@@ -17,6 +17,11 @@
         <state id="ProjectAtlasManager_Module_ProjectTemplateSelectedState" />
       </and>
     </insertCondition>
+    <insertCondition id="WebmapsGallery_Is_Ready">
+      <not>
+        <state id="WebmapsGallery_Is_Busy_State"/>
+      </not>
+    </insertCondition>
     <insertCondition id="ProjectAtlasManager_Module_WebMap_Selected">
       <state id="ProjectAtlasManager_Module_WebMapSelectedState" />
     </insertCondition>
@@ -84,7 +89,19 @@
         </button>
       </controls>
       <galleries>
-        <gallery id="newTemplateGallery" caption="selecteer een webmap" className="NewTemplateGallery" itemsInRow="1" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml" templateID="WebMapsGalleryItemTemplate" resizable="true" largeImage="Images/webmaps.png" itemWidth="415" loadOnClick="true" loadingMessage="inladen webmaps">
+        <gallery
+          id="newTemplateGallery"
+          caption="selecteer een webmap"
+          className="NewTemplateGallery"
+          itemsInRow="1"
+          dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml"
+          condition="WebmapsGallery_Is_Ready"
+          templateID="WebMapsGalleryItemTemplate"
+          resizable="true"
+          largeImage="Images/webmaps.png"
+          itemWidth="415"
+          loadOnClick="true"
+          loadingMessage="inladen webmaps">
           <tooltip heading="nieuwe templates">
             selecteer een webmap en gebruik de knop 'omzetten naar template' om van deze webmap een template te maken. De query om alle webmaps te vinden is: zoek alle webmaps die van de ingelogde gebruiker zijn binnen de organisatie en die geen tag 'ProjectAtlas' heeft.<disabledText /></tooltip>
         </gallery>

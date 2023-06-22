@@ -12,16 +12,12 @@ namespace ProjectAtlasManager.Domain
     private string _id;
     private string _title;
     private string _name;
-    private string _thumbnail;
 
     public WebMapItem(PortalItem portalItem, string token)
     {
       _id = portalItem.ID;
       _title = portalItem.Title;
       _name = portalItem.Name;
-      _thumbnail = portalItem.ThumbnailPath;
-      if (!string.IsNullOrEmpty(token))
-        _thumbnail += $"?token={token}";
       Snippet = string.IsNullOrEmpty(portalItem.Summary) ? _title : portalItem.Summary;
       Group = portalItem.Owner;
     }

@@ -33,10 +33,12 @@ namespace ProjectAtlasManager.Viewers
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
       {
+        Clear();
         LoadItemsAsync();
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
+        Clear();
         LoadItemsAsync();
       });
       Initialize();
@@ -74,7 +76,6 @@ namespace ProjectAtlasManager.Viewers
       _galleryBusy = true;
       LoadingMessage = "Loading viewers...";
       FrameworkApplication.State.Activate("ViewersGallery_Is_Busy_State");
-
       try
       {
         var portal = ArcGISPortalManager.Current.GetActivePortal();

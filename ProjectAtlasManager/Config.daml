@@ -10,10 +10,10 @@
   </AddInInfo>
   <conditions>
     <insertCondition id="ViewersGallery_Is_Ready">
-      <not>
-        <state id="ViewersGallery_Is_Busy_State"/>
-      </not>
       <and>
+        <not>
+          <state id="ViewersGallery_Is_Busy_State"/>
+        </not>
         <state id="ProjectAtlasManager_Module_ProjectTemplateSelectedState" />
       </and>
     </insertCondition>

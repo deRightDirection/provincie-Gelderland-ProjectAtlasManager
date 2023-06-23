@@ -190,6 +190,8 @@ namespace ProjectAtlasManager.Viewers
           _galleryBusy = false;
           FrameworkApplication.State.Deactivate("ViewersGallery_Is_Busy_State");
         }
+
+        SelectedItem = null;
       }
     }
   }

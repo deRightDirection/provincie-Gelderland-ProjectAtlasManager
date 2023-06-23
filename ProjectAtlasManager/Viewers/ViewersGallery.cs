@@ -145,44 +145,11 @@ namespace ProjectAtlasManager.Viewers
             var mapProjectItems = Project.Current.GetItems<MapProjectItem>();
             if (!string.IsNullOrEmpty(mapTitle))
             {
-              var mapsWithSameTitleAsPortalItem = mapProjectItems.Where(
-                x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(
-                  mapTitle, StringComparison.CurrentCultureIgnoreCase));
-              var mapItem = mapsWithSameTitleAsPortalItem.FirstOrDefault();
-              if (mapItem != null)
-              {
-                var map = mapItem.GetMap();
-                //is this map already active?
-                if (MapView.Active?.Map?.URI == map.URI)
-                  return;
-                //has this map already been opened?
-                var map_panes =
-                  FrameworkApplication.Panes.OfType<IMapPane>();
-                foreach (var map_pane in map_panes)
-                {
-                  if(map_pane.MapView.Map?.URI == null)
-                  {
-                    continue;
-                  }
-                  if (map_pane.MapView.Map.URI == map.URI)
-                  {
-                    var pane = map_pane as Pane;
-                      await FrameworkApplication.Current.Dispatcher.BeginInvoke((Action)(() => pane.Activate()));
-                    return;
-                  }
-                }
-                //open a new pane
-                await FrameworkApplication.Panes.CreateMapPaneAsync(map);
-                return;
-              }
-            }
-            //open a new pane
-            if (MapFactory.Instance.CanCreateMapFrom(currentItem))
-            {
+              var mapsWithSameTitleAsPortalItem = mapProjectItems.Where(x => !string.IsNullOrEmpty(x.Title) && x.Title.Equals(mapTitle, StringComparison.CurrentCultureIgnoreCase));
+              Project.Current.RemoveItems(mapsWithSameTitleAsPortalItem);
               var newMap = MapFactory.Instance.CreateMapFromItem(currentItem);
               await FrameworkApplication.Panes.CreateMapPaneAsync(newMap);
             }
-
           });
         }
         finally
@@ -190,7 +157,6 @@ namespace ProjectAtlasManager.Viewers
           _galleryBusy = false;
           FrameworkApplication.State.Deactivate("ViewersGallery_Is_Busy_State");
         }
-
         SelectedItem = null;
       }
     }

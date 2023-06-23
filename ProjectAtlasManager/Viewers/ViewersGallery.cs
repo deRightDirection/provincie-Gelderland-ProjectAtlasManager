@@ -160,7 +160,7 @@ namespace ProjectAtlasManager.Viewers
                   FrameworkApplication.Panes.OfType<IMapPane>();
                 foreach (var map_pane in map_panes)
                 {
-                  if(map_pane.MapView.Map.URI == null)
+                  if(map_pane.MapView.Map?.URI == null)
                   {
                     continue;
                   }

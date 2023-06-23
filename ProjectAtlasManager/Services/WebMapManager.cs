@@ -47,8 +47,10 @@ namespace ProjectAtlasManager.Services
         webmapData = UpdateGrouplayerInformation(webmapData, templateData, groupLayersToUpdate);
       }
       layersInWebMap = webmapData.RetrieveLayers();
+      // 23-06-2023: op verzoek van Mark uitgezet
       var newOrder = MakeIndicesLayersEqual(_layersInTemplate, layersInWebMap, 0, null);
       var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
+      //var json = CreateNewOperationalLayerJsonObject(layersInWebMap, new JArray());
       var webmap = JObject.Parse(webmapData);
       webmap["operationalLayers"] = json;
       return webmap.ToString();
@@ -206,30 +208,34 @@ namespace ProjectAtlasManager.Services
           var newSubLayers = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, webmapLayer.Level + 1, webmapLayer.Id);
           webmapLayer.SubLayers = newSubLayers.ToList();
         }
-        var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
-        webmapLayer.NewIndex = templateLayer?.Index ?? webmapLayer.Index;
+        // 23-06-2023: op verzoek van Mark uitgezet
+        //var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
+        //webmapLayer.NewIndex = templateLayer?.Index ?? webmapLayer.Index;
       }
-      var newList = new List<OperationalLayer>();
-      foreach (var webmapLayer in webmapLayers.OrderBy(x => x.NewIndex))
-      {
-        var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
-        if (templateLayer == null)
-        {
-          if (newList.Count >= webmapLayer.Index)
-          {
-            newList.Insert(webmapLayer.Index, webmapLayer);
-          }
-          else
-          {
-            newList.Add(webmapLayer);
-          }
-        }
-        else
-        {
-          newList.Add(webmapLayer);
-        }
-      }
-      return newList;
+      return webmapLayers;
+
+      // 23-06-2023: op verzoek van Mark uitgezet
+      //var newList = new List<OperationalLayer>();
+      //foreach (var webmapLayer in webmapLayers.OrderBy(x => x.NewIndex))
+      //{
+      //  var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
+      //  if (templateLayer == null)
+      //  {
+      //    if (newList.Count >= webmapLayer.Index)
+      //    {
+      //      newList.Insert(webmapLayer.Index, webmapLayer);
+      //    }
+      //    else
+      //    {
+      //      newList.Add(webmapLayer);
+      //    }
+      //  }
+      //  else
+      //  {
+      //    newList.Add(webmapLayer);
+      //  }
+      //}
+      //return newList;
     }
 
     /// <summary>

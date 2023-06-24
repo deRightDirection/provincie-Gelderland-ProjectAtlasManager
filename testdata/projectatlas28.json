@@ -1,0 +1,468 @@
+{
+    "operationalLayers": [
+        {
+            "id": "PAT_e632471eacc44e21b1cb318ee6459a30",
+            "title": "BAG",
+            "visibility": true,
+            "blendMode": "normal",
+            "opacity": 1,
+            "layers": [
+                {
+                    "id": "PAT_188d36895d2-layer-3",
+                    "title": "BAG 2.0 - ligplaats - Ligplaats",
+                    "visibility": true,
+                    "blendMode": "normal",
+                    "opacity": 1,
+                    "layerDefinition": {
+                        "minScale": 2500,
+                        "geometryType": "esriGeometryPolygon",
+                        "objectIdField": "objectid",
+                        "drawingInfo": {
+                            "renderer": {
+                                "type": "simple",
+                                "symbol": {
+                                    "type": "esriSFS",
+                                    "style": "esriSFSSolid",
+                                    "color": [
+                                        230,
+                                        0,
+                                        0,
+                                        255
+                                    ],
+                                    "outline": {
+                                        "type": "esriSLS",
+                                        "style": "esriSLSSolid",
+                                        "color": [
+                                            0,
+                                            112,
+                                            255,
+                                            255
+                                        ],
+                                        "width": 1
+                                    }
+                                }
+                            },
+                            "scaleSymbols": true
+                        },
+                        "templates": [
+                            {
+                                "name": "Ligplaats",
+                                "prototype": {
+                                    "attributes": {
+                                        "tijdstipeindregistratielv": null,
+                                        "tijdstipregistratielv": null,
+                                        "identificatie": null,
+                                        "status": null,
+                                        "documentdatum": null,
+                                        "documentnummer": null,
+                                        "hoofdadresid": null,
+                                        "versieid": null,
+                                        "voorkomenidentificatie": null,
+                                        "geconstateerd": null,
+                                        "begingeldigheid": null,
+                                        "eindgeldigheid": null,
+                                        "tijdstipregistratie": null,
+                                        "eindregistratie": null
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "url": "https://basisregistraties.arcgisonline.nl/arcgis/rest/services/BAG/BAGv3/FeatureServer/3",
+                    "layerType": "ArcGISFeatureLayer",
+                    "popupInfo": {
+                        "title": "Ligplaats: {identificatie}",
+                        "mediaInfos": [],
+                        "description": "Status: {status}<br />Ligplaats ID: {identificatie}",
+                        "showAttachments": true,
+                        "popupElements": [
+                            {
+                                "text": "Status: {status}<br />Ligplaats ID: {identificatie}",
+                                "type": "text"
+                            },
+                            {
+                                "displayType": "list",
+                                "type": "attachments"
+                            }
+                        ],
+                        "fieldInfos": [
+                            {
+                                "fieldName": "objectid",
+                                "isEditable": false,
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": false
+                                },
+                                "visible": false,
+                                "label": "OBJECTID"
+                            },
+                            {
+                                "fieldName": "identificatie",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Identificatie"
+                            },
+                            {
+                                "fieldName": "status",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Status"
+                            },
+                            {
+                                "fieldName": "documentdatum",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Documentdatum"
+                            },
+                            {
+                                "fieldName": "documentnummer",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Documentnummer"
+                            },
+                            {
+                                "fieldName": "hoofdadresid",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "HoofdadresID"
+                            },
+                            {
+                                "fieldName": "versieid",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "VersieID"
+                            },
+                            {
+                                "fieldName": "voorkomenidentificatie",
+                                "isEditable": true,
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": true
+                                },
+                                "visible": false,
+                                "label": "Voorkomenidentificatie"
+                            },
+                            {
+                                "fieldName": "geconstateerd",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Geconstateerd"
+                            },
+                            {
+                                "fieldName": "begingeldigheid",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "BeginGeldigheid"
+                            },
+                            {
+                                "fieldName": "eindgeldigheid",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "EindGeldigheid"
+                            },
+                            {
+                                "fieldName": "tijdstipregistratie",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "TijdstipRegistratie"
+                            },
+                            {
+                                "fieldName": "eindregistratie",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "EindRegistratie"
+                            },
+                            {
+                                "fieldName": "tijdstipregistratielv",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "TijdstipRegistratieLV"
+                            },
+                            {
+                                "fieldName": "tijdstipeindregistratielv",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "TijdstipEindRegistratieLV"
+                            },
+                            {
+                                "fieldName": "Shape__Area",
+                                "isEditable": false,
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                },
+                                "visible": false,
+                                "label": "st_area(shape)"
+                            },
+                            {
+                                "fieldName": "Shape__Length",
+                                "isEditable": false,
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                },
+                                "visible": false,
+                                "label": "st_length(shape)"
+                            }
+                        ],
+                        "expressionInfos": []
+                    },
+                    "disablePopup": false,
+                    "showLegend": true
+                }
+            ],
+            "layerType": "GroupLayer"
+        },
+        {
+            "id": "PAT_c9476dd0954a40488d5b64af1f68c457",
+            "title": "Bag2",
+            "visibility": true,
+            "blendMode": "normal",
+            "opacity": 1,
+            "layers": [
+                {
+                    "id": "PAT_3abc5bf00150437abde244bc5c89820c",
+                    "title": "BAG 2.0 - ligplaats - Ligplaats",
+                    "visibility": true,
+                    "blendMode": "normal",
+                    "opacity": 1,
+                    "layerDefinition": {
+                        "minScale": 2500,
+                        "geometryType": "esriGeometryPolygon",
+                        "objectIdField": "objectid",
+                        "drawingInfo": {
+                            "renderer": {
+                                "type": "simple",
+                                "symbol": {
+                                    "type": "esriSFS",
+                                    "style": "esriSFSSolid",
+                                    "color": [
+                                        112,
+                                        168,
+                                        0,
+                                        255
+                                    ],
+                                    "outline": {
+                                        "type": "esriSLS",
+                                        "style": "esriSLSSolid",
+                                        "color": [
+                                            0,
+                                            112,
+                                            255,
+                                            255
+                                        ],
+                                        "width": 1
+                                    }
+                                }
+                            },
+                            "scaleSymbols": true
+                        },
+                        "templates": [
+                            {
+                                "name": "Ligplaats",
+                                "prototype": {
+                                    "attributes": {
+                                        "tijdstipeindregistratielv": null,
+                                        "tijdstipregistratielv": null,
+                                        "identificatie": null,
+                                        "status": null,
+                                        "documentdatum": null,
+                                        "documentnummer": null,
+                                        "hoofdadresid": null,
+                                        "versieid": null,
+                                        "voorkomenidentificatie": null,
+                                        "geconstateerd": null,
+                                        "begingeldigheid": null,
+                                        "eindgeldigheid": null,
+                                        "tijdstipregistratie": null,
+                                        "eindregistratie": null
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "url": "https://basisregistraties.arcgisonline.nl/arcgis/rest/services/BAG/BAGv3/FeatureServer/3",
+                    "layerType": "ArcGISFeatureLayer",
+                    "popupInfo": {
+                        "title": "Ligplaats: {identificatie}",
+                        "mediaInfos": [],
+                        "description": "Status: {status}<br />Ligplaats ID: {identificatie}",
+                        "showAttachments": true,
+                        "popupElements": [
+                            {
+                                "text": "Status: {status}<br />Ligplaats ID: {identificatie}",
+                                "type": "text"
+                            },
+                            {
+                                "displayType": "list",
+                                "type": "attachments"
+                            }
+                        ],
+                        "fieldInfos": [
+                            {
+                                "fieldName": "objectid",
+                                "isEditable": false,
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": false
+                                },
+                                "visible": false,
+                                "label": "OBJECTID"
+                            },
+                            {
+                                "fieldName": "identificatie",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Identificatie"
+                            },
+                            {
+                                "fieldName": "status",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Status"
+                            },
+                            {
+                                "fieldName": "documentdatum",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Documentdatum"
+                            },
+                            {
+                                "fieldName": "documentnummer",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Documentnummer"
+                            },
+                            {
+                                "fieldName": "hoofdadresid",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "HoofdadresID"
+                            },
+                            {
+                                "fieldName": "versieid",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "VersieID"
+                            },
+                            {
+                                "fieldName": "voorkomenidentificatie",
+                                "isEditable": true,
+                                "format": {
+                                    "places": 0,
+                                    "digitSeparator": true
+                                },
+                                "visible": false,
+                                "label": "Voorkomenidentificatie"
+                            },
+                            {
+                                "fieldName": "geconstateerd",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "Geconstateerd"
+                            },
+                            {
+                                "fieldName": "begingeldigheid",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "BeginGeldigheid"
+                            },
+                            {
+                                "fieldName": "eindgeldigheid",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "EindGeldigheid"
+                            },
+                            {
+                                "fieldName": "tijdstipregistratie",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "TijdstipRegistratie"
+                            },
+                            {
+                                "fieldName": "eindregistratie",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "EindRegistratie"
+                            },
+                            {
+                                "fieldName": "tijdstipregistratielv",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "TijdstipRegistratieLV"
+                            },
+                            {
+                                "fieldName": "tijdstipeindregistratielv",
+                                "isEditable": true,
+                                "visible": false,
+                                "label": "TijdstipEindRegistratieLV"
+                            },
+                            {
+                                "fieldName": "Shape__Area",
+                                "isEditable": false,
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                },
+                                "visible": false,
+                                "label": "st_area(shape)"
+                            },
+                            {
+                                "fieldName": "Shape__Length",
+                                "isEditable": false,
+                                "format": {
+                                    "places": 2,
+                                    "digitSeparator": true
+                                },
+                                "visible": false,
+                                "label": "st_length(shape)"
+                            }
+                        ],
+                        "expressionInfos": []
+                    },
+                    "disablePopup": false,
+                    "showLegend": true
+                }
+            ],
+            "layerType": "GroupLayer"
+        }
+    ],
+    "baseMap": {
+        "baseMapLayers": [
+            {
+                "itemId": "596c944d6ce24be2b96af02b7a6fef88",
+                "id": "188d3672d66-layer-2",
+                "title": "Topo_RD",
+                "visibility": true,
+                "blendMode": "normal",
+                "opacity": 1,
+                "type": "VectorTileLayer",
+                "styleUrl": "https://tiles.arcgis.com/tiles/nSZVuSZjHpEZZbRo/arcgis/rest/services/Topo_RD/VectorTileServer/resources/styles/root.json",
+                "layerType": "VectorTileLayer"
+            }
+        ],
+        "title": "Topo_RD"
+    },
+    "spatialReference": {
+        "wkid": 28992,
+        "latestWkid": 28992
+    },
+    "initialState": {
+        "viewpoint": {
+            "targetGeometry": {
+                "xmin": 234132.47529413406,
+                "ymin": 583045.4015569123,
+                "xmax": 234854.81963731092,
+                "ymax": 583531.5507656536,
+                "spatialReference": {
+                    "wkid": 28992,
+                    "latestWkid": 28992
+                }
+            }
+        }
+    },
+    "version": "2.22",
+    "authoringApp": "ArcGIS Pro",
+    "authoringAppVersion": "12.9.5.32739",
+    "tables": []
+}

@@ -112,6 +112,9 @@ namespace ProjectAtlasManager
     {
       if (item == null)
         return;
+      var clickedWebMapItem = (WebMapItem)item;
+      Module1.SelectedProjectTemplate = clickedWebMapItem.ID;
+      FrameworkApplication.State.Activate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
       OpenWebMapAsync(item);
     }
 
@@ -152,7 +155,7 @@ namespace ProjectAtlasManager
                   FrameworkApplication.Panes.OfType<IMapPane>();
                 foreach (var map_pane in map_panes)
                 {
-                  if (map_pane.MapView.Map.URI == null)
+                  if (map_pane.MapView.Map?.URI == null)
                   {
                     continue;
                   }

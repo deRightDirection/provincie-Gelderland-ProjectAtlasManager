@@ -1,11 +1,11 @@
 <ArcGIS defaultAssembly="ProjectAtlasManager.dll" defaultNamespace="ProjectAtlasManager" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.16" desktopVersion="2.9.8">
+  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.17" desktopVersion="2.9.8">
     <Name>ProjectAtlas Manager</Name>
     <Description>De projectatlas manager voor de provincie Gelderland</Description>
     <Image>Images\button.png</Image>
     <Author>the Right Direction BV</Author>
     <Company>the Right Direction BV</Company>
-    <Date>26/06/2023 13:30:00</Date>
+    <Date>30/06/2023 13:30:00</Date>
     <Subject>Framework</Subject>
   </AddInInfo>
   <conditions>
@@ -36,6 +36,11 @@
   </conditions>
   <modules>
     <insertModule id="ProjectAtlasManager_Module" className="Module1" autoLoad="false" caption="Module1">
+      <dockPanes>
+        <dockPane id="viewers_Dockpanel" caption="viewers" className="Dockpanes.ViewersDockpaneViewModel" dock="group" dockWith="esri_core_contentsDockPane">
+          <content className="Dockpanes.ViewersDockpane"/>
+        </dockPane>
+      </dockPanes>
       <tabs>
         <tab id="ProjectAtlasManager_Tab1" caption="ProjectAtlas Manager">
           <group refID="ProjectAtlasManager_Group1" />
@@ -57,11 +62,13 @@
           <button refID="ProjectAtlasManager_SynchronizeTemplateButton" size="large" />
           <button refID="ProjectAtlasManager_DeleteTemplateButton" size="large" />
         </group>
+        <!--
         <group id="ProjectAtlasManager_Group3" caption="viewers" appearsOnAddInTab="false">
           <button refID="ProjectAtlasManager_NewViewerButton" size="large" />
           <gallery refID="viewersGallery" inline="false" size="large" />
           <button refID="ProjectAtlasManager_DeleteViewerButton" size="large" />
         </group>
+        -->
         <group id="ProjectAtlasManager_Group4" caption="sharing" appearsOnAddInTab="false">
           <button refID="esri_sharing_SaveWebMap" />
           <button refID="esri_sharing_SharingAsWebMapPaneBtn" />
@@ -84,6 +91,7 @@
         <button id="ProjectAtlasManager_DeleteTemplateButton" caption="verwijder een template" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="DeleteTemplateButton" loadOnClick="true" smallImage="Images/deletetemplate.png" largeImage="Images/deletetemplate.png">
           <tooltip heading="Verwijder template">Verwijder een template. De tags 'Template', 'ProjectAtlas' en 'PAT[itemid]' worden verwijderd van de webmap.<disabledText>Geen template geselecteerd</disabledText></tooltip>
         </button>
+        <!--
         <button id="ProjectAtlasManager_NewViewerButton" caption="maak een nieuwe webmap" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="Viewers.NewViewerButton" loadOnClick="true" smallImage="Images/newviewer.png" largeImage="Images/newviewer.png">
           <tooltip heading="Nieuwe webmap">
             Maak een nieuwe webmap gebaseerd op het geselecteerde template. De tags 'CopyOfTemplate', 'ProjectAtlas' en 'PAT[itemid]' worden toegevoegd aan de webmap.<disabledText>Geen template geselecteerd</disabledText></tooltip>
@@ -92,6 +100,7 @@
           <tooltip heading="Verwijder webmap">
             Verwijder een of meerdere viewers. De tags 'CopyOfTemplate', 'ProjectAtlas' en 'PAT[itemid]' worden verwijderd van de webmap.<disabledText>Geen template geselecteerd</disabledText></tooltip>
         </button>
+        -->
       </controls>
       <galleries>
         <gallery
@@ -125,6 +134,7 @@
           <tooltip heading="selecteer template">
             Selecteer een template, open de template en voer hier een actie mee uit. De query om templates te vinden is: zoek alle webmaps die de tags 'ProjectAtlas' en 'Template' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.<disabledText>geen templates beschikbaar</disabledText></tooltip>
         </gallery>
+        <!--
         <gallery
           id="viewersGallery"
           caption="selecteer een webmap"
@@ -140,6 +150,7 @@
           <tooltip heading="selecteer webmap">
             Open een webmap. De query om webmaps te vinden is: zoek alle webmaps die de tags 'ProjectAtlas', 'CopyOfTemplate' en 'PAT[id van template webmap]' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.<disabledText>geen templates beschikbaar</disabledText></tooltip>
         </gallery>
+        -->
       </galleries>
     </insertModule>
   </modules>

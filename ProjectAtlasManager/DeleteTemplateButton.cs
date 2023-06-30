@@ -40,9 +40,9 @@ namespace ProjectAtlasManager
       {
         Limit = 100
       };
-      await QueuedTask.Run(async () =>
-      {
-        var results = await portal.SearchForContentAsync(query);
+      Module1.SelectedProjectTemplate = string.Empty;
+      Module1.SelectedProjectTemplateName = string.Empty;
+      var results = await portal.SearchForContentAsync(query);
         var item = results.Results.FirstOrDefault();
         if (item == null)
         {
@@ -57,14 +57,13 @@ namespace ProjectAtlasManager
           Limit = 100
         };
         var mapsBasedOnTemplate = await portal.SearchForContentAsync(viewersBasedOnTemplateQuery);
-        foreach(var viewer in mapsBasedOnTemplate.Results)
+        foreach (var viewer in mapsBasedOnTemplate.Results)
         {
           var tags2 = TagsHelper.UpdateTags(viewer);
           await portalClient.UpdateTags(viewer, tags2);
           await portalClient.UpdateTemplate(viewer, false);
         }
-      });
-      Thread.Sleep(750);
+      Thread.Sleep(1500);
       EventSender.Publish(new UpdateGalleryEvent());
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
     }

@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace ProjectAtlasManager.Viewers
 {
+  [Obsolete("is in dockpane verwerkt")]
   class DeleteViewerButton : Button
   {
     private DeleteViewersWindow _deleteViewersWindow = null;

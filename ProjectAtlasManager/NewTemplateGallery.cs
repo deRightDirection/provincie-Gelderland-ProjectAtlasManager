@@ -41,8 +41,12 @@ namespace ProjectAtlasManager
 
     private void RenewData(EventBase eventData)
     {
-      Clear();
-      LoadItemsAsync();
+      var updateGalleryEvent = eventData as UpdateGalleryEvent;
+      if (updateGalleryEvent != null && updateGalleryEvent.UpdateWebmapsGallery)
+      {
+        Clear();
+        LoadItemsAsync();
+      }
     }
 
     protected override void OnDropDownOpened()

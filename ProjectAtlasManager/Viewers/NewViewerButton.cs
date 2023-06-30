@@ -8,12 +8,14 @@ using ProjectAtlasManager.Services;
 using ProjectAtlasManager.ViewModels;
 using ProjectAtlasManager.Web;
 using ProjectAtlasManager.Windows;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjectAtlasManager.Viewers
 {
+  [Obsolete("is in dockpane verwerkt")]
   internal class NewViewerButton : Button
   {
     private NewViewerWindow _newviewerwindow = null;

@@ -26,6 +26,7 @@ namespace ProjectAtlasManager
     /// het geselecteerde template
     /// </summary>
     internal static string SelectedProjectTemplate { get; set; }
+    internal static string SelectedProjectTemplateName { get; set; }
     /// <summary>
     /// de webmap die opgewaardeerd kan worden naar een template
     /// </summary>

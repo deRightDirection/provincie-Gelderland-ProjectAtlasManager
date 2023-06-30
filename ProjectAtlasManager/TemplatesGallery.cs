@@ -6,6 +6,7 @@ using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Mapping;
+using ProjectAtlasManager.Dockpanes;
 using ProjectAtlasManager.Domain;
 using ProjectAtlasManager.Events;
 using ProjectAtlasManager.Services;
@@ -40,8 +41,12 @@ namespace ProjectAtlasManager
 
     private void RenewData(EventBase eventData)
     {
-      Clear();
-      LoadItemsAsync();
+      var updateGalleryEvent = eventData as UpdateGalleryEvent;
+      if (updateGalleryEvent != null && updateGalleryEvent.UpdateTemplatesGallery)
+      {
+        Clear();
+        LoadItemsAsync();
+      }
     }
 
     protected override void OnDropDownOpened()
@@ -114,8 +119,10 @@ namespace ProjectAtlasManager
         return;
       var clickedWebMapItem = (WebMapItem)item;
       Module1.SelectedProjectTemplate = clickedWebMapItem.ID;
+      Module1.SelectedProjectTemplateName = clickedWebMapItem.Title;
       FrameworkApplication.State.Activate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
       OpenWebMapAsync(item);
+      ViewersDockpaneViewModel.ShowOrHide();
     }
 
     /// <summary>
@@ -187,6 +194,7 @@ namespace ProjectAtlasManager
         {
           _galleryBusy = false;
           FrameworkApplication.State.Deactivate("TemplatesGallery_Is_Busy_State");
+          EventSender.Publish(new UpdateGalleryEvent() { UpdateTemplatesGallery = false, UpdateWebmapsGallery = false, UpdateViewersGallery = true });
         }
       }
     }

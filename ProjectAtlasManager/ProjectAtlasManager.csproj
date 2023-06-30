@@ -44,6 +44,9 @@
     <ArcGISFolder Condition="'$(ArcGISFolder)' == ''">$(registry:HKEY_CURRENT_USER\SOFTWARE\ESRI\ArcGISPro@InstallDir)</ArcGISFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommunityToolkit.Mvvm, Version=8.2.0.0, Culture=neutral, PublicKeyToken=4aff67a105548ee2, processorArchitecture=MSIL">
+      <HintPath>packages\CommunityToolkit.Mvvm.8.2.0\lib\netstandard2.0\CommunityToolkit.Mvvm.dll</HintPath>
+    </Reference>
     <Reference Include="Flurl, Version=3.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Flurl.3.0.7\lib\net472\Flurl.dll</HintPath>
     </Reference>
@@ -226,6 +229,10 @@
     <Compile Include="Converters\UriSourceForThumbnailConverter.cs" />
     <Compile Include="CreateNewTemplateButton.cs" />
     <Compile Include="DeleteTemplateButton.cs" />
+    <Compile Include="Dockpanes\ViewersDockpane.xaml.cs">
+      <DependentUpon>ViewersDockpane.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dockpanes\ViewersDockpaneViewModel.cs" />
     <Compile Include="Domain\WebmapItem.cs" />
     <Compile Include="Services\PortalItemExtension.cs" />
     <Compile Include="Services\StringExtension.cs" />
@@ -265,6 +272,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="BackstageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dockpanes\ViewersDockpane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -313,9 +324,9 @@
     <AddInContent Include="Images\opentemplate.png" />
   </ItemGroup>
   <ItemGroup>
-    <AddInContent Include="Images\deleteviewer.png" />
-    <AddInContent Include="Images\newviewer.png" />
-    <AddInContent Include="Images\viewer.png" />
+    <Resource Include="Images\deleteviewer.png" />
+    <Resource Include="Images\newviewer.png" />
+    <Resource Include="Images\viewer.png" />
   </ItemGroup>
   <ItemGroup>
     <AddInContent Include="Images\templates.png" />
@@ -341,6 +352,13 @@
   <UsingTask AssemblyFile="C:\Program Files\ArcGIS\Pro\bin\proapp-sdk-MSBuild.dll" TaskName="proapp_sdk_MSBuild.ConvertToRelativePath" />
   <!--<Import Project="Esri.ArcGISPro.Extensions.targets" Condition="Exists('Esri.ArcGISPro.Extensions.targets')" />-->
   <Import Project="C:\Program Files\ArcGIS\Pro\bin\Esri.ProApp.SDK.Desktop.targets" Condition="Exists('C:\Program Files\ArcGIS\Pro\bin\Esri.ProApp.SDK.Desktop.targets') AND !Exists('Esri.ArcGISPro.Extensions.targets')" />
+  <Import Project="packages\CommunityToolkit.Mvvm.8.2.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets" Condition="Exists('packages\CommunityToolkit.Mvvm.8.2.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\CommunityToolkit.Mvvm.8.2.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CommunityToolkit.Mvvm.8.2.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

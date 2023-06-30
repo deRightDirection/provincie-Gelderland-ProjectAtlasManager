@@ -23,6 +23,7 @@ using ProjectAtlasManager.Events;
 
 namespace ProjectAtlasManager.Viewers
 {
+  [Obsolete("is in dockpane verwerkt")]
   internal class ViewersGallery : Gallery
   {
     private bool _isInitialized;

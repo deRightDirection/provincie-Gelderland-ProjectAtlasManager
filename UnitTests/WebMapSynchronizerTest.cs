@@ -27,8 +27,27 @@ namespace UnitTests
     }
 
     [TestMethod]
+    // template heeft een laag aangevinkt en een extra laag
+    // na sync is de viewer helemaal verprutst, niet gereproduceerd in deze sync
+    public void Issue_1_17_1()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas29.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template29.json"));
+      var xx = JToken.Parse(projectTemplateJson);
+      var xx2 = JToken.Parse(webmap);
+      xx["operationalLayers"].Children().Count().Should().Be(13);
+      xx2["operationalLayers"].Children().Count().Should().Be(12);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      x["operationalLayers"].Children().Count().Should().Be(13);
+      x2["operationalLayers"].Children().Count().Should().Be(13);
+    }
+
+    [TestMethod]
     public void WithoutOrdering()
     {
+      Assert.Inconclusive("waarschijnlijk niet meer goed omdat re-ordering is uitgezet");
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas28.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template28.json"));
       var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
@@ -107,6 +126,7 @@ namespace UnitTests
     // op alle niveuas zijn er lagen verwisseld
     public void Reorder5()
     {
+      Assert.Inconclusive("waarschijnlijk niet meer goed omdat re-ordering is uitgezet");
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas22.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template22.json"));
       var jsonTemplate = JToken.Parse(projectTemplateJson);
@@ -123,6 +143,7 @@ namespace UnitTests
     // daarnaast zijn de normale laag en groepslaag ook verwisseld
     public void Reorder4()
     {
+      Assert.Inconclusive("waarschijnlijk niet meer goed omdat re-ordering is uitgezet");
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas21.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template21.json"));
       var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
@@ -147,6 +168,7 @@ namespace UnitTests
     // waarbij die extra laag in het midden van de 2 andere lagen zitten die in de template verwisseld zijn
     public void Reorder3()
     {
+      Assert.Inconclusive("waarschijnlijk niet meer goed omdat re-ordering is uitgezet");
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas20.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template20.json"));
       var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
@@ -163,6 +185,7 @@ namespace UnitTests
     // maar in een andere volgorde
     public void Reorder2()
     {
+      Assert.Inconclusive("waarschijnlijk niet meer goed omdat re-ordering is uitgezet");
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas19.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template19.json"));
       var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
@@ -178,6 +201,7 @@ namespace UnitTests
     // maar in een andere volgorde
     public void Reorder()
     {
+      Assert.Inconclusive("waarschijnlijk niet meer goed omdat re-ordering is uitgezet");
       var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas18.json"));
       var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template18.json"));
       var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);

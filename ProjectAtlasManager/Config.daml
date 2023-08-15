@@ -1,11 +1,11 @@
 <ArcGIS defaultAssembly="ProjectAtlasManager.dll" defaultNamespace="ProjectAtlasManager" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.17" desktopVersion="2.9.8">
+  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.18" desktopVersion="2.9.8">
     <Name>ProjectAtlas Manager</Name>
     <Description>De projectatlas manager voor de provincie Gelderland</Description>
     <Image>Images\button.png</Image>
     <Author>the Right Direction BV</Author>
     <Company>the Right Direction BV</Company>
-    <Date>30/06/2023 13:30:00</Date>
+    <Date>15/08/2023 13:30:00</Date>
     <Subject>Framework</Subject>
   </AddInInfo>
   <conditions>
@@ -37,7 +37,7 @@
   <modules>
     <insertModule id="ProjectAtlasManager_Module" className="Module1" autoLoad="false" caption="Module1">
       <dockPanes>
-        <dockPane id="viewers_Dockpanel" caption="viewers" className="Dockpanes.ViewersDockpaneViewModel" dock="group" dockWith="esri_core_contentsDockPane">
+        <dockPane id="viewers_Dockpanel" caption="Viewers" className="Dockpanes.ViewersDockpaneViewModel" dock="group" dockWith="esri_core_contentsDockPane">
           <content className="Dockpanes.ViewersDockpane"/>
         </dockPane>
       </dockPanes>

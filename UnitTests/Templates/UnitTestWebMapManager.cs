@@ -42,8 +42,9 @@ namespace UnitTests.Templates
       }
       layersInWebMap = RetrieveLayers(webmapData);
       var newOrder = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, 0, null);
-//      var newOrder = layersInWebMap;
       var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
+      // 23-06-2023: op verzoek van Mark uitgezet
+      //var json = CreateNewOperationalLayerJsonObject(layersInWebMap, new JArray());
       var webmap = JObject.Parse(webmapData);
       webmap["operationalLayers"] = json;
       return webmap.ToString();
@@ -199,8 +200,9 @@ namespace UnitTests.Templates
           var newSubLayers = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, webmapLayer.Level + 1, webmapLayer.Id);
           webmapLayer.SubLayers = newSubLayers.ToList();
         }
-//        var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
-//        webmapLayer.NewIndex = templateLayer?.Index ?? webmapLayer.Index;
+        // 23-06-2023: op verzoek van Mark uitgezet
+        //        var templateLayer = templateLayers.FirstOrDefault(x => x.Id.Equals(webmapLayer.Id));
+        //        webmapLayer.NewIndex = templateLayer?.Index ?? webmapLayer.Index;
       }
 
       return webmapLayers;

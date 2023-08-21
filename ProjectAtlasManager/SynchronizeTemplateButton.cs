@@ -20,6 +20,7 @@ namespace ProjectAtlasManager
     private List<string> _itemIds;
 
     private ProgressDialog progDialog;
+
     protected override async void OnClick()
     {
       if (_syncviewersfromtemplatewindow != null)
@@ -37,7 +38,7 @@ namespace ProjectAtlasManager
         _syncviewersfromtemplatewindow = null;
       };
       var result = _syncviewersfromtemplatewindow.ShowDialog();
-      if(_itemIds != null && _itemIds.Any())
+      if (_itemIds != null && _itemIds.Any())
       {
         progDialog = new ProgressDialog("Synchroniseren webmaps...");
         progDialog.Show();
@@ -54,12 +55,13 @@ namespace ProjectAtlasManager
       return QueuedTask.Run(async () =>
       {
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
-        var item = results.Results.FirstOrDefault();
-        if (item == null)
+        var projectTemplate = results.Results.FirstOrDefault();
+        if (projectTemplate == null)
         {
           return;
         }
-        var templateWebmapData = await portalClient.GetDataFromItem(item);
+        await portalClient.UpdateTemplate(projectTemplate, true);
+        var templateWebmapData = await portalClient.GetDataFromItem(projectTemplate);
         var webmapSynchronizer = new WebMapManager(templateWebmapData);
         Parallel.ForEach(viewers, async x =>
         {

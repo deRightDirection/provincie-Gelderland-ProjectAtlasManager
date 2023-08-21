@@ -50,6 +50,7 @@ namespace ProjectAtlasManager
         {
           return;
         }
+        item.Refresh();
         var tags = TagsHelper.ParseTags(item);
         if(!tags.Contains("Template"))
         {

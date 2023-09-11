@@ -127,7 +127,7 @@ namespace ProjectAtlasManager.Services
       {
         var filter = $"..*[?(@.id == '{layerToRemove.Id}')]";
         var webmapLayer = (JObject)webmap.SelectToken(filter);
-        webmapLayer.Remove();
+        webmapLayer?.Remove();
       }
       return webmap.ToString();
     }

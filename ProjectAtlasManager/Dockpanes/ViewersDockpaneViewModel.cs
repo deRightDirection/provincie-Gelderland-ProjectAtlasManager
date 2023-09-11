@@ -59,7 +59,11 @@ namespace ProjectAtlasManager.Dockpanes
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
-        _viewers.Clear();
+        try
+        {
+          _viewers.Clear();
+        }
+        catch (Exception e) { }
         LoadItemsAsync();
       });
       NewViewerCommand = new AsyncRelayCommand(NewViewer, CanNewViewer);
@@ -214,7 +218,12 @@ namespace ProjectAtlasManager.Dockpanes
       if (string.IsNullOrEmpty(Module1.SelectedProjectTemplate))
       {
         Template = "";
-        _viewers.Clear();
+        try
+        {
+          _viewers.Clear();
+        }
+        catch (Exception e)
+        { }
         var pane = FrameworkApplication.DockPaneManager.Find(DockPaneId);
         if (pane != null)
         {

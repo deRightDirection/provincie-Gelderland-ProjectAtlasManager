@@ -1,11 +1,11 @@
 <ArcGIS defaultAssembly="ProjectAtlasManager.dll" defaultNamespace="ProjectAtlasManager" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.20" desktopVersion="2.9.10">
+  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.21" desktopVersion="2.9.10">
     <Name>ProjectAtlas Manager</Name>
     <Description>De projectatlas manager voor de provincie Gelderland</Description>
     <Image>Images\button.png</Image>
     <Author>the Right Direction BV</Author>
     <Company>the Right Direction BV</Company>
-    <Date>11/09/2023 9:55:00</Date>
+    <Date>18/10/2023 9:55:00</Date>
     <Subject>Framework</Subject>
   </AddInInfo>
   <conditions>
@@ -50,17 +50,17 @@
         </tab>
       </tabs>
       <groups>
-        <group id="ProjectAtlasManager_Group1" caption="webmaps" appearsOnAddInTab="false">
+        <group id="ProjectAtlasManager_Group1" caption="Webmap templates" appearsOnAddInTab="false">
           <!-- bekijk alle webmaps en markeer een webmap als template -->
-          <gallery refID="newTemplateGallery" inline="false" size="large" />
           <button refID="ProjectAtlasManager_SyncWebmapsButton" size="large" />
+          <gallery refID="newTemplateGallery" inline="false" size="large" />
           <button refID="ProjectAtlasManager_CreateNewTemplateButton" size="large" />
+          <button refID="ProjectAtlasManager_DeleteTemplateButton" size="large" />
         </group>
-        <group id="ProjectAtlasManager_Group2" caption="templates" appearsOnAddInTab="false">
+        <group id="ProjectAtlasManager_Group2" caption="Webmap afgeleiden" appearsOnAddInTab="false">
           <!-- bekijk alle templates -->
           <gallery refID="showTemplatesGallery" inline="false" size="large" />
           <button refID="ProjectAtlasManager_SynchronizeTemplateButton" size="large" />
-          <button refID="ProjectAtlasManager_DeleteTemplateButton" size="large" />
         </group>
         <!--
         <group id="ProjectAtlasManager_Group3" caption="viewers" appearsOnAddInTab="false">
@@ -69,9 +69,11 @@
           <button refID="ProjectAtlasManager_DeleteViewerButton" size="large" />
         </group>
         -->
-        <group id="ProjectAtlasManager_Group4" caption="sharing" appearsOnAddInTab="false">
+        <group id="ProjectAtlasManager_Group4" caption="Webmap overschrijven" appearsOnAddInTab="false">
           <button refID="esri_sharing_SaveWebMap" />
+          <!--
           <button refID="esri_sharing_SharingAsWebMapPaneBtn" />
+          -->
         </group>
       </groups>
       <controls>

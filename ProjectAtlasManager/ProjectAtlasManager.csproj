@@ -234,13 +234,11 @@
     </Compile>
     <Compile Include="Dockpanes\ViewersDockpaneViewModel.cs" />
     <Compile Include="Domain\WebmapItem.cs" />
-    <Compile Include="Services\PortalItemExtension.cs" />
     <Compile Include="Services\StringExtension.cs" />
     <Compile Include="Services\TagsHelper.cs" />
     <Compile Include="Viewers\DeleteViewerButton.cs" />
     <Compile Include="Domain\OperationalLayer.cs" />
     <Compile Include="Domain\PortalInformation.cs" />
-    <Compile Include="Domain\WebMap.cs" />
     <Compile Include="Events\EventSender.cs" />
     <Compile Include="Events\UpdateGalleryEvent.cs" />
     <Compile Include="Module1.cs" />

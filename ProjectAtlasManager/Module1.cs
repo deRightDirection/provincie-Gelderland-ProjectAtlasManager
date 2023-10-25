@@ -7,6 +7,7 @@ namespace ProjectAtlasManager
   {
     private static Module1 _this = null;
     private static string ModuleID = "ProjectAtlasManager_Module";
+    internal static readonly object _lock = new object();
 
     /// <summary>
     /// Retrieve the singleton instance to this module here

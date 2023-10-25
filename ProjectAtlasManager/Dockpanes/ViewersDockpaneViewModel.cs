@@ -40,8 +40,8 @@ namespace ProjectAtlasManager.Dockpanes
 
     protected override Task InitializeAsync()
     {
-        BindingOperations.EnableCollectionSynchronization(Viewers, Module1._lock);
-        return base.InitializeAsync();
+      BindingOperations.EnableCollectionSynchronization(Viewers, Module1._lock);
+      return base.InitializeAsync();
     }
 
     internal static void ShowOrHide()
@@ -192,8 +192,20 @@ namespace ProjectAtlasManager.Dockpanes
     }
     public ObservableCollection<WebMapItem> Viewers
     {
-      get => _viewers;
-      set => SetProperty(ref _viewers, value);
+      get
+      {
+        lock (Module1._lock)
+        {
+          return _viewers;
+        }
+      }
+      set
+      {
+        lock (Module1._lock)
+        {
+          SetProperty(ref _viewers, value);
+        }
+      }
     }
     public WebMapItem SelectedViewer
     {
@@ -215,8 +227,11 @@ namespace ProjectAtlasManager.Dockpanes
       var updateGalleryEvent = eventData as UpdateGalleryEvent;
       if (updateGalleryEvent != null && updateGalleryEvent.UpdateViewersGallery)
       {
-        _viewers.Clear();
-        LoadItemsAsync();
+        lock (Module1._lock)
+        {
+          _viewers.Clear();
+          LoadItemsAsync();
+        }
       }
     }
 
@@ -227,11 +242,20 @@ namespace ProjectAtlasManager.Dockpanes
       if (string.IsNullOrEmpty(Module1.SelectedProjectTemplate))
       {
         Template = "";
-        _viewers.Clear();
-        var pane = FrameworkApplication.DockPaneManager.Find(DockPaneId);
-        if (pane != null)
+        lock (Module1._lock)
         {
-          pane.IsVisible = false;
+          _viewers.Clear();
+          var pane = FrameworkApplication.DockPaneManager.Find(DockPaneId);
+          if (pane != null)
+          {
+            try
+            {
+              pane.IsVisible = false;
+            }
+            catch (InvalidOperationException e)
+            {
+            }
+          }
         }
         return;
       }
@@ -244,15 +268,21 @@ namespace ProjectAtlasManager.Dockpanes
         var portal = ArcGISPortalManager.Current.GetActivePortal();
         if (portal == null)
         {
-          _viewers.Clear();
-          LoadingMessage = "Sign on to retrieve web maps";
+          lock (Module1._lock)
+          {
+            _viewers.Clear();
+            LoadingMessage = "Sign on to retrieve web maps";
+          }
           return;
         }
         var signedOn = await QueuedTask.Run(() => portal.IsSignedOn()).ConfigureAwait(false);
         if (!signedOn)
         {
-          _viewers.Clear();
-          LoadingMessage = "Sign on to retrieve web maps";
+          lock (Module1._lock)
+          {
+            _viewers.Clear();
+            LoadingMessage = "Sign on to retrieve web maps";
+          }
           return;
         }
         var portalInfo = await portal.GetPortalInfoAsync().ConfigureAwait(false);
@@ -264,12 +294,18 @@ namespace ProjectAtlasManager.Dockpanes
         var results = await portal.SearchForContentAsync(query).ConfigureAwait(false);
         if (results == null)
         {
-          Viewers.Clear();
+          lock (Module1._lock)
+          {
+            Viewers.Clear();
+          }
           return;
         }
         foreach (var item in results.Results.OrderBy(x => x.Title))
         {
-          Viewers.Add(new WebMapItem(item));
+          lock (Module1._lock)
+          {
+            Viewers.Add(new WebMapItem(item));
+          }
         }
         LoadingMessage = string.Empty;
       }
@@ -315,7 +351,10 @@ namespace ProjectAtlasManager.Dockpanes
       var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
       await portalClient.UpdateTemplate(item, true).ConfigureAwait(false);
       await portalClient.CreateViewerFromTemplate(item, _name, tags).ConfigureAwait(false);
-      _viewers.Clear();
+      lock (Module1._lock)
+      {
+        _viewers.Clear();
+      }
       await Task.Delay(1500).ConfigureAwait(false);
       EventSender.Publish(new UpdateGalleryEvent() { UpdateTemplatesGallery = false, UpdateWebmapsGallery = false, UpdateViewersGallery = true });
     }

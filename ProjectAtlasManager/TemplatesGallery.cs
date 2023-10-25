@@ -137,8 +137,6 @@ namespace ProjectAtlasManager
       {
         _galleryBusy = true;
         FrameworkApplication.State.Activate("TemplatesGallery_Is_Busy_State");
-        try
-        {
           await QueuedTask.Run(async () =>
           {
             //Open WebMap
@@ -174,7 +172,7 @@ namespace ProjectAtlasManager
                     return;
                   }
                 }
-
+                map.UpdateSummary(map.GetMetadata(), clickedWebMapItem.Snippet);
                 //open a new pane
                 await FrameworkApplication.Panes.CreateMapPaneAsync(map);
                 return;
@@ -185,18 +183,15 @@ namespace ProjectAtlasManager
             if (MapFactory.Instance.CanCreateMapFrom(currentItem))
             {
               var newMap = MapFactory.Instance.CreateMapFromItem(currentItem);
+              newMap.UpdateSummary(newMap.GetMetadata(), clickedWebMapItem.Snippet);
               await FrameworkApplication.Panes.CreateMapPaneAsync(newMap);
             }
 
           });
-        }
-        finally
-        {
           _galleryBusy = false;
           FrameworkApplication.State.Deactivate("TemplatesGallery_Is_Busy_State");
           EventSender.Publish(new UpdateGalleryEvent() { UpdateTemplatesGallery = false, UpdateWebmapsGallery = false, UpdateViewersGallery = true });
         }
-      }
     }
   }
 }

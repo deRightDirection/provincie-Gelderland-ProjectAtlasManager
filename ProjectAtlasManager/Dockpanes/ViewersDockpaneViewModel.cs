@@ -18,7 +18,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Threading;
 
 namespace ProjectAtlasManager.Dockpanes
 {
@@ -82,7 +84,10 @@ namespace ProjectAtlasManager.Dockpanes
 
     private bool CanDeleteViewer()
     {
-      return !string.IsNullOrEmpty(Module1.SelectedProjectTemplate) && Viewers.Any();
+      lock(Module1._lock)
+      {
+        return !string.IsNullOrEmpty(Module1.SelectedProjectTemplate) && Viewers.Any();
+      }
     }
 
     private bool CanNewViewer()
@@ -263,8 +268,6 @@ namespace ProjectAtlasManager.Dockpanes
       LoadingMessage = "Loading viewers...";
       Template = Module1.SelectedProjectTemplateName;
       FrameworkApplication.State.Activate("ViewersGallery_Is_Busy_State");
-      try
-      {
         var portal = ArcGISPortalManager.Current.GetActivePortal();
         if (portal == null)
         {
@@ -308,14 +311,13 @@ namespace ProjectAtlasManager.Dockpanes
           }
         }
         LoadingMessage = string.Empty;
-      }
-      finally
-      {
         _galleryBusy = false;
         FrameworkApplication.State.Deactivate("ViewersGallery_Is_Busy_State");
+      FrameworkApplication.Current.Dispatcher.Invoke(() =>
+      {
         NewViewerCommand.NotifyCanExecuteChanged();
         DeleteViewerCommand.NotifyCanExecuteChanged();
-      }
+      }); 
     }
 
     private async Task CreateNewViewerFromTemplate()

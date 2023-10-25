@@ -10,11 +10,12 @@ namespace ProjectAtlasManager.Services
 {
   internal static class MapExtension
   {
-    internal static string UpdateSummary(this string mapMetadata, string summary)
+    internal static void UpdateSummary(this Map map, string summary)
     {
+      var mapMetadata = map.GetMetadata();
       if (string.IsNullOrEmpty(mapMetadata))
       {
-        return string.Empty;
+        return;
       }
       XElement xml = null;
       try
@@ -23,19 +24,18 @@ namespace ProjectAtlasManager.Services
       }
       catch (Exception e)
       {
-        return string.Empty;
+        return;
       }
       if (xml == null)
       {
-        return string.Empty;
+        return;
       }
       var summaryElement = xml.Element("dataIdInfo")?.Element("idPurp");
       if (summaryElement != null)
       {
         summaryElement.Value = summary;
       }
-
-      return xml.ToString();
+      map.SetMetadata(xml.ToString());
     }
   }
 }

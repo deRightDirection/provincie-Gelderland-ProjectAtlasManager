@@ -152,6 +152,8 @@ namespace ProjectAtlasManager
               if (mapItem != null)
               {
                 var map = mapItem.GetMap();
+                // TODO description uit portaal ophalen
+                map.UpdateSummary(clickedWebMapItem.Snippet);
                 //is this map already active?
                 if (MapView.Active?.Map?.URI == map.URI)
                   return;
@@ -172,7 +174,6 @@ namespace ProjectAtlasManager
                     return;
                   }
                 }
-                map.UpdateSummary(map.GetMetadata(), clickedWebMapItem.Snippet);
                 //open a new pane
                 await FrameworkApplication.Panes.CreateMapPaneAsync(map);
                 return;
@@ -183,7 +184,8 @@ namespace ProjectAtlasManager
             if (MapFactory.Instance.CanCreateMapFrom(currentItem))
             {
               var newMap = MapFactory.Instance.CreateMapFromItem(currentItem);
-              newMap.UpdateSummary(newMap.GetMetadata(), clickedWebMapItem.Snippet);
+              // TODO description uit portaal ophalen
+              newMap.UpdateSummary(clickedWebMapItem.Snippet);
               await FrameworkApplication.Panes.CreateMapPaneAsync(newMap);
             }
 

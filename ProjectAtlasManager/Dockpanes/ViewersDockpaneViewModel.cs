@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace ProjectAtlasManager.Dockpanes
 {
@@ -36,6 +37,12 @@ namespace ProjectAtlasManager.Dockpanes
     private List<string> _itemIds;
     private bool _removeAsItem;
     private ProgressDialog _progDialog;
+
+    protected override Task InitializeAsync()
+    {
+        BindingOperations.EnableCollectionSynchronization(Viewers, Module1._lock);
+        return base.InitializeAsync();
+    }
 
     internal static void ShowOrHide()
     {

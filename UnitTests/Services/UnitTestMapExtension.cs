@@ -1,14 +1,9 @@
-using ArcGIS.Desktop.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
+using System;
 
-namespace ProjectAtlasManager.Services
+namespace UnitTests.Services
 {
-  internal static class MapExtension
+  internal static class UnitTestMapExtension
   {
     internal static string UpdateSummary(this string mapMetadata, string summary)
     {

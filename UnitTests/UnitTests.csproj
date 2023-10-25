@@ -72,6 +72,8 @@
     <Compile Include="Domain\OperationalLayer.cs" />
     <Compile Include="Domain\PortalInformation.cs" />
     <Compile Include="Domain\WebMap.cs" />
+    <Compile Include="MapExtensionTest.cs" />
+    <Compile Include="Services\UnitTestMapExtension.cs" />
     <Compile Include="Templates\UnitTestWebMapManager.cs" />
     <Compile Include="WebMapSynchronizerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,7 +83,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logging\Log4NetConfiguration.xml" />
+    <None Include="metadata.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -37,7 +37,7 @@
   <modules>
     <insertModule id="ProjectAtlasManager_Module" className="Module1" autoLoad="false" caption="Module1">
       <dockPanes>
-        <dockPane id="viewers_Dockpanel" caption="Viewers" className="Dockpanes.ViewersDockpaneViewModel" dock="group" dockWith="esri_core_contentsDockPane">
+        <dockPane id="viewers_Dockpanel" caption="Afgeleiden" className="Dockpanes.ViewersDockpaneViewModel" dock="group" dockWith="esri_core_contentsDockPane">
           <content className="Dockpanes.ViewersDockpane" />
         </dockPane>
       </dockPanes>
@@ -62,57 +62,39 @@
           <gallery refID="showTemplatesGallery" inline="false" size="large" />
           <button refID="ProjectAtlasManager_SynchronizeTemplateButton" size="large" />
         </group>
-        <!--
-        <group id="ProjectAtlasManager_Group3" caption="viewers" appearsOnAddInTab="false">
-          <button refID="ProjectAtlasManager_NewViewerButton" size="large" />
-          <gallery refID="viewersGallery" inline="false" size="large" />
-          <button refID="ProjectAtlasManager_DeleteViewerButton" size="large" />
-        </group>
-        -->
         <group id="ProjectAtlasManager_Group4" caption="Webmap overschrijven" appearsOnAddInTab="false">
           <button refID="esri_sharing_SaveWebMap" />
-          <!--
-          <button refID="esri_sharing_SharingAsWebMapPaneBtn" />
-          -->
         </group>
       </groups>
       <controls>
-        <button id="ProjectAtlasManager_SyncWebmapsButton" caption="synchroniseer webmaps" className="Buttons.SyncWebmapsButton" loadOnClick="true" smallImage="Images/syncwebmaps.png" largeImage="Images/syncwebmaps.png">
+        <button id="ProjectAtlasManager_SyncWebmapsButton" caption="Synchroniseer webmaps" className="Buttons.SyncWebmapsButton" loadOnClick="true" smallImage="Images/syncwebmaps.png" largeImage="Images/syncwebmaps.png">
           <tooltip heading="Synchroniseer webmaps">
-            Synchroniseer de lijst met webmaps
+            Synchroniseer de lijst met webmaps aan de hand van het ingelogde Portaal. De query voor webmaps die getoond moeten worden is: zoek alle webmaps zonder de tag 'ProjectAtlas' binnen de eigen organisatie van de ingelogde gebruiker.
           </tooltip>
         </button>
-        <button id="ProjectAtlasManager_CreateNewTemplateButton" caption="maak van de webmap een template" condition="ProjectAtlasManager_Module_WebMap_Selected" className="CreateNewTemplateButton" loadOnClick="true" smallImage="Images/upgradewebmaptotemplate.png" largeImage="Images/upgradewebmaptotemplate.png">
+        <button id="ProjectAtlasManager_CreateNewTemplateButton" caption="Maak van de webmap een template" condition="ProjectAtlasManager_Module_WebMap_Selected" className="CreateNewTemplateButton" loadOnClick="true" smallImage="Images/upgradewebmaptotemplate.png" largeImage="Images/upgradewebmaptotemplate.png">
           <tooltip heading="Upgrade webmap">
-            Selecteer een webmap en maak van deze webmap een template. De tags 'Template', 'ProjectAtlas' en 'PAT[itemid]' worden toegevoegd aan de webmap.
+            Maak van de geselecteerde webmap een template. De tags 'Template', 'ProjectAtlas' en 'PAT[itemid]' worden toegevoegd aan de webmap.
             <disabledText>Geen webmap geselecteerd</disabledText>
           </tooltip>
         </button>
-        <button id="ProjectAtlasManager_SynchronizeTemplateButton" caption="synchroniseer template" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="SynchronizeTemplateButton" loadOnClick="true" smallImage="Images/synchronizetemplate.png" largeImage="Images/synchronizetemplate.png">
+        <button id="ProjectAtlasManager_SynchronizeTemplateButton" caption="Synchroniseer template" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="SynchronizeTemplateButton" loadOnClick="true" smallImage="Images/synchronizetemplate.png" largeImage="Images/synchronizetemplate.png">
           <tooltip heading="Synchroniseer template">
-            Alle kopieën van het template worden bijgewerkt. De query die hiervoor wordt gebruikt is: [type:"Web Map" AND tags:"ProjectAtlas" AND tags:"CopyOfTemplate" AND tags:"PAT{item.ID}" AND orgid:0123456789ABCDEF"].<disabledText>Geen template geselecteerd</disabledText>
+            Selecteer de afgeleiden van de template die moeten worden gesynchroniseerd. De query voor de webmaps die getoond worden is: zoek alle webmaps met de tags 'ProjectAtlas', 'CopyOfTemplate', 'PAT{item.ID}' en 'orgid:0123456789ABCDEF'.
+            <disabledText>Geen template geselecteerd</disabledText>
           </tooltip>
         </button>
-        <button id="ProjectAtlasManager_DeleteTemplateButton" caption="verwijder een template" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="DeleteTemplateButton" loadOnClick="true" smallImage="Images/deletetemplate.png" largeImage="Images/deletetemplate.png">
+        <button id="ProjectAtlasManager_DeleteTemplateButton" caption="Verwijder een template" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="DeleteTemplateButton" loadOnClick="true" smallImage="Images/deletetemplate.png" largeImage="Images/deletetemplate.png">
           <tooltip heading="Verwijder template">
-            Verwijder een template. De tags 'Template', 'ProjectAtlas' en 'PAT[itemid]' worden verwijderd van de webmap.<disabledText>Geen template geselecteerd</disabledText>
+            Verwijder de geselecteerde template. De tags 'Template', 'ProjectAtlas' en 'PAT[itemid]' worden verwijderd van de webmap.
+            <disabledText>Geen template geselecteerd</disabledText>
           </tooltip>
         </button>
-        <!--
-        <button id="ProjectAtlasManager_NewViewerButton" caption="maak een nieuwe webmap" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="Viewers.NewViewerButton" loadOnClick="true" smallImage="Images/newviewer.png" largeImage="Images/newviewer.png">
-          <tooltip heading="Nieuwe webmap">
-            Maak een nieuwe webmap gebaseerd op het geselecteerde template. De tags 'CopyOfTemplate', 'ProjectAtlas' en 'PAT[itemid]' worden toegevoegd aan de webmap.<disabledText>Geen template geselecteerd</disabledText></tooltip>
-        </button>
-        <button id="ProjectAtlasManager_DeleteViewerButton" caption="verwijder webmap(s)" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="Viewers.DeleteViewerButton" loadOnClick="true" smallImage="Images/deleteviewer.png" largeImage="Images/deleteviewer.png">
-          <tooltip heading="Verwijder webmap">
-            Verwijder een of meerdere viewers. De tags 'CopyOfTemplate', 'ProjectAtlas' en 'PAT[itemid]' worden verwijderd van de webmap.<disabledText>Geen template geselecteerd</disabledText></tooltip>
-        </button>
-        -->
       </controls>
       <galleries>
         <gallery
           id="newTemplateGallery"
-          caption="selecteer een webmap"
+          caption="Selecteer een webmap"
           className="NewTemplateGallery"
           itemsInRow="1"
           dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml"
@@ -123,13 +105,14 @@
           itemWidth="415"
           loadOnClick="true"
           loadingMessage="inladen webmaps">
-          <tooltip heading="nieuwe templates">
-            selecteer een webmap en gebruik de knop 'omzetten naar template' om van deze webmap een template te maken. De query om alle webmaps te vinden is: zoek alle webmaps die van de ingelogde gebruiker zijn binnen de organisatie en die geen tag 'ProjectAtlas' heeft.<disabledText />
+          <tooltip heading="Nieuwe templates">
+            Selecteer een webmap en gebruik de knop 'maak van de template een template' om van deze webmap een template te maken.
+            <disabledText />
           </tooltip>
         </gallery>
         <gallery
           id="showTemplatesGallery"
-          caption="selecteer een bestaand template"
+          caption="Selecteer een bestaand template"
           className="TemplatesGallery"
           condition="TemplatesGallery_Is_Ready"
           itemsInRow="1"
@@ -139,27 +122,11 @@
           itemWidth="415"
           largeImage="Images/templates.png"
           loadingMessage="inladen templates">
-          <tooltip heading="selecteer template">
-            Selecteer een template, open de template en voer hier een actie mee uit. De query om templates te vinden is: zoek alle webmaps die de tags 'ProjectAtlas' en 'Template' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.<disabledText>geen templates beschikbaar</disabledText>
+          <tooltip heading="Selecteer template">
+            Selecteer en open een template en voer hier een actie mee uit in de dockpane. De query voor templates die getoond moeten worden is: zoek alle webmaps met de tags 'ProjectAtlas' en 'Template' binnen de eigen organisatie van de ingelogde gebruiker.
+            <disabledText>Geen templates beschikbaar</disabledText>
           </tooltip>
         </gallery>
-        <!--
-        <gallery
-          id="viewersGallery"
-          caption="selecteer een webmap"
-          className="Viewers.ViewersGallery"
-          itemsInRow="1"
-          condition="ViewersGallery_Is_Ready"
-          dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml"
-          templateID="WebMapsGalleryItemTemplate"
-          resizable="true"
-          largeImage="Images/viewer.png"
-          itemWidth="415"
-          loadingMessage="inladen webmaps">
-          <tooltip heading="selecteer webmap">
-            Open een webmap. De query om webmaps te vinden is: zoek alle webmaps die de tags 'ProjectAtlas', 'CopyOfTemplate' en 'PAT[id van template webmap]' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.<disabledText>geen templates beschikbaar</disabledText></tooltip>
-        </gallery>
-        -->
       </galleries>
     </insertModule>
   </modules>

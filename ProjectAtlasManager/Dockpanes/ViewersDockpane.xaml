@@ -20,33 +20,33 @@
         <Button.Content>
           <StackPanel>
             <Image Source="/ProjectAtlasManager;component/Images/newviewer.png" Width="35" Height="35" Margin="2"/>
-            <TextBlock Text="maak nieuwe webmap" TextWrapping="WrapWithOverflow" FontSize="10"/>
+            <TextBlock Text="Maak nieuwe afgeleide" TextWrapping="WrapWithOverflow" FontSize="10"/>
           </StackPanel>
         </Button.Content>
         <Button.ToolTip>
-          Maak een nieuwe webmap gebaseerd op het geselecteerde template. De tags 'CopyOfTemplate', 'ProjectAtlas' en 'PAT[itemid]' worden toegevoegd aan de webmap.
+          Maak een nieuwe afgeleide gebaseerd op de geselecteerde template. De tags 'CopyOfTemplate', 'ProjectAtlas' en 'PAT[itemid]' worden toegevoegd aan de webmap.
         </Button.ToolTip>
       </Button>
       <Button Width="70" Margin="10 3 10 3" Background="White" IsEnabled="{Binding ViewerIsSelected}" Command="{Binding OpenViewerCommand}">
         <Button.Content>
           <StackPanel>
             <Image Source="/ProjectAtlasManager;component/Images/viewer.png" Width="35" Height="35" Margin="2"/>
-            <TextBlock Text="open webmap" TextWrapping="WrapWithOverflow" FontSize="10"/>
+            <TextBlock Text="Open afgeleide" TextWrapping="WrapWithOverflow" FontSize="10"/>
           </StackPanel>
         </Button.Content>
         <Button.ToolTip>
-            Open een webmap. De query om webmaps te vinden is: zoek alle webmaps die de tags 'ProjectAtlas', 'CopyOfTemplate' en 'PAT[id van template webmap]' hebben binnen de eigen organisatie en van de ingelogde gebruiker zijn.
+          Open de geselecteerde afgeleide.
         </Button.ToolTip>
       </Button>
       <Button Width="70" Margin="3" Background="White" Command="{Binding DeleteViewerCommand}">
         <Button.Content>
           <StackPanel>
             <Image Source="/ProjectAtlasManager;component/Images/deleteviewer.png" Width="35" Height="35" Margin="2"/>
-            <TextBlock Text="verwijder webmap(s)" TextWrapping="WrapWithOverflow" FontSize="10"/>
+            <TextBlock Text="Verwijder afgeleide(n)" TextWrapping="WrapWithOverflow" FontSize="10"/>
           </StackPanel>
         </Button.Content>
         <Button.ToolTip>
-          Verwijder een of meerdere viewers. De tags 'CopyOfTemplate', 'ProjectAtlas' en 'PAT[itemid]' worden verwijderd van de webmap.
+          Verwijder een of meerdere afgeleiden. De tags 'CopyOfTemplate', 'ProjectAtlas' en 'PAT[itemid]' worden verwijderd van de webmap.
         </Button.ToolTip>
       </Button>
     </StackPanel>

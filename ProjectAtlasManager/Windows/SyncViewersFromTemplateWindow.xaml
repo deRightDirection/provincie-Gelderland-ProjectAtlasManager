@@ -15,7 +15,7 @@
       <RowDefinition Height="*"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
-    <TextBlock Grid.Row="0" Margin="0 0 0 5">selecteer viewers om bij te werken met geselecteerde template</TextBlock>
+    <TextBlock Grid.Row="0" Margin="0 0 0 5">Selecteer de afgeleiden van de template die moeten worden bijgewerkt.</TextBlock>
     <xctk:CheckListBox Grid.Row="1"
                        ItemsSource="{Binding Viewers}"
                        DisplayMemberPath="Title"

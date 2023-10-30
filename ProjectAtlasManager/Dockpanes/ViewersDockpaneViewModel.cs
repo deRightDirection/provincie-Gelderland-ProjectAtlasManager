@@ -65,6 +65,7 @@ namespace ProjectAtlasManager.Dockpanes
       {
         lock (Module1._lock)
         {
+          _galleryBusy = false;
           _viewers.Clear();
           LoadItemsAsync();
         }
@@ -73,6 +74,7 @@ namespace ProjectAtlasManager.Dockpanes
       {
         lock (Module1._lock)
         {
+          _galleryBusy = false;
           _viewers.Clear();
           LoadItemsAsync();
         }

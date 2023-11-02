@@ -7,7 +7,7 @@
                     mc:Ignorable="d"
                                         x:Name="ProWindowDialogWin"
 
-        Title="nieuwe viewer" Height="110" Width="500"
+        Title="Nieuwe afgeleide" Height="110" Width="500"
         WindowStartupLocation="CenterOwner"
     >
   <Grid Margin="10">
@@ -18,7 +18,7 @@
     <StackPanel Orientation="Horizontal">
       <TextBlock VerticalAlignment="Center">naam</TextBlock>
       <TextBlock FontSize="8" VerticalAlignment="Center" Margin="3 0 3 0">(minimaal 3 karakters)</TextBlock>
-      <xctk:WatermarkTextBox Watermark="naam van de viewer" MinWidth="350" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+      <xctk:WatermarkTextBox Watermark="naam afgeleide" MinWidth="350" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
     <StackPanel Grid.Row="2" Orientation="Horizontal" MinWidth="200">
       <Button Style="{DynamicResource Esri_Button}" 

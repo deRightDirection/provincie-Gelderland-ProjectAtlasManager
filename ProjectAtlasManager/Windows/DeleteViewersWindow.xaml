@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     mc:Ignorable="d"
                     x:Name="ProWindowDialogWin"
-        Title="Verwijder (viewers)" Height="500" Width="500"
+        Title="Verwijder (afgeleiden)" Height="500" Width="500"
         WindowStartupLocation="CenterOwner"
     >
   <Grid Margin="10">
@@ -16,7 +16,7 @@
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
-    <TextBlock Grid.Row="0" Margin="0 0 0 5">selecteer viewers om te verwijderen</TextBlock>
+    <TextBlock Grid.Row="0" Margin="0 0 0 5">selecteer afgeleiden om te verwijderen</TextBlock>
     <xctk:CheckListBox Grid.Row="1"
                        ItemsSource="{Binding Viewers}"
                        DisplayMemberPath="Title"

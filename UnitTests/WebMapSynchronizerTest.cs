@@ -27,6 +27,61 @@ namespace UnitTests
     }
 
     [TestMethod]
+    // template heeft een groepslaag op een dieper niveau met x aantal andere lagen verwijderd
+    // na sync moet die ook in de viewer verdwenen zijn
+    public void Remove_GroupLayers_Without_Layers_At_Deeper_Level()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas31.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template31.json"));
+      var filter = "..*[?(@.id == 'PAT_e8404bd786cd4a819f7ab9e5ea09c5ba')]";
+      var xx = JToken.Parse(projectTemplateJson);
+      var xx2 = JToken.Parse(webmap);
+      xx.SelectToken(filter)["layers"].Children().Count().Should().Be(2);
+      xx2.SelectToken(filter)["layers"].Children().Count().Should().Be(3);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      x.SelectToken(filter)["layers"].Children().Count().Should().Be(2);
+      x2.SelectToken(filter)["layers"].Children().Count().Should().Be(2);
+    }
+
+    [TestMethod]
+    // template heeft een groepslaag op rootlevel met x aantal andere lagen verwijderd
+    // na sync moet die ook in de viewer verdwenen zijn
+    public void Remove_GroupLayers_Without_Layers_At_Root_Level()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas30.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template30_3.json"));
+      var xx = JToken.Parse(projectTemplateJson);
+      var xx2 = JToken.Parse(webmap);
+      xx["operationalLayers"].Children().Count().Should().Be(5);
+      xx2["operationalLayers"].Children().Count().Should().Be(6);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      x["operationalLayers"].Children().Count().Should().Be(5);
+      x2["operationalLayers"].Children().Count().Should().Be(5);
+    }
+
+    [TestMethod]
+    // template heeft een groepslaag met x aantal andere lagen verwijderd
+    // na sync moet die ook in de viewer verdwenen zijn
+    public void Remove_GroupLayers_Without_Layers()
+    {
+      var projectTemplateJson = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas30.json"));
+      var webmap = File.ReadAllText(Path.Combine(_testdataFolder, "projectatlas copy van template30_2.json"));
+      var xx = JToken.Parse(projectTemplateJson);
+      var xx2 = JToken.Parse(webmap);
+      xx["operationalLayers"].Children().Count().Should().Be(5);
+      xx2["operationalLayers"].Children().Count().Should().Be(6);
+      var newWebMap = _synchronizer.Synchronize(webmap, projectTemplateJson);
+      var x = JToken.Parse(projectTemplateJson);
+      var x2 = JToken.Parse(newWebMap);
+      x["operationalLayers"].Children().Count().Should().Be(5);
+      x2["operationalLayers"].Children().Count().Should().Be(5);
+    }
+
+    [TestMethod]
     // template heeft een laag aangevinkt en een extra laag
     // na sync is de viewer helemaal verprutst, niet gereproduceerd in deze sync
     public void Issue_1_17_1()

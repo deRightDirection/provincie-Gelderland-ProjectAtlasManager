@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using ProjectAtlasManager.Domain;
-using theRightDirection.Library;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectAtlasManager.Services
 {
@@ -49,9 +44,51 @@ namespace ProjectAtlasManager.Services
       layersInWebMap = webmapData.RetrieveLayers();
       var newOrder = MakeIndicesLayersEqual(_layersInTemplate, layersInWebMap, 0, null);
       var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
+      json = DetermineGroupLayersToBeRemoved(templateData, json);
       var webmap = JObject.Parse(webmapData);
       webmap["operationalLayers"] = json;
       return webmap.ToString();
+    }
+
+
+    /// <summary>
+    /// Het kan in sommige gevallen voorkomen dat grouplayers in de viewer geen PAT-id krijgen.
+    /// In de template is dan de gehele grouplayer verdwenen maar in de viewer blijft dan
+    /// een lege grouplayer achter. De lagen in de grouplayer zijn wel verwijderd uit de viewer.
+    /// </summary>
+    private JArray DetermineGroupLayersToBeRemoved(string templateData, JArray viewerJson)
+    {
+      var groupLayerFilter = "..*[?(@.layerType == 'GroupLayer')]";
+      var groupLayersInViewer = viewerJson.SelectTokens(groupLayerFilter);
+      var emptyGroupLayersInViewer = groupLayersInViewer.Where(x => !x["layers"].Children().Any());
+      if (emptyGroupLayersInViewer.Any())
+      {
+        return RemoveGroupLayersWithoutLayersFromViewer(emptyGroupLayersInViewer, templateData, viewerJson);
+      }
+      return viewerJson;
+    }
+
+    /// <summary>
+    /// verwijder grouplayers zonder layers uit de viewer
+    /// </summary>
+    private JArray RemoveGroupLayersWithoutLayersFromViewer(IEnumerable<JToken> emptyGroupLayersInViewer, string templateData, JArray viewerJson)
+    {
+      var groupLayerFilter = "..*[?(@.layerType == 'GroupLayer')]";
+      var template = JObject.Parse(templateData);
+      var groupLayersInTemplate = template.SelectTokens(groupLayerFilter);
+      var groupLayerTitlesInTemplate = groupLayersInTemplate.Select(x => x["title"].ToString());
+      var newViewerJson = viewerJson.DeepClone();
+      foreach (var emptyGroupLayer in emptyGroupLayersInViewer)
+      {
+        var title = emptyGroupLayer["title"].ToString();
+        if (!groupLayerTitlesInTemplate.Contains(title))
+        {
+          var layerToBeRemovedFilter = "..*[?(@.layerType == 'GroupLayer')]";
+          var layerToBeRemoved = newViewerJson.SelectTokens(layerToBeRemovedFilter).FirstOrDefault(x => x["id"].Equals(emptyGroupLayer["id"]));
+          layerToBeRemoved?.Remove();
+        }
+      }
+      return newViewerJson as JArray;
     }
 
     /// <summary>
@@ -101,6 +138,7 @@ namespace ProjectAtlasManager.Services
       }
       return webmapData;
     }
+
     private bool LayerFound(OperationalLayer webmapLayer, OperationalLayer templateLayer)
     {
       if (webmapLayer.Level != templateLayer.Level)
@@ -117,6 +155,7 @@ namespace ProjectAtlasManager.Services
       }
       return false;
     }
+
     /// <summary>
     /// verwijder lagen uit de webmap
     /// </summary>
@@ -127,6 +166,7 @@ namespace ProjectAtlasManager.Services
       {
         var filter = $"..*[?(@.id == '{layerToRemove.Id}')]";
         var webmapLayer = (JObject)webmap.SelectToken(filter);
+        // het kan zijn dat er een grouplayer is verwijderd, dan zijn de volgende layers uit de lijst van layersToRemove mogelijk null
         webmapLayer?.Remove();
       }
       return webmap.ToString();

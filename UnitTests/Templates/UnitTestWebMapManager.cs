@@ -44,11 +44,53 @@ namespace UnitTests.Templates
       var newOrder = MakeIndicesLayersEqual(layersInTemplate, layersInWebMap, 0, null);
       var json = CreateNewOperationalLayerJsonObject(newOrder, new JArray());
       // 23-06-2023: op verzoek van Mark uitgezet
-      //var json = CreateNewOperationalLayerJsonObject(layersInWebMap, new JArray());
+      //var viewerJson = CreateNewOperationalLayerJsonObject(layersInWebMap, new JArray());
+      json = DetermineGroupLayersToBeRemoved(templateData, json);
       var webmap = JObject.Parse(webmapData);
       webmap["operationalLayers"] = json;
       return webmap.ToString();
     }
+
+    /// <summary>
+    /// Het kan in sommige gevallen voorkomen dat grouplayers in de viewer geen PAT-id krijgen.
+    /// In de template is dan de gehele grouplayer verdwenen maar in de viewer blijft dan
+    /// een lege grouplayer achter. De lagen in de grouplayer zijn wel verwijderd uit de viewer.
+    /// </summary>
+    private JArray DetermineGroupLayersToBeRemoved(string templateData, JArray viewerJson)
+    {
+      var groupLayerFilter = "..*[?(@.layerType == 'GroupLayer')]";
+      var groupLayersInViewer = viewerJson.SelectTokens(groupLayerFilter);
+      var emptyGroupLayersInViewer = groupLayersInViewer.Where(x => !x["layers"].Children().Any());
+      if (emptyGroupLayersInViewer.Any())
+      {
+        return RemoveGroupLayersWithoutLayersFromViewer(emptyGroupLayersInViewer, templateData, viewerJson);
+      }
+      return viewerJson;
+    }
+
+    /// <summary>
+    /// verwijder grouplayers zonder layers uit de viewer
+    /// </summary>
+    private JArray RemoveGroupLayersWithoutLayersFromViewer(IEnumerable<JToken> emptyGroupLayersInViewer, string templateData, JArray viewerJson)
+    {
+      var groupLayerFilter = "..*[?(@.layerType == 'GroupLayer')]";
+      var template = JObject.Parse(templateData);
+      var groupLayersInTemplate = template.SelectTokens(groupLayerFilter);
+      var groupLayerTitlesInTemplate = groupLayersInTemplate.Select(x => x["title"].ToString());
+      var newViewerJson = viewerJson.DeepClone();
+      foreach (var emptyGroupLayer in emptyGroupLayersInViewer)
+      {
+        var title = emptyGroupLayer["title"].ToString();
+        if (!groupLayerTitlesInTemplate.Contains(title))
+        {
+          var layerToBeRemovedFilter = "..*[?(@.layerType == 'GroupLayer')]";
+          var layerToBeRemoved = newViewerJson.SelectTokens(layerToBeRemovedFilter).FirstOrDefault(x => x["id"].Equals(emptyGroupLayer["id"]));
+          layerToBeRemoved?.Remove();
+        }
+      }
+      return newViewerJson as JArray;
+    }
+
 
     /// <summary>
     /// zorg ervoor dat de visibility-instelling van een grouplayer wordt overgenomen in de webmap vanuit het template
@@ -87,7 +129,7 @@ namespace UnitTests.Templates
       {
         var filter = $"..*[?(@.id == '{layerToRemove.Id}')]";
         var webmapLayer = (JObject)webmap.SelectToken(filter);
-        webmapLayer.Remove();
+        webmapLayer?.Remove();
       }
       return webmap.ToString();
     }

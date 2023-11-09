@@ -18,9 +18,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Threading;
 
 namespace ProjectAtlasManager.Dockpanes
 {
@@ -382,7 +380,7 @@ namespace ProjectAtlasManager.Dockpanes
         }
         else
         {
-          var tags = TagsHelper.UpdateTags(item);
+          var tags = TagsHelper.UpdateTags(item.ItemTags);
           await portalClient.UpdateTags(item, tags).ConfigureAwait(false);
         }
       }

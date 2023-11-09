@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 
-namespace ProjectAtlasManager.Services
+namespace UnitTests.Services
 {
-  internal class TagsHelper
+  internal class UnitTestTagsHelper
   {
     internal static string UpdateTags(IReadOnlyList<string> tags)
     {
-      var tagsToRemove = new List<string>() { "projectatlas", "copyoftemplate", "template"};
+      var tagsToRemove = new List<string>() { "projectatlas", "copyoftemplate", "template" };
 
       var newSetOfTags = new List<string>();
       foreach (var tag in tags)

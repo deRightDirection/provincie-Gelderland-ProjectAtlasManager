@@ -28,8 +28,6 @@ namespace ProjectAtlasManager.Web
     internal Task UpdateTags(PortalItem item, string tags)
     {
       var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/{item.FolderID}/items/{item.ItemID}/update?f=json&token=" + _token;
-      // TODO thumbnail toevoegen indien die nog niet aanwezig is
-      // TODO opzoeken van item die de template informatie bevat
       var formContent = new MultipartFormDataContent
       {
         { new StringContent(tags), "tags" }
@@ -102,7 +100,7 @@ namespace ProjectAtlasManager.Web
           data = data.Replace(layer.Id, newId);
         }
       }
-      await UpdateData(item, data);
+      await UpdateData(item, data).ConfigureAwait(false);
     }
   }
 }

@@ -75,7 +75,7 @@ namespace ProjectAtlasManager.Viewers
           }
           else
           {
-            var tags = TagsHelper.UpdateTags(item);
+            var tags = TagsHelper.UpdateTags(item.ItemTags);
             await portalClient.UpdateTags(item, tags);
           }
         });

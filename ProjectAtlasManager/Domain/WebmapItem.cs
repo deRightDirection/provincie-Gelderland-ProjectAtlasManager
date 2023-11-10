@@ -1,4 +1,5 @@
 using ArcGIS.Desktop.Core.Portal;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +10,40 @@ namespace ProjectAtlasManager.Domain
 {
   public class WebMapItem
   {
-    private string _id;
     private string _title;
-    private string _name;
 
+    public WebMapItem()
+    {
+    }
     public WebMapItem(PortalItem portalItem)
     {
-      _id = portalItem.ID;
-      _title = portalItem.Title;
-      _name = portalItem.Name;
-      Snippet = string.IsNullOrEmpty(portalItem.Summary) ? _title : portalItem.Summary;
+      ID = portalItem.ID;
+      Title = portalItem.Title;
+      Name = portalItem.Name;
+      Snippet = string.IsNullOrEmpty(portalItem.Summary) ? Title : portalItem.Summary;
       Group = portalItem.Owner;
     }
 
-    public string ID => _id;
+    public string ID { get; set; }
 
-    public string Title => _title;
+    public string Title
+    {
+      get
+      {
+        if (string.IsNullOrEmpty(_title))
+        {
+          return Name;
+        }
+        return _title;
+      }
+      set
+      {
+        _title = value;
+      }
+    }
 
-    public string Name => _name;
+    [JsonProperty("title")]
+    public string Name { get; set; }
 
     public string Snippet { get; }
 

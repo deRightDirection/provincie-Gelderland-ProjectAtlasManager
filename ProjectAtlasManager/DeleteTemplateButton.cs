@@ -34,8 +34,8 @@ namespace ProjectAtlasManager
       var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
       await portalClient.UpdateTags(item, tags).ConfigureAwait(false);
       await portalClient.UpdateTemplate(item, false).ConfigureAwait(false);
-      Thread.Sleep(1500);
-      EventSender.Publish(new UpdateGalleryEvent());
+      await Task.Delay(1500);
+      EventSender.Publish(new UpdateGalleryEvent { TemplateDeleted = true, Template = item });
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");
     }
   }

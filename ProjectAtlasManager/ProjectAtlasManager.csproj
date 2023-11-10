@@ -235,9 +235,9 @@
     <Compile Include="Dockpanes\ViewersDockpaneViewModel.cs" />
     <Compile Include="Domain\WebmapItem.cs" />
     <Compile Include="Services\MapExtension.cs" />
+    <Compile Include="Services\ObversableCollectionExtension.cs" />
     <Compile Include="Services\StringExtension.cs" />
     <Compile Include="Services\TagsHelper.cs" />
-    <Compile Include="Viewers\DeleteViewerButton.cs" />
     <Compile Include="Domain\OperationalLayer.cs" />
     <Compile Include="Domain\PortalInformation.cs" />
     <Compile Include="Events\EventSender.cs" />
@@ -251,8 +251,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="SynchronizeTemplateButton.cs" />
-    <Compile Include="Viewers\NewViewerButton.cs" />
-    <Compile Include="Viewers\ViewersGallery.cs" />
     <Compile Include="ViewModels\DeleteViewersWindowViewModel.cs" />
     <Compile Include="ViewModels\NewViewerWindowViewModel.cs" />
     <Compile Include="Windows\DeleteViewersWindow.xaml.cs">

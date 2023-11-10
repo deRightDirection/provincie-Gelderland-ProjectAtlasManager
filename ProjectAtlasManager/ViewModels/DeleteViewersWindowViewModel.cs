@@ -3,6 +3,7 @@ using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Controls;
+using ProjectAtlasManager.Domain;
 using ProjectAtlasManager.Events;
 using System;
 using System.Collections.Generic;
@@ -16,47 +17,14 @@ namespace ProjectAtlasManager.ViewModels
 {
   class DeleteViewersWindowViewModel : PropertyChangedBase
   {
-    private IEnumerable<PortalItem> _viewers;
-    private ObservableCollection<PortalItem> _viewersToDelete;
+    private IEnumerable<WebMapItem> _viewers;
+    private ObservableCollection<WebMapItem> _viewersToDelete;
     private bool _removeAsItem;
 
     public DeleteViewersWindowViewModel()
     {
-      EventSender.Subscribe(RenewData, true);
-      _viewers = new List<PortalItem>();
-      _viewersToDelete = new ObservableCollection<PortalItem>();
-      FillList();
-    }
-
-    private void RenewData(UpdateGalleryEvent eventData)
-    {
-      if (eventData.UpdateViewersGallery)
-      {
-        FillList();
-      }
-    }
-
-
-    private async void FillList()
-    {
-      ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
-      var portalInfo = await portal.GetPortalInfoAsync();
-      var orgId = portalInfo.OrganizationId;
-      var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
-      query.Limit = 100;
-      var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
-      var item = results.Results.FirstOrDefault();
-      if (item == null)
-      {
-        return;
-      }
-      var viewersBasedOnTemplateQuery = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"CopyOfTemplate\" AND tags:\"PAT{item.ID}\" AND orgid:{orgId}")
-      {
-        Limit = 100
-      };
-      var mapsBasedOnTemplate = await ArcGISPortalExtensions.SearchForContentAsync(portal, viewersBasedOnTemplateQuery);
-      Viewers = mapsBasedOnTemplate.Results.OrderBy(x => x.Title);
-      CmdOk.RaiseCanExecuteChanged();
+      _viewers = new List<WebMapItem>();
+      _viewersToDelete = new ObservableCollection<WebMapItem>();
     }
 
     public bool RemoveAsItem
@@ -65,13 +33,13 @@ namespace ProjectAtlasManager.ViewModels
       set => SetProperty(ref _removeAsItem, value);
     }
 
-    public IEnumerable<PortalItem> Viewers
+    public IEnumerable<WebMapItem> Viewers
     {
       get => _viewers;
       set => SetProperty(ref _viewers, value);
     }
 
-    public ObservableCollection<PortalItem> ViewersToDelete
+    public ObservableCollection<WebMapItem> ViewersToDelete
     {
       get => _viewersToDelete;
       set => SetProperty(ref _viewersToDelete, value);
@@ -93,6 +61,10 @@ namespace ProjectAtlasManager.ViewModels
       (proWindow as ProWindow).Close();
     }, () => true);
 
+    internal void SetViewers(ObservableCollection<WebMapItem> viewers)
+    {
+      Viewers = viewers.ToList();
+    }
     #endregion
   }
 }

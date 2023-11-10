@@ -1,26 +1,13 @@
-using ArcGIS.Core.CIM;
-using ArcGIS.Core.Data;
-using ArcGIS.Core.Geometry;
-using ArcGIS.Desktop.Catalog;
 using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Editing;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
-using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
-using ArcGIS.Desktop.Layouts;
-using ArcGIS.Desktop.Mapping;
-using Newtonsoft.Json;
 using ProjectAtlasManager.Events;
 using ProjectAtlasManager.Services;
 using ProjectAtlasManager.Web;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjectAtlasManager
@@ -51,7 +38,7 @@ namespace ProjectAtlasManager
           return;
         }
         item.Refresh();
-        var tags = TagsHelper.ParseTags(item);
+        var tags = TagsHelper.ParseTags(item.ItemTags);
         if(!tags.Contains("Template"))
         {
           tags += ",Template";
@@ -71,10 +58,9 @@ namespace ProjectAtlasManager
         var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
         await portalClient.UpdateTemplate(item, true);
         await portalClient.UpdateTags(item, tags);
+        FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_WebMapSelectedState");
+        EventSender.Publish(new UpdateGalleryEvent { TemplateAdded = true, Template = item });
       });
-      FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_WebMapSelectedState");
-      Thread.Sleep(750);
-      EventSender.Publish(new UpdateGalleryEvent());
     }
   }
 }

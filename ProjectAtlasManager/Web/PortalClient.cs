@@ -44,12 +44,18 @@ namespace ProjectAtlasManager.Web
       var response = await _http.GetAsync(uri).ConfigureAwait(false);
       return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
     }
+    internal async Task<string> GetItem(string itemId)
+    {
+      var uri = $"{_portalUri}sharing/rest/content/items/{itemId}?f=json&token={_token}";
+      var response = await _http.GetAsync(uri).ConfigureAwait(false);
+      return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+    }
     internal Task Delete(PortalItem item)
     {
       var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/items/{item.ID}/delete?f=json&token={_token}";
       return uri.PostAsync();
     }
-    internal async Task CreateViewerFromTemplate(PortalItem item, string title, string tags)
+    internal async Task<WebMapItem> CreateViewerFromTemplate(PortalItem item, string title, string tags)
     {
       var uri = $"{_portalUri}sharing/rest/content/users/{item.Owner}/addItem?f=json&token={_token}";
       var data = await GetDataFromItem(item).ConfigureAwait(false);
@@ -67,7 +73,11 @@ namespace ProjectAtlasManager.Web
       formContent.Add(new StringContent(extent), "extent");
       var json = JsonConvert.SerializeObject(item.ItemCategories);
       formContent.Add(new StringContent(json), "categories");
-      await _http.PostAsync(uri, formContent).ConfigureAwait(false);
+      var result = await _http.PostAsync(uri, formContent).ConfigureAwait(false);
+      var resultData = await result.Content.ReadAsStringAsync();
+      var newItem = JsonConvert.DeserializeObject<WebMapItem>(resultData);
+      var newItemInfo = await GetItem(newItem.ID);
+      return JsonConvert.DeserializeObject<WebMapItem>(newItemInfo);
     }
 
     internal Task<EsriHttpResponseMessage> UpdateData(PortalItem webmap, string webmapData)

@@ -1,4 +1,5 @@
 using ArcGIS.Core.Events;
+using ArcGIS.Desktop.Core.Portal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,11 @@ namespace ProjectAtlasManager.Events
 {
   class UpdateGalleryEvent : EventBase
   {
-    public UpdateGalleryEvent()
-    {
-      UpdateTemplatesGallery = true;
-      UpdateWebmapsGallery = true;
-      UpdateViewersGallery = true;
-    }
-    public bool UpdateWebmapsGallery { get; set; }
-    public bool UpdateTemplatesGallery { get; set; }
-    public bool UpdateViewersGallery { get; set; }
+    public bool ViewerDeleted { get; set; }
+    public bool TemplateDeleted { get; set; }
+    public PortalItem Template { get; set; }
+    public bool TemplateAdded { get; set; }
+    public bool TemplateSelected { get; set; }
+    public bool DataRefreshed { get; set; }
   }
 }

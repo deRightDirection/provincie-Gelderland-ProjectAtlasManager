@@ -12,7 +12,7 @@ namespace ProjectAtlasManager.Buttons
   {
     protected override void OnClick()
     {
-      EventSender.Publish(new UpdateGalleryEvent() { UpdateTemplatesGallery = false, UpdateWebmapsGallery = true });
+      EventSender.Publish(new UpdateGalleryEvent { DataRefreshed = true });
     }
   }
 }

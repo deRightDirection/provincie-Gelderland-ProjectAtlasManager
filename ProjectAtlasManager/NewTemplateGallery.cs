@@ -7,11 +7,8 @@ using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ProjectAtlasManager.Domain;
 using ProjectAtlasManager.Events;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjectAtlasManager
 {
@@ -42,10 +39,52 @@ namespace ProjectAtlasManager
     private void RenewData(EventBase eventData)
     {
       var updateGalleryEvent = eventData as UpdateGalleryEvent;
-      if (updateGalleryEvent != null && updateGalleryEvent.UpdateWebmapsGallery)
+      if (updateGalleryEvent != null)
       {
-        Clear();
-        LoadItemsAsync();
+        // als er een template is aangemaakt moet de lijst met webmaps worden verkleind
+        if (updateGalleryEvent.TemplateAdded)
+        {
+          lock (Module1._lock)
+          {
+            var itemToRemove = ItemCollection.FirstOrDefault(x => ((WebMapItem)x).ID.Equals(updateGalleryEvent.Template.ID));
+            if (itemToRemove != null)
+            {
+              Remove(itemToRemove);
+            }
+          }
+        }
+        // als er een template is verwijderd moet de lijst met webmaps worden uitgebreid
+        // of er is een nieuwe viewer aangemaakt en vervolgens los gekoppeld van een template
+        if (updateGalleryEvent.TemplateDeleted || updateGalleryEvent.ViewerDeleted)
+        {
+          lock (Module1._lock)
+          {
+            Add(new WebMapItem(updateGalleryEvent.Template));
+            var newList = new List<WebMapItem>();
+            foreach (var item in ItemCollectionCopy)
+            {
+              newList.Add(item as WebMapItem);
+            }
+            var orderedList = newList.OrderBy(x => x.Title);
+            Clear();
+            foreach (var item in orderedList)
+            {
+              Add(item);
+            }
+          }
+        }
+        if(updateGalleryEvent.DataRefreshed)
+        {
+          lock (Module1._lock)
+          {
+            Clear();
+            LoadItemsAsync();
+          }
+        }
+        if (updateGalleryEvent.TemplateSelected)
+        {
+          // niets doen
+        }
       }
     }
 
@@ -120,7 +159,7 @@ namespace ProjectAtlasManager
       {
         var clickedWebMapItem = (WebMapItem)item;
         Module1.SelectedWebMapToUpgradeToTemplate = clickedWebMapItem.ID;
-      }
+      } 
       FrameworkApplication.State.Activate("ProjectAtlasManager_Module_WebMapSelectedState");
       base.OnClick(item);
     }

@@ -12,7 +12,7 @@ namespace UnitTests.Services
       foreach (var tag in tags)
       {
         var tagValue = tag.ToLowerInvariant().Trim();
-        if (tagsToRemove.Contains(tagValue) || (tagValue.StartsWith("pat_") && tagValue.Length > 10))
+        if (tagsToRemove.Contains(tagValue) || (tagValue.StartsWith("pat") && tagValue.Length > 30))
         {
           continue;
         }
@@ -26,6 +26,11 @@ namespace UnitTests.Services
       var newSetOfTags = new List<string>();
       foreach (var tag in tags)
       {
+        var tagValue = tag.ToLowerInvariant().Trim();
+        if (tagValue.StartsWith("pat") && tagValue.Length > 30)
+        {
+          continue;
+        }
         newSetOfTags.Add(tag.Trim());
       }
       return string.Join(",", newSetOfTags);

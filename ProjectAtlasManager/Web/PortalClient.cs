@@ -2,12 +2,9 @@ using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Portal;
 using Flurl.Http;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using ProjectAtlasManager.Domain;
 using ProjectAtlasManager.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 

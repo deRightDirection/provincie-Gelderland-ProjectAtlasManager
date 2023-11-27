@@ -25,12 +25,10 @@ namespace ProjectAtlasManager
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
       {
-        Clear();
         LoadItemsAsync();
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
-        Clear();
         LoadItemsAsync();
       });
       Initialize();
@@ -77,7 +75,6 @@ namespace ProjectAtlasManager
         {
           lock (Module1._lock)
           {
-            Clear();
             LoadItemsAsync();
           }
         }
@@ -104,6 +101,7 @@ namespace ProjectAtlasManager
     {
       if (_galleryBusy)
         return;
+      Clear();
       _galleryBusy = true;
       LoadingMessage = "Loading webmaps...";
       FrameworkApplication.State.Activate("WebmapsGallery_Is_Busy_State");
@@ -112,14 +110,12 @@ namespace ProjectAtlasManager
         var portal = ArcGISPortalManager.Current.GetActivePortal();
         if (portal == null)
         {
-          Clear();
           LoadingMessage = "Sign on to retrieve web maps";
           return;
         }
         var signedOn = await QueuedTask.Run(() => portal.IsSignedOn());
         if (!signedOn)
         {
-          Clear();
           LoadingMessage = "Sign on to retrieve web maps";
           return;
         }
@@ -132,7 +128,6 @@ namespace ProjectAtlasManager
         var results = await portal.SearchForContentAsync(query);
         if (results == null)
         {
-          Clear();
           return;
         }
         if (results.TotalResultsCount > 0)

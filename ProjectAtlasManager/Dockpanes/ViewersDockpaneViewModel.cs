@@ -64,7 +64,6 @@ namespace ProjectAtlasManager.Dockpanes
         lock (Module1._lock)
         {
           _galleryBusy = false;
-          _viewers.Clear();
           LoadItemsAsync();
         }
       });
@@ -73,7 +72,6 @@ namespace ProjectAtlasManager.Dockpanes
         lock (Module1._lock)
         {
           _galleryBusy = false;
-          _viewers.Clear();
           LoadItemsAsync();
         }
       });
@@ -119,7 +117,7 @@ namespace ProjectAtlasManager.Dockpanes
       {
         _progDialog = new ProgressDialog("Verwijder afgeleiden...");
         _progDialog.Show();
-        await DeleteViewersAsync().ConfigureAwait(false);
+        await DeleteViewersAsync();
         _progDialog.Hide();
       }
     }
@@ -132,28 +130,12 @@ namespace ProjectAtlasManager.Dockpanes
       {
         _galleryBusy = true;
         FrameworkApplication.State.Activate("ViewersGallery_Is_Busy_State");
-        try
+        await QueuedTask.Run(async () =>
         {
-          await QueuedTask.Run(async () =>
-          {
-            //Open WebMap
-            var currentItem = ItemFactory.Instance.Create(clickedWebMapItem.ID, ItemFactory.ItemType.PortalItem);
-            var mapTitle = clickedWebMapItem.Title;
-            var mapProjectItems = Project.Current.GetItems<MapProjectItem>();
-            if (!string.IsNullOrEmpty(mapTitle))
-            {
-              var mapsWithSameTitleAsPortalItem = mapProjectItems.Where(x => !string.IsNullOrEmpty(x.Title) && x.Title.Equals(mapTitle, StringComparison.CurrentCultureIgnoreCase));
-              Project.Current.RemoveItems(mapsWithSameTitleAsPortalItem);
-              var newMap = MapFactory.Instance.CreateMapFromItem(currentItem);
-              await FrameworkApplication.Panes.CreateMapPaneAsync(newMap).ConfigureAwait(false);
-            }
-          }).ConfigureAwait(false);
-        }
-        finally
-        {
-          _galleryBusy = false;
-          FrameworkApplication.State.Deactivate("ViewersGallery_Is_Busy_State");
-        }
+          await clickedWebMapItem.Open();
+        });
+        _galleryBusy = false;
+        FrameworkApplication.State.Deactivate("ViewersGallery_Is_Busy_State");
         SelectedViewer = null;
       }
     }
@@ -179,7 +161,7 @@ namespace ProjectAtlasManager.Dockpanes
       {
         _progDialog = new ProgressDialog($"Aanmaken afgeleide [{_name}]...");
         _progDialog.Show();
-        await CreateNewViewerFromTemplate().ConfigureAwait(false);
+        await CreateNewViewerFromTemplate();
         _progDialog.Hide();
       }
     }
@@ -240,7 +222,6 @@ namespace ProjectAtlasManager.Dockpanes
         }
         lock (Module1._lock)
         {
-          _viewers.Clear();
           if (updateGalleryEvent.TemplateSelected)
           {
             LoadItemsAsync();
@@ -261,22 +242,19 @@ namespace ProjectAtlasManager.Dockpanes
     {
       if (_galleryBusy)
         return;
+      _viewers.Clear();
       if (string.IsNullOrEmpty(Module1.SelectedProjectTemplate))
       {
         Template = "";
-        lock (Module1._lock)
+        var pane = FrameworkApplication.DockPaneManager.Find(DockPaneId);
+        if (pane != null)
         {
-          _viewers.Clear();
-          var pane = FrameworkApplication.DockPaneManager.Find(DockPaneId);
-          if (pane != null)
+          try
           {
-            try
-            {
-              pane.IsVisible = false;
-            }
-            catch (InvalidOperationException e)
-            {
-            }
+            pane.IsVisible = false;
+          }
+          catch (InvalidOperationException e)
+          {
           }
         }
         return;
@@ -288,44 +266,29 @@ namespace ProjectAtlasManager.Dockpanes
       var portal = ArcGISPortalManager.Current.GetActivePortal();
       if (portal == null)
       {
-        lock (Module1._lock)
-        {
-          _viewers.Clear();
-          LoadingMessage = "Sign on to retrieve web maps";
-        }
+        LoadingMessage = "Sign on to retrieve web maps";
         return;
       }
-      var signedOn = await QueuedTask.Run(() => portal.IsSignedOn()).ConfigureAwait(false);
+      var signedOn = await QueuedTask.Run(() => portal.IsSignedOn());
       if (!signedOn)
       {
-        lock (Module1._lock)
-        {
-          _viewers.Clear();
-          LoadingMessage = "Sign on to retrieve web maps";
-        }
+        LoadingMessage = "Sign on to retrieve web maps";
         return;
       }
-      var portalInfo = await portal.GetPortalInfoAsync().ConfigureAwait(false);
+      var portalInfo = await portal.GetPortalInfoAsync();
       var orgId = portalInfo.OrganizationId;
       var username = portal.GetSignOnUsername();
       var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"PAT{Module1.SelectedProjectTemplate}\" AND tags:\"CopyOfTemplate\" AND orgid:{orgId} owner:\"{username}\"");
       query.SortField = "title";
       query.Limit = 100;
-      var results = await portal.SearchForContentAsync(query).ConfigureAwait(false);
+      var results = await portal.SearchForContentAsync(query);
       if (results == null)
       {
-        lock (Module1._lock)
-        {
-          Viewers.Clear();
-        }
         return;
       }
       foreach (var item in results.Results.OrderBy(x => x.Title))
       {
-        lock (Module1._lock)
-        {
-          Viewers.Add(new WebMapItem(item));
-        }
+        Viewers.Add(new WebMapItem(item));
       }
       LoadingMessage = string.Empty;
       _galleryBusy = false;
@@ -342,7 +305,7 @@ namespace ProjectAtlasManager.Dockpanes
       var portal = ArcGISPortalManager.Current.GetActivePortal();
       var query = new PortalQueryParameters("id:" + itemId);
       query.Limit = 1;
-      var results = await portal.SearchForContentAsync(query).ConfigureAwait(false);
+      var results = await portal.SearchForContentAsync(query);
       return results.Results.FirstOrDefault();
     }
 
@@ -374,8 +337,8 @@ namespace ProjectAtlasManager.Dockpanes
       }
       tags = tags.Replace(",,", ",");
       var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
-      await portalClient.UpdateTemplate(item, true).ConfigureAwait(false);
-      var newViewer = await portalClient.CreateViewerFromTemplate(item, _name, tags).ConfigureAwait(false);
+      await portalClient.UpdateTemplate(item, true);
+      var newViewer = await portalClient.CreateViewerFromTemplate(item, _name, tags);
       _viewers.InsertInPlace(newViewer, x => x.Title);
       FrameworkApplication.Current.Dispatcher.Invoke(() =>
       {
@@ -396,12 +359,12 @@ namespace ProjectAtlasManager.Dockpanes
         }
         if (_removeAsItem)
         {
-          await portalClient.Delete(item).ConfigureAwait(false);
+          await portalClient.Delete(item);
         }
         else
         {
           var tags = TagsHelper.UpdateTags(item.ItemTags);
-          await portalClient.UpdateTags(item, tags).ConfigureAwait(false);
+          await portalClient.UpdateTags(item, tags);
         }
         var viewerToRemove = Viewers.FirstOrDefault(x => x.ID.Equals(itemid));
         if (viewerToRemove != null)

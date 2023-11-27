@@ -26,12 +26,10 @@ namespace ProjectAtlasManager
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
       {
-        Clear();
         LoadItemsAsync();
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
-        Clear();
         LoadItemsAsync();
       });
       Initialize();
@@ -98,6 +96,7 @@ namespace ProjectAtlasManager
     {
       if (_galleryBusy)
         return;
+      Clear();
       _galleryBusy = true;
       LoadingMessage = "Loading templates...";
       FrameworkApplication.State.Activate("TemplatesGallery_Is_Busy_State");
@@ -106,7 +105,6 @@ namespace ProjectAtlasManager
         var portal = ArcGISPortalManager.Current.GetActivePortal();
         if (portal == null)
         {
-          Clear();
           LoadingMessage = "Sign on to retrieve web maps";
           return;
         }
@@ -114,7 +112,6 @@ namespace ProjectAtlasManager
         var signedOn = await QueuedTask.Run(() => portal.IsSignedOn());
         if (!signedOn)
         {
-          Clear();
           LoadingMessage = "Sign on to retrieve web maps";
           return;
         }
@@ -129,7 +126,6 @@ namespace ProjectAtlasManager
         var results = await portal.SearchForContentAsync(query);
         if (results == null)
         {
-          Clear();
           return;
         }
         foreach (var item in results.Results.OfType<PortalItem>().OrderBy(x => x.Title))
@@ -170,55 +166,7 @@ namespace ProjectAtlasManager
         FrameworkApplication.State.Activate("TemplatesGallery_Is_Busy_State");
         await QueuedTask.Run(async () =>
         {
-          //Open WebMap
-          var currentItem = ItemFactory.Instance.Create(clickedWebMapItem.ID, ItemFactory.ItemType.PortalItem);
-          var mapTitle = clickedWebMapItem.Title;
-          var mapProjectItems = Project.Current.GetItems<MapProjectItem>();
-          if (!string.IsNullOrEmpty(mapTitle))
-          {
-            var mapsWithSameTitleAsPortalItem = mapProjectItems.Where(
-              x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(
-                mapTitle, StringComparison.CurrentCultureIgnoreCase));
-            var mapItem = mapsWithSameTitleAsPortalItem.FirstOrDefault();
-            if (mapItem != null)
-            {
-              var map = mapItem.GetMap();
-              // TODO description uit portaal ophalen
-              map.UpdateSummary(clickedWebMapItem.Snippet);
-              //is this map already active?
-              if (MapView.Active?.Map?.URI == map.URI)
-                return;
-              //has this map already been opened?
-              var map_panes =
-              FrameworkApplication.Panes.OfType<IMapPane>();
-              foreach (var map_pane in map_panes)
-              {
-                if (map_pane.MapView.Map?.URI == null)
-                {
-                  continue;
-                }
-
-                if (map_pane.MapView.Map.URI == map.URI)
-                {
-                  var pane = map_pane as Pane;
-                  await FrameworkApplication.Current.Dispatcher.BeginInvoke((Action)(() => pane.Activate()));
-                  return;
-                }
-              }
-              //open a new pane
-              await FrameworkApplication.Panes.CreateMapPaneAsync(map);
-              return;
-            }
-          }
-
-          //open a new pane
-          if (MapFactory.Instance.CanCreateMapFrom(currentItem))
-          {
-            var newMap = MapFactory.Instance.CreateMapFromItem(currentItem);
-            // TODO description uit portaal ophalen
-            newMap.UpdateSummary(clickedWebMapItem.Snippet);
-            await FrameworkApplication.Panes.CreateMapPaneAsync(newMap);
-          }
+          await clickedWebMapItem.Open();
         });
         FrameworkApplication.State.Deactivate("TemplatesGallery_Is_Busy_State");
         EventSender.Publish(new UpdateGalleryEvent() { TemplateSelected = true });

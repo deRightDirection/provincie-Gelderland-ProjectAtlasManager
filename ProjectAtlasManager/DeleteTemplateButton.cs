@@ -24,7 +24,7 @@ namespace ProjectAtlasManager
       var query = new PortalQueryParameters("id:" + Module1.SelectedProjectTemplate);
       Module1.SelectedProjectTemplate = string.Empty;
       Module1.SelectedProjectTemplateName = string.Empty;
-      var results = await portal.SearchForContentAsync(query).ConfigureAwait(false);
+      var results = await portal.SearchForContentAsync(query);
       var item = results.Results.FirstOrDefault();
       if (item == null)
       {
@@ -32,8 +32,8 @@ namespace ProjectAtlasManager
       }
       var tags = TagsHelper.UpdateTags(item.ItemTags);
       var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
-      await portalClient.UpdateTags(item, tags).ConfigureAwait(false);
-      await portalClient.UpdateTemplate(item, false).ConfigureAwait(false);
+      await portalClient.UpdateTags(item, tags);
+      await portalClient.UpdateTemplate(item, false);
       await Task.Delay(1500);
       EventSender.Publish(new UpdateGalleryEvent { TemplateDeleted = true, Template = item });
       FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_ProjectTemplateSelectedState");

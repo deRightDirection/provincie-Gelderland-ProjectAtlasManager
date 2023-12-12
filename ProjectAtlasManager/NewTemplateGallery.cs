@@ -122,9 +122,11 @@ namespace ProjectAtlasManager
         var portalInfo = await portal.GetPortalInfoAsync();
         var orgId = portalInfo.OrganizationId;
         var username = portal.GetSignOnUsername();
-        var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:{orgId} owner:\"{username}\"");
-        query.SortField = "title, modified";
-        query.Limit = 100;
+        var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:{orgId} owner:\"{username}\"")
+        {
+          SortField = "title, modified",
+          Limit = 100
+        };
         var results = await portal.SearchForContentAsync(query);
         if (results == null)
         {

@@ -5,7 +5,6 @@ using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
-using ArcGIS.Desktop.Mapping;
 using CommunityToolkit.Mvvm.Input;
 using ProjectAtlasManager.Domain;
 using ProjectAtlasManager.Events;
@@ -61,19 +60,19 @@ namespace ProjectAtlasManager.Dockpanes
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
       {
-        lock (Module1._lock)
-        {
+//        lock (Module1._lock)
+//        {
           _galleryBusy = false;
           LoadItemsAsync();
-        }
+//        }
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
-        lock (Module1._lock)
-        {
+//       lock (Module1._lock)
+//        {
           _galleryBusy = false;
           LoadItemsAsync();
-        }
+//        }
       });
       NewViewerCommand = new AsyncRelayCommand(NewViewer, CanNewViewer);
       OpenViewerCommand = new AsyncRelayCommand(OpenViewer);

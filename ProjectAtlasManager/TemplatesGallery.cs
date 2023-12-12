@@ -5,12 +5,9 @@ using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
-using ArcGIS.Desktop.Mapping;
 using ProjectAtlasManager.Dockpanes;
 using ProjectAtlasManager.Domain;
 using ProjectAtlasManager.Events;
-using ProjectAtlasManager.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -120,9 +117,11 @@ namespace ProjectAtlasManager
         var orgId = portalInfo.OrganizationId;
         var username = portal.GetSignOnUsername();
         var query = new PortalQueryParameters(
-          $"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:{orgId} owner:\"{username}\"");
-        query.SortField = "title";
-        query.Limit = 100;
+          $"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:{orgId} owner:\"{username}\"")
+        {
+          SortField = "title",
+          Limit = 100
+        };
         var results = await portal.SearchForContentAsync(query);
         if (results == null)
         {

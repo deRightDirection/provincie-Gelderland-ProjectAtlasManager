@@ -31,7 +31,7 @@ namespace ProjectAtlasManager.Services
         return;
       }
       var summaryElement = xml.Element("dataIdInfo")?.Element("idPurp");
-      if (summaryElement != null)
+      if (summaryElement != null && summary != null)
       {
         summaryElement.Value = summary;
       }

@@ -60,19 +60,13 @@ namespace ProjectAtlasManager.Dockpanes
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
       {
-//        lock (Module1._lock)
-//        {
           _galleryBusy = false;
           LoadItemsAsync();
-//        }
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
-//       lock (Module1._lock)
-//        {
           _galleryBusy = false;
           LoadItemsAsync();
-//        }
       });
       NewViewerCommand = new AsyncRelayCommand(NewViewer, CanNewViewer);
       OpenViewerCommand = new AsyncRelayCommand(OpenViewer);

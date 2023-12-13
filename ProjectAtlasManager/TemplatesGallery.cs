@@ -43,6 +43,14 @@ namespace ProjectAtlasManager
         {
           lock (Module1._lock)
           {
+            var existingWebMapItems = ItemCollectionCopy.Cast<WebMapItem>();
+            var existingWebMapItemIds = existingWebMapItems.Select(x => x.ID);
+            var newTemplateItemId = updateGalleryEvent.Template.ItemID;
+            // template bestaat al
+            if(existingWebMapItemIds.Contains(newTemplateItemId))
+            {
+              return;
+            }  
             Add(new WebMapItem(updateGalleryEvent.Template));
             var newList = new List<WebMapItem>();
             foreach (var item in ItemCollectionCopy)

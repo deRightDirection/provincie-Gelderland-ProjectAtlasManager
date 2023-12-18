@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ProjectAtlasManager.Domain
 {
@@ -59,36 +60,23 @@ namespace ProjectAtlasManager.Domain
       //Open WebMap
       var currentItem = ItemFactory.Instance.Create(ID, ItemFactory.ItemType.PortalItem);
       var mapTitle = Title;
-      var mapProjectItems = Project.Current.GetItems<MapProjectItem>();
       if (!string.IsNullOrEmpty(mapTitle))
       {
-        var mapsWithSameTitleAsPortalItem = mapProjectItems.Where(
-          x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(
-            mapTitle, StringComparison.CurrentCultureIgnoreCase));
-        var mapItem = mapsWithSameTitleAsPortalItem.FirstOrDefault();
+        MapProjectItem mapItem = FindProjectItem(mapTitle);
         if (mapItem != null)
         {
           var map = mapItem.GetMap();
-          // TODO description uit portaal ophalen
-          map.UpdateSummary(Snippet);
-          //is this map already active?
-          if (MapView.Active?.Map?.URI == map.URI)
-            return;
-          //has this map already been opened?
           var map_panes = FrameworkApplication.Panes.OfType<IMapPane>();
           foreach (var map_pane in map_panes)
           {
             var contentId = map_pane.ViewState?.ViewableObjectPath;
-            if(contentId.Equals(map.URI))
+            if (contentId.Equals(map.URI))
             {
               var pane = map_pane as Pane;
-              await FrameworkApplication.Current.Dispatcher.BeginInvoke((Action)(() => pane.Activate()));
-              return;
+              await FrameworkApplication.Current.Dispatcher.BeginInvoke((Action)(() => pane.Close()));
             }
           }
-          //open a new pane
-          await FrameworkApplication.Panes.CreateMapPaneAsync(map);
-          return;
+          Project.Current.RemoveItem(mapItem);
         }
       }
       //open a new pane
@@ -99,6 +87,17 @@ namespace ProjectAtlasManager.Domain
         newMap.UpdateSummary(Snippet);
         await FrameworkApplication.Panes.CreateMapPaneAsync(newMap);
       }
+    }
+
+    private MapProjectItem FindProjectItem(string mapTitle)
+    {
+      var mapProjectItems = Project.Current.GetItems<MapProjectItem>();
+      var mapsWithSameTitleAsPortalItem = mapProjectItems.Where(
+        x => !string.IsNullOrEmpty(x.Name)
+              && x.Name.Equals(mapTitle, StringComparison.CurrentCultureIgnoreCase)
+              && x.GetItemId().Equals(ID, StringComparison.CurrentCultureIgnoreCase));
+      var mapItem = mapsWithSameTitleAsPortalItem.FirstOrDefault();
+      return mapItem;
     }
 
     public override string ToString()

@@ -235,6 +235,7 @@
     <Compile Include="Dockpanes\ViewersDockpaneViewModel.cs" />
     <Compile Include="Domain\WebmapItem.cs" />
     <Compile Include="Services\MapExtension.cs" />
+    <Compile Include="Services\MapProjectItemExtension.cs" />
     <Compile Include="Services\ObversableCollectionExtension.cs" />
     <Compile Include="Services\StringExtension.cs" />
     <Compile Include="Services\TagsHelper.cs" />

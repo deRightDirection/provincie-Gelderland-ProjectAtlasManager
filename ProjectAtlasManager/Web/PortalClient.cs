@@ -63,8 +63,7 @@ namespace ProjectAtlasManager.Web
         { new StringContent(data), "text" },
         { new StringContent(item.Type), "type" },
         { new StringContent(item.TypeKeywords), "typeKeywords" },
-        { new StringContent(string.IsNullOrEmpty(item.Description) ? string.Empty : item.Description), "description" },
-        { new StringContent(string.IsNullOrEmpty(item.Summary) ? string.Empty : item.Summary), "snippet" }
+        { new StringContent(string.IsNullOrEmpty(item.Summary) ? string.Empty : $"afgeleide van template '{item.Title}', samenvatting verder aanvullen"), "snippet" }
       };
       var extent = $"{item.XMin},{item.YMin},{item.XMax},{item.YMax}";
       formContent.Add(new StringContent(extent), "extent");

@@ -5,24 +5,24 @@ using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Mapping;
 using Newtonsoft.Json;
 using ProjectAtlasManager.Services;
+using ProjectAtlasManager.Web;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace ProjectAtlasManager.Domain
 {
   public class WebMapItem
   {
     private string _title;
+    private readonly Uri _portalUri;
 
     public WebMapItem()
     {
     }
     public WebMapItem(PortalItem portalItem)
     {
+      _portalUri = portalItem.PortalUri;
       ID = portalItem.ID;
       Title = portalItem.Title;
       Name = portalItem.Name;
@@ -51,7 +51,8 @@ namespace ProjectAtlasManager.Domain
     [JsonProperty("title")]
     public string Name { get; set; }
 
-    public string Snippet { get; }
+    [JsonProperty("snippet")]
+    public string Snippet { get; set; }
 
     public string Group { get; }
 
@@ -78,6 +79,14 @@ namespace ProjectAtlasManager.Domain
           }
           Project.Current.RemoveItem(mapItem);
         }
+      }
+      var portal = ArcGISPortalManager.Current.GetActivePortal();
+      if (portal != null)
+      {
+        var portalClient = new PortalClient(_portalUri, portal.GetToken());
+        var newItemData = await portalClient.GetItem(ID);
+        var newItem = JsonConvert.DeserializeObject<WebMapItem>(newItemData);
+        Snippet = newItem.Snippet;
       }
       //open a new pane
       if (MapFactory.Instance.CanCreateMapFrom(currentItem))

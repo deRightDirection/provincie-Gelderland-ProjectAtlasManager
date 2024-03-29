@@ -83,7 +83,7 @@ namespace ProjectAtlasManager.Domain
       var portal = ArcGISPortalManager.Current.GetActivePortal();
       if (portal != null)
       {
-        var portalClient = new PortalClient(_portalUri, portal.GetToken());
+        var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
         var newItemData = await portalClient.GetItem(ID);
         var newItem = JsonConvert.DeserializeObject<WebMapItem>(newItemData);
         Snippet = newItem.Snippet;

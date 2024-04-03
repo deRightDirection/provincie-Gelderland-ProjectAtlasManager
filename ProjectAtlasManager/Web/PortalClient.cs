@@ -43,7 +43,6 @@ namespace ProjectAtlasManager.Web
     }
     internal async Task<string> GetItem(string itemId)
     {
-      // TODO knop toevoegen aan ribbon voor het openen van Docking pane
         var uri = $"{_portalUri}sharing/rest/content/items/{itemId}?f=json&token={_token}";
         var response = await _http.GetAsync(uri).ConfigureAwait(false);
         return await response.Content.ReadAsStringAsync().ConfigureAwait(false);

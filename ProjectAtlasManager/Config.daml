@@ -1,11 +1,11 @@
 <ArcGIS defaultAssembly="ProjectAtlasManager.dll" defaultNamespace="ProjectAtlasManager" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.31" desktopVersion="2.9.10">
+  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.32" desktopVersion="2.9.10">
     <Name>ProjectAtlas Manager</Name>
     <Description>De projectatlas manager voor de provincie Gelderland</Description>
     <Image>Images\button.png</Image>
     <Author>the Right Direction BV</Author>
     <Company>the Right Direction BV</Company>
-    <Date>29/3/24 07:52:00</Date>
+    <Date>3/4/24 07:57:00</Date>
     <Subject>Framework</Subject>
   </AddInInfo>
   <conditions>
@@ -61,12 +61,18 @@
           <!-- bekijk alle templates -->
           <gallery refID="showTemplatesGallery" inline="false" size="large" />
           <button refID="ProjectAtlasManager_SynchronizeTemplateButton" size="large" />
+          <button refID="ProjectAtlasManager_ShowDockPaneButton" size="large"/>
         </group>
         <group id="ProjectAtlasManager_Group4" caption="Webmap overschrijven" appearsOnAddInTab="false">
           <button refID="esri_sharing_SaveWebMap" />
         </group>
       </groups>
       <controls>
+        <button id="ProjectAtlasManager_ShowDockPaneButton" caption="Toon afgeleiden paneel" className="Buttons.ShowViewersPane" loadOnClick="true" smallImage="Images/dockingpane.png" largeImage="Images/dockingpane.png">
+          <tooltip heading="Toon afgeleiden paneel">
+            Toon het paneel voor afgeleiden.
+          </tooltip>
+        </button>
         <button id="ProjectAtlasManager_SyncWebmapsButton" caption="Synchroniseer webmaps" className="Buttons.SyncWebmapsButton" loadOnClick="true" smallImage="Images/syncwebmaps.png" largeImage="Images/syncwebmaps.png">
           <tooltip heading="Synchroniseer webmaps">
             Synchroniseer de lijst met webmaps aan de hand van het ingelogde Portaal. De query voor webmaps die getoond moeten worden is: zoek alle webmaps zonder de tag 'ProjectAtlas' binnen de eigen organisatie van de ingelogde gebruiker.

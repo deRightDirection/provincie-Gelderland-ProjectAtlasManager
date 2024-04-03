@@ -23,7 +23,7 @@ namespace ProjectAtlasManager.Dockpanes
 {
   class ViewersDockpaneViewModel : DockPane
   {
-    private const string DockPaneId = "viewers_Dockpanel";
+    public static string DockPaneId = "viewers_Dockpanel";
     private ObservableCollection<WebMapItem> _viewers;
     private bool _viewerIsSelected;
     private bool _galleryBusy;

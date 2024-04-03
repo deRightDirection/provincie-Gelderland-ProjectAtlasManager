@@ -1,3 +1,5 @@
+![tRD-logo-1regel](https://github.com/deRightDirection/provincie-Gelderland-ProjectAtlasManager/assets/47241453/2cf71438-f9c6-4790-b623-2e0d9d47d4fa)
+
 # ProjectAtlasManager
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.

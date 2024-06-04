@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace ProjectAtlasManager.Dockpanes
 {
@@ -270,7 +271,7 @@ namespace ProjectAtlasManager.Dockpanes
       }
       var portalInfo = await portal.GetPortalInfoAsync();
       var orgId = portalInfo.OrganizationId;
-      var username = portal.GetSignOnUsername();
+      var username = await QueuedTask.Run(() => portal.GetSignOnUsername());
       var query = new PortalQueryParameters($"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"PAT{Module1.SelectedProjectTemplate}\" AND tags:\"CopyOfTemplate\" AND orgid:{orgId} owner:\"{username}\"");
       query.SortField = "title";
       query.Limit = 100;
@@ -329,7 +330,7 @@ namespace ProjectAtlasManager.Dockpanes
         tags = tags.Substring(1);
       }
       tags = tags.Replace(",,", ",");
-      var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
+      var portalClient = await QueuedTask.Run(() => new PortalClient(item.PortalUri, portal.GetToken()));
       await portalClient.UpdateTemplate(item, true);
       var newViewer = await portalClient.CreateViewerFromTemplate(item, _name, tags);
       _viewers.InsertInPlace(newViewer, x => x.Title);
@@ -342,7 +343,7 @@ namespace ProjectAtlasManager.Dockpanes
     private async Task DeleteViewersAsync()
     {
       var portal = ArcGISPortalManager.Current.GetActivePortal();
-      var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
+      var portalClient = await QueuedTask.Run(() => new PortalClient(portal.PortalUri, portal.GetToken()));
       foreach (var itemid in _itemIds)
       {
         var item = await FindItem(itemid);

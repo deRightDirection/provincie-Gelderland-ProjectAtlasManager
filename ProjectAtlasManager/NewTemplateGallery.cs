@@ -121,7 +121,7 @@ namespace ProjectAtlasManager
         }
         var portalInfo = await portal.GetPortalInfoAsync();
         var orgId = portalInfo.OrganizationId;
-        var username = portal.GetSignOnUsername();
+        var username = await QueuedTask.Run(() => portal.GetSignOnUsername());
         var query = new PortalQueryParameters($"-tags:\"ProjectAtlas\" type:\"Web Map\" orgid:{orgId} owner:\"{username}\"")
         {
           SortField = "title, modified",

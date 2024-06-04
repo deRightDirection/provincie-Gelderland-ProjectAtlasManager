@@ -123,7 +123,7 @@ namespace ProjectAtlasManager
 
         var portalInfo = await portal.GetPortalInfoAsync();
         var orgId = portalInfo.OrganizationId;
-        var username = portal.GetSignOnUsername();
+        var username = await QueuedTask.Run(() => portal.GetSignOnUsername());
         var query = new PortalQueryParameters(
           $"type:\"Web Map\" AND tags:\"ProjectAtlas\" AND tags:\"Template\" AND orgid:{orgId} owner:\"{username}\"")
         {

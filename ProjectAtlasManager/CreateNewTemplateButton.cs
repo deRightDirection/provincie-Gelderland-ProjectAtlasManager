@@ -55,7 +55,7 @@ namespace ProjectAtlasManager
         {
           tags = tags.Substring(1);
         }
-        var portalClient = new PortalClient(item.PortalUri, portal.GetToken());
+        var portalClient = await QueuedTask.Run(() => new PortalClient(item.PortalUri, portal.GetToken()));
         await portalClient.UpdateTemplate(item, true);
         await portalClient.UpdateTags(item, tags);
         FrameworkApplication.State.Deactivate("ProjectAtlasManager_Module_WebMapSelectedState");

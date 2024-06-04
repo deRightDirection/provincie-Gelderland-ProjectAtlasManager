@@ -1,11 +1,10 @@
 using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Framework.Contracts;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ProjectAtlasManager.Domain;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectAtlasManager
@@ -28,11 +27,11 @@ namespace ProjectAtlasManager
         {
           var portalData = new PortalInformation();
           portalData.PortalUri = portal.PortalUri;
-          portalData.IsSignedOn = portal.IsSignedOn();
+          portalData.IsSignedOn = await QueuedTask.Run(() => portal.IsSignedOn());
           portalData.IsActive = portal.IsActivePortal();
           var info = await portal.GetPortalInfoAsync();
           portalData.PortalName = info.PortalName;
-          portalData.Username = portal.GetSignOnUsername();
+          portalData.Username = await QueuedTask.Run(() => portal.GetSignOnUsername());
           portals.Add(portalData);
         }
         Portals = portals;

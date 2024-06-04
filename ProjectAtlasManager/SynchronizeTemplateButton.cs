@@ -11,6 +11,7 @@ using ProjectAtlasManager.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace ProjectAtlasManager
 {
@@ -51,9 +52,9 @@ namespace ProjectAtlasManager
     {
       ArcGISPortal portal = ArcGISPortalManager.Current.GetActivePortal();
       var query = PortalQueryParameters.CreateForItemsWithId(Module1.SelectedProjectTemplate);
-      var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
       return QueuedTask.Run(async () =>
       {
+        var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
         var results = await ArcGISPortalExtensions.SearchForContentAsync(portal, query);
         var projectTemplate = results.Results.FirstOrDefault();
         if (projectTemplate == null)

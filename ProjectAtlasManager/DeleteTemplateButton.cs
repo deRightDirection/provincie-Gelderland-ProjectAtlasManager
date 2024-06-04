@@ -2,6 +2,7 @@ using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ProjectAtlasManager.Events;
 using ProjectAtlasManager.Services;
 using ProjectAtlasManager.Web;
@@ -31,7 +32,7 @@ namespace ProjectAtlasManager
         return;
       }
       var tags = TagsHelper.UpdateTags(item.ItemTags);
-      var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
+      var portalClient = await QueuedTask.Run(() => new PortalClient(item.PortalUri, portal.GetToken()));
       await portalClient.UpdateTags(item, tags);
       await portalClient.UpdateTemplate(item, false);
       await Task.Delay(1500);

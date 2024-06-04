@@ -2,6 +2,7 @@ using ArcGIS.Desktop.Core;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Mapping;
 using Newtonsoft.Json;
 using ProjectAtlasManager.Services;
@@ -83,7 +84,7 @@ namespace ProjectAtlasManager.Domain
       var portal = ArcGISPortalManager.Current.GetActivePortal();
       if (portal != null)
       {
-        var portalClient = new PortalClient(portal.PortalUri, portal.GetToken());
+        var portalClient = await QueuedTask.Run(() => new PortalClient(portal.PortalUri, portal.GetToken()));
         var newItemData = await portalClient.GetItem(ID);
         var newItem = JsonConvert.DeserializeObject<WebMapItem>(newItemData);
         Snippet = newItem.Snippet;

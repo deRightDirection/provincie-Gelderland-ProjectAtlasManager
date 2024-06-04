@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ArcGIS defaultAssembly="ProjectAtlasManager.dll" defaultNamespace="ProjectAtlasManager" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="1.32" desktopVersion="2.9.10">
+  <AddInInfo id="{deb43740-8edf-4329-9a69-1fc71672e6c1}" version="2.0" desktopVersion="3.3.52636">
     <Name>ProjectAtlas Manager</Name>
     <Description>De projectatlas manager voor de provincie Gelderland</Description>
     <Image>Images\button.png</Image>
@@ -61,7 +62,7 @@
           <!-- bekijk alle templates -->
           <gallery refID="showTemplatesGallery" inline="false" size="large" />
           <button refID="ProjectAtlasManager_SynchronizeTemplateButton" size="large" />
-          <button refID="ProjectAtlasManager_ShowDockPaneButton" size="large"/>
+          <button refID="ProjectAtlasManager_ShowDockPaneButton" size="large" />
         </group>
         <group id="ProjectAtlasManager_Group4" caption="Webmap overschrijven" appearsOnAddInTab="false">
           <button refID="esri_sharing_SaveWebMap" />
@@ -81,57 +82,29 @@
         <button id="ProjectAtlasManager_CreateNewTemplateButton" caption="Maak van de webmap een template" condition="ProjectAtlasManager_Module_WebMap_Selected" className="CreateNewTemplateButton" loadOnClick="true" smallImage="Images/upgradewebmaptotemplate.png" largeImage="Images/upgradewebmaptotemplate.png">
           <tooltip heading="Upgrade webmap">
             Maak van de geselecteerde webmap een template. De tags 'Template', 'ProjectAtlas' en 'PAT[itemid]' worden toegevoegd aan de webmap.
-            <disabledText>Geen webmap geselecteerd</disabledText>
-          </tooltip>
+            <disabledText>Geen webmap geselecteerd</disabledText></tooltip>
         </button>
         <button id="ProjectAtlasManager_SynchronizeTemplateButton" caption="Synchroniseer template" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="SynchronizeTemplateButton" loadOnClick="true" smallImage="Images/synchronizetemplate.png" largeImage="Images/synchronizetemplate.png">
           <tooltip heading="Synchroniseer template">
             Selecteer de afgeleiden van de template die moeten worden gesynchroniseerd. De query voor de webmaps die getoond worden is: zoek alle webmaps met de tags 'ProjectAtlas', 'CopyOfTemplate' en 'PAT{item.ID}'.
-            <disabledText>Geen template geselecteerd</disabledText>
-          </tooltip>
+            <disabledText>Geen template geselecteerd</disabledText></tooltip>
         </button>
         <button id="ProjectAtlasManager_DeleteTemplateButton" caption="Verwijder een template" condition="ProjectAtlasManager_Module_ProjectTemplate_Selected" className="DeleteTemplateButton" loadOnClick="true" smallImage="Images/deletetemplate.png" largeImage="Images/deletetemplate.png">
           <tooltip heading="Verwijder template">
             Verwijder de geselecteerde template. De tags 'Template', 'ProjectAtlas' en 'PAT[itemid]' worden verwijderd van de webmap die is geselecteerd onder Webmap afgeleiden. De webmap zelf blijft wel bestaan.
-            <disabledText>Geen template geselecteerd</disabledText>
-          </tooltip>
+            <disabledText>Geen template geselecteerd</disabledText></tooltip>
         </button>
       </controls>
       <galleries>
-        <gallery
-          id="newTemplateGallery"
-          caption="Selecteer een webmap"
-          className="NewTemplateGallery"
-          itemsInRow="1"
-          dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml"
-          condition="WebmapsGallery_Is_Ready"
-          templateID="WebMapsGalleryItemTemplate"
-          resizable="true"
-          largeImage="Images/webmaps.png"
-          itemWidth="415"
-          loadOnClick="true"
-          loadingMessage="inladen webmaps">
+        <gallery id="newTemplateGallery" caption="Selecteer een webmap" className="NewTemplateGallery" itemsInRow="1" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml" condition="WebmapsGallery_Is_Ready" templateID="WebMapsGalleryItemTemplate" resizable="true" largeImage="Images/webmaps.png" itemWidth="415" loadOnClick="true" loadingMessage="inladen webmaps">
           <tooltip heading="Nieuwe templates">
             Selecteer een webmap en gebruik de knop 'maak van de webmap een template' om van deze webmap een template te maken.
-            <disabledText />
-          </tooltip>
+            <disabledText /></tooltip>
         </gallery>
-        <gallery
-          id="showTemplatesGallery"
-          caption="Selecteer een bestaand template"
-          className="TemplatesGallery"
-          condition="TemplatesGallery_Is_Ready"
-          itemsInRow="1"
-          dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml"
-          templateID="WebMapsGalleryItemTemplate"
-          resizable="true"
-          itemWidth="415"
-          largeImage="Images/templates.png"
-          loadingMessage="inladen templates">
+        <gallery id="showTemplatesGallery" caption="Selecteer een bestaand template" className="TemplatesGallery" condition="TemplatesGallery_Is_Ready" itemsInRow="1" dataTemplateFile="pack://application:,,,/ProjectAtlasManager;component//Views/WebMapGalleryItemTemplate.xaml" templateID="WebMapsGalleryItemTemplate" resizable="true" itemWidth="415" largeImage="Images/templates.png" loadingMessage="inladen templates">
           <tooltip heading="Selecteer template">
             Selecteer en open een template en voer hier een actie mee uit in de dockpane. De query voor templates die getoond moeten worden is: zoek alle webmaps met de tags 'ProjectAtlas' en 'Template' binnen de eigen organisatie van de ingelogde gebruiker.
-            <disabledText>Geen templates beschikbaar</disabledText>
-          </tooltip>
+            <disabledText>Geen templates beschikbaar</disabledText></tooltip>
         </gallery>
       </galleries>
     </insertModule>

@@ -12,7 +12,7 @@ namespace UnitTests
     public void Setup()
     {
       var path = Assembly.GetExecutingAssembly().Location;
-      _testdataFolder = path.Replace("\\Tests\\bin\\Debug\\net8.0\\Tests.dll", "\\testdata");
+      _testdataFolder = path.Replace("\\Tests\\bin\\Debug\\net6.0\\Tests.dll", "\\testdata");
     }
     [TestMethod]
     public void SetSummary()

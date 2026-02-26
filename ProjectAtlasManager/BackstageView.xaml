@@ -16,9 +16,15 @@
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     <DockPanel Grid.Row="0">
+      <StackPanel>
       <TextBlock DockPanel.Dock="Left" Style="{DynamicResource Esri_TextBlockBackStageTitle}"
-                       Text="Project Atlas manager configuratie" 
-                       Margin="0,0,0,15" ></TextBlock>
+                 Text="Project Atlas manager configuratie" 
+                 Margin="0,0,0,15" ></TextBlock>
+      <StackPanel Orientation="Horizontal">
+        <TextBlock FontSize="14" FontWeight="Bold" Margin="0 0 25 0">logfile path:</TextBlock>
+          <TextBlock FontSize="14" Text="{Binding LogFilePath}"/>
+</StackPanel>
+      </StackPanel>
     </DockPanel>
     <StackPanel Grid.Row="1" Margin="0,60,0,0" Orientation="Vertical">
       <TextBlock>selecteer het ArcGIS Enterprise-portaal van de provincie Gelderland</TextBlock>

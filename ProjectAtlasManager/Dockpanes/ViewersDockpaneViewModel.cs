@@ -12,13 +12,14 @@ using ProjectAtlasManager.Services;
 using ProjectAtlasManager.ViewModels;
 using ProjectAtlasManager.Web;
 using ProjectAtlasManager.Windows;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace ProjectAtlasManager.Dockpanes
 {
@@ -61,13 +62,13 @@ namespace ProjectAtlasManager.Dockpanes
       EventSender.Subscribe(RenewData, true);
       ActivePortalChangedEvent.Subscribe((args) =>
       {
-          _galleryBusy = false;
-          LoadItemsAsync();
+        _galleryBusy = false;
+        LoadItemsAsync();
       });
       PortalSignOnChangedEvent.Subscribe((args) =>
       {
-          _galleryBusy = false;
-          LoadItemsAsync();
+        _galleryBusy = false;
+        LoadItemsAsync();
       });
       NewViewerCommand = new AsyncRelayCommand(NewViewer, CanNewViewer);
       OpenViewerCommand = new AsyncRelayCommand(OpenViewer);
@@ -155,7 +156,14 @@ namespace ProjectAtlasManager.Dockpanes
       {
         _progDialog = new ProgressDialog($"Aanmaken afgeleide [{_name}]...");
         _progDialog.Show();
-        await CreateNewViewerFromTemplate();
+        try
+        {
+          await CreateNewViewerFromTemplate();
+        }
+        catch (Exception e)
+        {
+          Log.Logger.Error(e.ToStringDemystified());
+        }
         _progDialog.Hide();
       }
     }

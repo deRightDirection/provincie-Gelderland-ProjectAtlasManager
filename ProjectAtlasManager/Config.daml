@@ -36,7 +36,7 @@
     </insertCondition>
   </conditions>
   <modules>
-    <insertModule id="ProjectAtlasManager_Module" className="Module1" autoLoad="false" caption="Module1">
+    <insertModule id="ProjectAtlasManager_Module" className="Module1" autoLoad="true" caption="Module1">
       <dockPanes>
         <dockPane id="viewers_Dockpanel" caption="Afgeleiden" className="Dockpanes.ViewersDockpaneViewModel" dock="group" dockWith="esri_core_contentsDockPane">
           <content className="Dockpanes.ViewersDockpane" />

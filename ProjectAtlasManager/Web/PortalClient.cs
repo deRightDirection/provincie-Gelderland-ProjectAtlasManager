@@ -4,9 +4,11 @@ using Flurl.Http;
 using Newtonsoft.Json;
 using ProjectAtlasManager.Domain;
 using ProjectAtlasManager.Services;
+using Serilog;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using theRightDirection;
 
 namespace ProjectAtlasManager.Web
 {
@@ -69,9 +71,17 @@ namespace ProjectAtlasManager.Web
       formContent.Add(new StringContent(extent), "extent");
       var json = JsonConvert.SerializeObject(item.ItemCategories);
       formContent.Add(new StringContent(json), "categories");
+      Log.Logger.Debug($"opslaan nieuwe viewer op basis van template, title: '{title}' ");
       var result = await _http.PostAsync(uri, formContent).ConfigureAwait(false);
       var resultData = await result.Content.ReadAsStringAsync();
+      Log.Logger.Debug($"resultaat opslaan nieuwe viewer op basis van template, title: '{title}'");
       var newItem = JsonConvert.DeserializeObject<WebMapItem>(resultData);
+      if(newItem == null || newItem.ID.HasNoText())
+      {
+        Log.Logger.Error($"geen gegevens voor nieuwe viewer, result: '{resultData}'");
+        return null;
+      }
+      Log.Logger.Debug($"ophalen van item van nieuwe viewer met id: '{newItem.ID}'");
       var newItemInfo = await GetItem(newItem.ID);
       return JsonConvert.DeserializeObject<WebMapItem>(newItemInfo);
     }

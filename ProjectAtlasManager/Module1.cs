@@ -17,9 +17,9 @@ namespace ProjectAtlasManager
     protected override bool Initialize()
     {
       var logLocation = GetAddinFolder();
-      var filePath = Path.Combine(logLocation, "projectatlasmanager-log-.txt");
+      var filePath = Path.Combine(logLocation, "projectatlasmanager-log-.log");
       Log.Logger = new LoggerConfiguration()
-        .WriteTo.File(filePath, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 5)
+        .WriteTo.Async(a => a.File(filePath, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 5, shared: true, buffered: false, flushToDiskInterval: TimeSpan.FromSeconds(5)))
         .MinimumLevel.Verbose()
         .CreateLogger();
       Log.Logger.Information("addin gestart");
@@ -62,6 +62,7 @@ namespace ProjectAtlasManager
 
     protected override bool CanUnload()
     {
+      Log.CloseAndFlush();
       return true;
     }
   }

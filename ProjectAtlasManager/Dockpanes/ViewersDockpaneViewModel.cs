@@ -4,6 +4,7 @@ using ArcGIS.Desktop.Core.Events;
 using ArcGIS.Desktop.Core.Portal;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
+using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using ProjectAtlasManager.Domain;
@@ -341,6 +342,11 @@ namespace ProjectAtlasManager.Dockpanes
       var portalClient = await QueuedTask.Run(() => new PortalClient(item.PortalUri, portal.GetToken()));
       await portalClient.UpdateTemplate(item, true);
       var newViewer = await portalClient.CreateViewerFromTemplate(item, _name, tags);
+      if(newViewer == null)
+      {
+        MessageBox.Show("probleem bij aanmaken viewer van template", "Probleempje!", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+        return;
+      }
       _viewers.InsertInPlace(newViewer, x => x.Title);
       FrameworkApplication.Current.Dispatcher.Invoke(() =>
       {
